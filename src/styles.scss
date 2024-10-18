@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+body{
+    background-color: #EF8481; /*na vídeoaula de tela de login determinamos a cor do fundo por aqui, mas eventualmente gostaria de encontrar uma alternativa pois
+    no restante das páginas a cor de fundo será outra*/
+
+}

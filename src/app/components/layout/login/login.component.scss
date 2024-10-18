@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
+.centralizarTexto{
+    text-align: center;
+}
+
+body{
+    background-color: #EF8481;
+}
+
+/*.logoJuno{ //logo + nome
+    position: relative;
+    left: 2vh;
+    top: 2vh;
+    display: flex;
+    //align-content: center;
+    align-items: center;
+}*/
+
+.logoJuno{
+    position: relative;
+    display: flex;
+    left: 3vh;
+    top:3vh;
+    
+}
+
+.nomeJuno{
+    color: #EF8481;
+    font-size: xx-large;
+    font-family: Playwrite GB S;
+    font-style: italic;
+
+    margin-left: 0.5rem;
+}
+
+.card{
+    height: 100vh;
+    width: 90vh;
+    position: absolute; //TODO: perguntar ao professor se tem alternativa mais apropriada que usar ABSOLUTE ou RELATIVE 
+    left: 0;
+
+    font-family: Inconsolata;
+    z-index: 10;
+}
+
+.elementosLogin{
+    display: flex;
+    flex-direction: column; //coloca os campos de email, senha e o botão de acesso em forma de coluna
+    
+}
+
+.campoEmail, .campoSenha{
+    margin-bottom: 3rem; //coloca uma margem inferior nos campos de email e senha
+}
+
+.desenhoLogin{
+    width: 1800;
+    height: auto;
+    position: absolute;
+    right: 15vh;
+    bottom: 20vh;
+
+}
+
+.fraseTagline{
+    font-family: Inconsolata, monospace;
+    font-size: large;
+    position: absolute;
+    bottom: 10vh;
+    right: 20vh;
+    color: white;
+}
+
+.btn-primary {
+    font-size: medium;
+    //background-color: #8883F0 !important;
+    background-color: #EF8481;
+  }
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+    background-color: #3f3b8a !important;
+}
+

@@ -1,0 +1,74 @@
+<!-- <p>login works!</p> -->
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-4"> <!-- Colunas que contém o conteúdo da aplicação-->
+
+            <div class="card">
+
+                <div class="logoJuno">
+                    <img src="assets/images/JunoLogo.png" height="15%" width="auto">
+
+                    <h1 class="nomeJuno">Juno</h1>
+                </div>
+
+                <div class="card-body">
+                  <h2 class="card-title">Bem vindo(a) de volta!</h2>
+                  <p class="card-text">Digite as informações de login abaixo</p>
+
+
+                    <div class="elementosLogin">
+                        <div class="campoEmail">
+                            <mdb-form-control>
+                                <input mdbLabel type="email" placeholder="" id="email" class="form-control" [(ngModel)]="email"/> <!-- two way databind-->
+                                <label mdbInput class="form-label" for="email">Email</label>
+                            </mdb-form-control>
+                        </div>
+                        
+                        <div class="campoSenha">
+                            <mdb-form-control>
+                                <input mdbLabel type="password" id="senha" class="form-control" [(ngModel)]="senha"/>
+                                <label mdbInput class="form-label" for="senha">Senha</label>
+                            </mdb-form-control>
+                        </div>
+                        
+                        
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="logar()">Entrar</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div> 
+        
+        <div class="col-lg-4"> 
+
+            <p class="fraseTagline">"Gestão humanizada e precisa para o bem-estar materno."</p>
+
+            <div class="desenhoLogin">
+                <img src="assets/images/nutritionist.png">
+            </div>
+
+        </div><!-- Quatro colunas vazias-->
+            
+        <div class="col-lg-4"> 
+
+            
+
+        </div><!-- Quatro colunas vazias-->
+
+
+            
+
+    </div> <!-- fim da row -->
+
+        
+
+</div> <!-- fim do container -->
+    
+
+
