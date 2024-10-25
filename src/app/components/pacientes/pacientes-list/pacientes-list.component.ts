@@ -94,6 +94,14 @@ export class PacientesListComponent {
       });
     }
 
+    cadastrar(){
+      //implementar a lógica de abertura de modal APÓS criar o formulario de paciente
+      /*
+      this.pacienteEdit = new Paciente();
+      this.modalRef = this.modalService.open(this.modalPacientesForm);
+      */
+    }
+
 }
 
   
