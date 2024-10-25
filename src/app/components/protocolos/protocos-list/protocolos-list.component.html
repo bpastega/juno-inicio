@@ -45,7 +45,10 @@
       @for (protocolo of lista; track $index){
       <tr>
         <!-- <td>{{ protocolo.paciente?.nome || 'Nome não disponível' }}</td> -->
-        <td >{{ protocolo.statusProtocolo}}</td>
+        <td>
+          <span [ngClass]="statusProtocoloService.renderStatusProtocolo(protocolo)">{{statusProtocoloService.listStatusProtocolo(protocolo)}}
+          </span>
+        </td>
         <td>{{ protocolo.dataAbertura}}</td>
         <td>
           <button (click)="encerrar(protocolo)" type="button" class="btn btn-secondary"mdbRipple>Encerrar</button>

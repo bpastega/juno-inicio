@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 import { NgClass } from '@angular/common';
+import { StatusProtocoloService } from '../../../services/utility/status-protocolo.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class ProtocosListComponent {
 
   protocoloService = inject(ProtocoloService);
 
-  statusPacienteService = inject(StatusPacienteService); //para alterar a cor do status futuramente
+  statusProtocoloService = inject(StatusProtocoloService)
+
 
   constructor(){
     this.findAll();
