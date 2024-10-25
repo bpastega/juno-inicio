@@ -74,7 +74,8 @@ export class PacientesListComponent {
           this.lista=lista;
         },
         error: erro =>{
-          alert('Errooooo!!')//futuramente adicionar sweetalert2
+          Swal.fire('Erro',erro.error,'error');
+         // alert('Errooooo!!')//futuramente adicionar sweetalert2
         }
       })
       
@@ -86,7 +87,7 @@ export class PacientesListComponent {
           this.lista = lista;
         },
         error: (erro) => {
-          alert('Deu erro');
+          Swal.fire('Erro!',erro.error,'error');
         },
       });
     }
@@ -105,7 +106,8 @@ export class PacientesListComponent {
               this.findAll();
             },
             error: (erro) => {
-              alert('Deu erro');
+              
+              Swal.fire('Erro!',erro.error,'error');
             },
           });
         }
