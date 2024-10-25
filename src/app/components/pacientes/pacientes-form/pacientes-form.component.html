@@ -1,1 +1,54 @@
-<p>pacientes-form works!</p>
+<!-- TESTE DE MODAL FORM PACIENTES AQUI!!! -->
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5>{{tituloComponente}}</h5>
+  
+            <form #formulario1="ngForm">
+              <mdb-form-control>
+                <input [(ngModel)]="paciente.nome" mdbInput pattern=".*\S+.*" required type="text" name="titulo" class="form-control" />
+                <label mdbLabel class="form-label" for="titulo">Nome:</label>
+              </mdb-form-control>
+  
+              <br>
+             <!-- <div class="alinharDireita">
+                <a  class="btn btn-primary" (click)="abrirModal()">+</a>
+              </div>
+            -->
+  
+  
+            @if(paciente.id > 0){
+              <button [disabled]="!formulario1.valid" (click)="atualizar()" class="btn btn-primary">Atualizar</button>
+            }@else{
+              <button [disabled]="!formulario1.valid" (click)="cadastrar()" class="btn btn-primary">Salvar</button>
+            }
+             
+              <a href="admin/livros" class="btn btn-default">Voltar</a>
+  
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  <ng-template #modalPacienteList>
+  
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">teste</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      
+       <app-autores-list [modoAssociacao]="true" (retorno)="autorSelecionado($event)"></app-autores-list> 
+  
+    </div>
+  </ng-template>-->

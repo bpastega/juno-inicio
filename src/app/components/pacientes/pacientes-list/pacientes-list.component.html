@@ -15,6 +15,7 @@
                     </button>
                   
                     <button (click)="cadastrar()" type="button" class="btn btn-primary" mdbRipple>Novo</button>
+                    <!-- por event binding no click executa o método cadastrar que abre o modal com o formulário -->
                     
                   </div>
                   
@@ -85,7 +86,9 @@
                             </td>
 
                             <td><!-- Célula G: Editar Paciente-->
-                                <button type="button" class="btn btn-tertiary" mdbRipple routerLink = "admin/pacientes/editar/{{paciente.id}}">Editar</button>                
+                                <!-- <button type="button" class="btn btn-tertiary" mdbRipple routerLink = "admin/pacientes/editar/{{paciente.id}}">Editar</button>-->
+                                <button type="button" class="btn btn-tertiary" (click)="editar(paciente)">Editar</button>
+                                <!-- por event binding executa o método editar que abre a modal com o formulário -->
                             </td>
 
                             <td>
@@ -131,3 +134,25 @@
     -->
     
     <!--https://www.youtube.com/watch?v=Hh6uLjawNpQ 27:40-->
+
+    <!-- MODAL -->
+    <ng-template #modalPacientesForm>
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dados de Paciente</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modalRef.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- <app-livros-form [livro]="livroEdit" (retorno)="retornoForm($event)"></app-livros-form> -->
+         <app-pacientes-form [paciente]="pacienteEdit" (retorno)="retornoForm($event)"></app-pacientes-form>
+    
+      </div>
+      
+    
+    </ng-template>

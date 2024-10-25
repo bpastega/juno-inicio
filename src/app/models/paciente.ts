@@ -15,12 +15,12 @@ export class Paciente {
     endereco!: Endereco;
     protocolos!: Protocolo[];
 
-    constructor(id:number, nome:string, cpf:string, email:string, dataNascimento:Date, tipoSanguineo:string){
+   /*constructor(id:number, nome:string, cpf:string, email:string, dataNascimento:Date, tipoSanguineo:string){
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.tipoSanguineo = tipoSanguineo;
-    }
+    }*/
 }
