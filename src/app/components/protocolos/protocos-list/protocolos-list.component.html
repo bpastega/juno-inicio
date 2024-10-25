@@ -1,25 +1,62 @@
-
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            
-                    <table class="table table-sm" >
-                        <thead class="bg-light">
-                          <tr>
-                            <th>Paciente</th>
-                            <th>Status</th>
-                            
-                            <!--<th>Endereço</th>-->
-                            <th>Ações</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                      
-                      </table>
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
 
-                </div>
-            </div>
+  <div class="input-group">
+  <!-- Campo de busca pelo nome do paciente -->
+      <input (keyup.enter)="findByPacienteNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do nome..."
+      aria-label="Recipient's username with two button addons" />
 
-        </div>
-   
 
+      <button (click)="findByPacienteNome()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+        Pesquisar
+      </button>
+
+      <button (click)="findAll()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+        Todos
+      </button>
+
+      <button (click)="findByAtivo()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+        Ativos
+      </button>
+
+      <button (click)="findByInativo()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+        Inativos
+      </button>
+  
+ 
+
+</div>
+
+  <!-- Tabela de protocolos -->
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <!-- <th>ID</th> -->
+        <!-- <th>Nome do Paciente</th> -->
+        <th>Status</th>
+        <th>Data Abertura</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (protocolo of lista; track $index){
+      <tr>
+        <!-- <td>{{ protocolo.paciente?.nome || 'Nome não disponível' }}</td> -->
+        <td >{{ protocolo.statusProtocolo}}</td>
+        <td>{{ protocolo.dataAbertura}}</td>
+        <td>
+          <button (click)="encerrar(protocolo)" type="button" class="btn btn-secondary"mdbRipple>Encerrar</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
