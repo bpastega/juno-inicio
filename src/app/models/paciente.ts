@@ -12,6 +12,8 @@ export class Paciente {
 
     statusPreNatal!: boolean; /*TODO: potencialmente alterar para que o default seja false, fazendo com que o pré natal seja 
     inicializado com esse status até que seja determinado o contrário.*/
+
+    telefone!: string;
     endereco!: Endereco;
     protocolos!: Protocolo[];
 

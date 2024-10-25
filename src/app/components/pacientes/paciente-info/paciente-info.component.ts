@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FormataCPFService } from "../../../services/utility/formata-cpf.service";
 import { DatePipe, NgClass } from "@angular/common";
 import { StatusPacienteService } from "../../../services/utility/status-paciente.service";
+import { Endereco } from "../../../models/endereco";
 
 
 @Component({
@@ -17,6 +18,8 @@ import { StatusPacienteService } from "../../../services/utility/status-paciente
 
 export class PacienteInfoComponent {
   pacienteEncontrado!: Paciente;
+  pacienteEndereco!: Endereco;
+
 
   /*Injections*/
   pacienteService = inject(PacienteService);
@@ -36,6 +39,7 @@ export class PacienteInfoComponent {
     this.pacienteService.findById(id).subscribe({
       next: paciente => {
         this.pacienteEncontrado = paciente;
+        this.pacienteEndereco = paciente.endereco;
       },
       error: erro => {
         alert('Paciente não encontrado'); //TODO: SWEET ALERT 

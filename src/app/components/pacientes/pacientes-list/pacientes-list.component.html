@@ -63,7 +63,7 @@
                             </td>
 
                             <td> <!-- Célula C: Data de Nascimento--> 
-                              <p class="fw-normal mb-1">{{ paciente.dataNascimento | date:'MMM d, y' :'':'pt-BR'}}</p> <!-- NÃO CONSEGUI USAR O DatePipe-->
+                              <p class="fw-normal mb-1">{{ paciente.dataNascimento | date: 'longDate' :'':'pt-BR'}}</p> <!-- NÃO CONSEGUI USAR O DatePipe-->
                               
                               <!-- 'longDate': equivalent to 'MMMM d, y' for en_US locale (e.g. September 3, 2010)-->
                               <!-- <p class="text-muted mb-0">{{verificaMaioridade(paciente)}}</p> -->

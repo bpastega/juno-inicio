@@ -7,7 +7,21 @@
     font-family: Inconsolata;
 }
 
+.topo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    margin-right: 1rem;
+}
+
 .paciente{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.enderecoPaciente{
     display: flex;
     flex-wrap: wrap;
 }
@@ -16,4 +30,14 @@
     margin-top: 1.5rem;
     margin-right: 3rem;
     margin-bottom: 1.5;
+}
+
+.infoEndereco{
+    margin-top: 1.5rem;
+    margin-right: 3rem;
+    margin-bottom: 1.5;
+}
+
+.bold{
+    font-weight: bold;
 }
