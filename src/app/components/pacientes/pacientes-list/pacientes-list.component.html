@@ -4,6 +4,16 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                  <div class="input-group">
+                    <input (keyup.enter)="findByNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do título..."
+                      aria-label="Recipient's username with two button addons" />
+                    <button (click)="findByNome()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+                      Pesquisar
+                    </button>
+                    <button (click)="findAll()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
+                      Todos
+                    </button>
+                  </div>
                     <table class="table align-middle mb-0 bg-white" >
                         <thead class="bg-light">
                           <tr>
@@ -23,14 +33,14 @@
                         @for (paciente of lista; track $index) {
                           <tr>
                             <td> <!-- Célula A: Ícone, Nome e Email-->
-                              <div class="d-flex align-items-center">
-                                <img
+                             <div class="d-flex align-items-center">
+                               <!-- <img
                                     src="{{imagemService.getProximoIcone()}}"
 
                                     alt=""
                                     style="width: 45px; height: 45px"
                                     class="rounded-circle"
-                                    />
+                                    />-->
                                 <div class="ms-3">
                                   <p class="fw-bold mb-1">{{paciente.nome}}</p>
                                   <p class="text-muted mb-0">{{paciente.email}}</p>
@@ -47,7 +57,7 @@
                               <p class="fw-normal mb-1">{{ paciente.dataNascimento | date:'MMM d, y' :'':'pt-BR'}}</p> <!-- NÃO CONSEGUI USAR O DatePipe-->
                               
                               <!-- 'longDate': equivalent to 'MMMM d, y' for en_US locale (e.g. September 3, 2010)-->
-                              <p class="text-muted mb-0">{{verificaMaioridade(paciente)}}</p>
+                              <!-- <p class="text-muted mb-0">{{verificaMaioridade(paciente)}}</p> -->
                             </td>
 
                             <td> <!-- Célula D: Tipagem Sanguínea-->
@@ -70,11 +80,11 @@
                             </td>
 
                             <td><!-- Célula G: Editar Paciente-->
-                                <button type="button" class="btn btn-info" mdbRipple routerLink = "admin/pacientes/editar/{{paciente.id}}">Editar</button>                
+                                <button type="button" class="btn btn-tertiary" mdbRipple routerLink = "admin/pacientes/editar/{{paciente.id}}">Editar</button>                
                             </td>
 
                             <td>
-                                <button type="button" class="btn btn-danger" mdbRipple>Deletar</button>
+                                <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
                             </td>
                           </tr> <!-- FIM DO PACIENTE -->
 
