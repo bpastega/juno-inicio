@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import {MatTableModule} from '@angular/material/table'; tentativa de usar outros templates
+
 
 @Component({
   selector: 'app-protocolos-list',

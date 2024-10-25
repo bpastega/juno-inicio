@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { PacienteService } from '../../../services/paciente.service';
 import { ImagemService } from '../../../services/imagem.service';
 import { DatePipe, registerLocaleData } from '@angular/common';
+import Swal from 'sweetalert2';
 //Teste 
 import localePT from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
@@ -69,6 +70,27 @@ export class PacientesListComponent {
         error: (erro) => {
           alert('Deu erro');
         },
+      });
+    }
+
+    deletarById(paciente: Paciente){
+      Swal.fire({
+        title: 'Tem certeza que deseja deletar o paciente ' + paciente.nome + '?',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: `Cancelar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.pacienteService.delete(paciente.id).subscribe({
+            next: (mensagem) => {
+              Swal.fire(mensagem, '', 'success');
+              this.findAll();
+            },
+            error: (erro) => {
+              alert('Deu erro');
+            },
+          });
+        }
       });
     }
 
