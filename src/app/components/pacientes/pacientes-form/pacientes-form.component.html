@@ -1,54 +1,103 @@
-<!-- TESTE DE MODAL FORM PACIENTES AQUI!!! -->
 <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5>{{tituloComponente}}</h5>
-  
-            <form #formulario1="ngForm">
-              <mdb-form-control>
-                <input [(ngModel)]="paciente.nome" mdbInput pattern=".*\S+.*" required type="text" name="titulo" class="form-control" />
-                <label mdbLabel class="form-label" for="titulo">Nome:</label>
-              </mdb-form-control>
-  
-              <br>
-             <!-- <div class="alinharDireita">
-                <a  class="btn btn-primary" (click)="abrirModal()">+</a>
-              </div>
-            -->
-  
-  
-            @if(paciente.id > 0){
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>{{ tituloComponente }}</h5>
+
+          <form #formulario1="ngForm">
+            <!-- Campo Nome -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.nome" mdbInput pattern=".*\S+.*" required type="text" name="nome" class="form-control" />
+              <label mdbLabel class="form-label" for="nome">Nome:</label>
+            </mdb-form-control>
+
+            <!-- Campo CPF -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{11}" required type="text" name="cpf" class="form-control" />
+              <label mdbLabel class="form-label" for="cpf">CPF:</label>
+            </mdb-form-control>
+
+            <!-- Campo Email -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.email" mdbInput type="email" required name="email" class="form-control" />
+              <label mdbLabel class="form-label" for="email">Email:</label>
+            </mdb-form-control>
+
+            <!-- Campo Data de Nascimento -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.dataNascimento" mdbInput type="date" required name="dataNascimento" class="form-control" />
+              <label mdbLabel class="form-label" for="dataNascimento">Data de Nascimento:</label>
+            </mdb-form-control>
+
+            <!-- Campo Tipo Sanguíneo -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.tipoSanguineo" mdbInput required type="text" name="tipoSanguineo" class="form-control" />
+              <label mdbLabel class="form-label" for="tipoSanguineo">Tipo Sanguíneo:</label>
+            </mdb-form-control>
+
+            <!-- Campo Status Pré-Natal -->
+            <mdb-form-control>
+              <select [(ngModel)]="paciente.statusPreNatal" mdbInput required name="statusPreNatal" class="form-select">
+                <option [ngValue]="true">Sim</option>
+                <option [ngValue]="false">Não</option>
+              </select>
+              <label mdbLabel class="form-label" for="statusPreNatal">Status Pré-Natal:</label>
+            </mdb-form-control>
+
+            <hr />
+
+            <!-- Campos do Endereço -->
+            <h5>Endereço</h5>
+
+            <!-- Rua -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.endereco.rua" mdbInput required type="text" name="rua" class="form-control" />
+              <label mdbLabel class="form-label" for="rua">Rua:</label>
+            </mdb-form-control>
+
+            <!-- Número -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.endereco.numero" mdbInput required type="number" name="numero" class="form-control" />
+              <label mdbLabel class="form-label" for="numero">Número:</label>
+            </mdb-form-control>
+
+            <!-- Bairro -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.endereco.bairro" mdbInput required type="text" name="bairro" class="form-control" />
+              <label mdbLabel class="form-label" for="bairro">Bairro:</label>
+            </mdb-form-control>
+
+            <!-- Cidade -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.endereco.cidade" mdbInput required type="text" name="cidade" class="form-control" />
+              <label mdbLabel class="form-label" for="cidade">Cidade:</label>
+            </mdb-form-control>
+
+            <!-- CEP -->
+            <mdb-form-control>
+              <input [(ngModel)]="paciente.endereco.cep" mdbInput pattern="\d{5}-\d{3}" required type="text" name="cep" class="form-control" />
+              <label mdbLabel class="form-label" for="cep">CEP:</label>
+            </mdb-form-control>
+
+            <!-- Descrição do Endereço -->
+            <mdb-form-control>
+              <textarea [(ngModel)]="paciente.endereco.descricao" mdbInput name="descricao" class="form-control"></textarea>
+              <label mdbLabel class="form-label" for="descricao">Descrição:</label>
+            </mdb-form-control>
+
+            <br />
+
+            <!-- Botões -->
+            @if(paciente.id > 0) {
               <button [disabled]="!formulario1.valid" (click)="atualizar()" class="btn btn-primary">Atualizar</button>
-            }@else{
+            } @else {
               <button [disabled]="!formulario1.valid" (click)="cadastrar()" class="btn btn-primary">Salvar</button>
             }
-             
-              <a href="admin/livros" class="btn btn-default">Voltar</a>
-  
-            </form>
-  
-          </div>
+            <a href="admin/livros" class="btn btn-default">Voltar</a>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <!--
-  <ng-template #modalPacienteList>
-  
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">teste</h5>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="modalRef.close()"
-      ></button>
-    </div>
-    <div class="modal-body">
-      
-       <app-autores-list [modoAssociacao]="true" (retorno)="autorSelecionado($event)"></app-autores-list> 
-  
-    </div>
-  </ng-template>-->
+</div>
