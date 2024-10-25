@@ -1,5 +1,5 @@
 import { Endereco } from "./endereco";
-import { ProtocoloPreNatal } from "./protocolo-pre-natal";
+import { Protocolo } from "./protocolo";
 
 export class Paciente {
     id!: number;
@@ -13,7 +13,7 @@ export class Paciente {
     statusPreNatal!: boolean; /*TODO: potencialmente alterar para que o default seja false, fazendo com que o pré natal seja 
     inicializado com esse status até que seja determinado o contrário.*/
     endereco!: Endereco;
-    protocolos!: ProtocoloPreNatal[];
+    protocolos!: Protocolo[];
 
     constructor(id:number, nome:string, cpf:string, email:string, dataNascimento:Date, tipoSanguineo:string){
         this.id = id;
