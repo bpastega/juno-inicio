@@ -94,7 +94,7 @@ export class PacientesListComponent {
           this.lista = lista;
         },
         error: (erro) => {
-          Swal.fire('Erro!',erro.error,'error');
+          Swal.fire('Erro',erro.error,'error');
         },
       });
     }
