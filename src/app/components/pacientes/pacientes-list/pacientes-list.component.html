@@ -148,7 +148,7 @@
 
     <!-- MODAL -->
     <ng-template #modalPacientesForm>
-
+      <div class="modal-fullscreen">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Dados de Paciente</h5>
         <button
@@ -160,10 +160,10 @@
       </div>
       <div class="modal-body">
         
-        <!-- <app-livros-form [livro]="livroEdit" (retorno)="retornoForm($event)"></app-livros-form> -->
+        
          <app-pacientes-form [paciente]="pacienteEdit" (retorno)="retornoForm($event)"></app-pacientes-form>
     
       </div>
-      
+    </div>
     
     </ng-template>
