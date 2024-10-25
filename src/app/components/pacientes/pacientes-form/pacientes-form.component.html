@@ -13,7 +13,7 @@
         
             </mdb-form-control>
 
-            <!-- Campo CPF -->
+            <!-- Campo CPF SEM MASCARA, NAO USAR MASCARA NO INPUT OU TRATAR -->
             <mdb-form-control>
               <label mdbLabel class="form-label" for="cpf">CPF:</label>
               <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{11}" required type="text" name="cpf" class="form-control" />
@@ -59,41 +59,41 @@
             <mdb-form-control>
               <label mdbLabel class="form-label" for="rua">Rua:</label>
               
-              <input [(ngModel)]="endereco.rua" mdbInput required type="text" name="rua" class="form-control" />
+              <input [(ngModel)]="paciente.endereco.rua" mdbInput required type="text" name="rua" class="form-control" />
             </mdb-form-control>
 
         
             <mdb-form-control>
               <label mdbLabel class="form-label" for="numero">Número:</label>
 
-              <input [(ngModel)]="endereco.numero" mdbInput required type="number" name="numero" class="form-control" />
+              <input [(ngModel)]="paciente.endereco.numero" mdbInput required type="number" name="numero" class="form-control" />
             </mdb-form-control>
 
           
             <mdb-form-control>
               <label mdbLabel class="form-label" for="bairro">Bairro:</label>
 
-              <input [(ngModel)]="endereco.bairro" mdbInput required type="text" name="bairro" class="form-control" />
+              <input [(ngModel)]="paciente.endereco.bairro" mdbInput required type="text" name="bairro" class="form-control" />
             </mdb-form-control>
 
             <mdb-form-control>
               <label mdbLabel class="form-label" for="cidade">Cidade:</label>
 
-              <input [(ngModel)]="endereco.cidade" mdbInput required type="text" name="cidade" class="form-control" />
+              <input [(ngModel)]="paciente.endereco.cidade" mdbInput required type="text" name="cidade" class="form-control" />
             </mdb-form-control>
 
          
             <mdb-form-control>
               <label mdbLabel class="form-label" for="cep">CEP:</label>
 
-              <input [(ngModel)]="endereco.cep" mdbInput pattern="\d{5}-\d{3}" required type="text" name="cep" class="form-control" />
+              <input [(ngModel)]="paciente.endereco.cep" mdbInput pattern="\d{5}-\d{3}" required type="text" name="cep" class="form-control" />
             </mdb-form-control>
 
           
             <mdb-form-control>
               <label mdbLabel class="form-label" for="descricao">Descrição:</label>
 
-              <textarea [(ngModel)]="endereco.descricao" mdbInput name="descricao" class="form-control"></textarea>
+              <textarea [(ngModel)]="paciente.endereco.descricao" mdbInput name="descricao" class="form-control"></textarea>
             </mdb-form-control>
 
             <br />

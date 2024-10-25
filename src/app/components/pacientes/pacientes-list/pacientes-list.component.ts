@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
 import { FormataCPFService } from '../../../services/utility/formata-cpf.service';
 import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
+import { Endereco } from '../../../models/endereco';
 
 registerLocaleData(localePT);
 
@@ -81,8 +82,9 @@ export class PacientesListComponent {
           this.lista=lista;
         },
         error: erro =>{
-          Swal.fire('Erro',erro.error,'error');
+         // Swal.fire('Erro',erro.error,'error');
          // alert('Errooooo!!')//futuramente adicionar sweetalert2
+         console.log(erro);
         }
       })
       
@@ -124,7 +126,7 @@ export class PacientesListComponent {
     cadastrar(){
       //implementar a lógica de abertura de modal APÓS criar o formulario de paciente
      
-     this.pacienteEdit= new Paciente();
+     this.pacienteEdit= new Paciente(new Endereco());
      this.modalRef = this.modalService.open(this.modalPacientesForm);
     }
 
