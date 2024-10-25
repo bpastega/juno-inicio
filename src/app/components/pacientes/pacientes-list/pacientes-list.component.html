@@ -4,6 +4,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+
+                  <!-- Trecho correspondente aos botões e barra de pesquisa no topo da tabela-->
                   <div class="input-group">
                     <input (keyup.enter)="findByNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do título..."
                       aria-label="Recipient's username with two button addons" />
@@ -28,9 +30,10 @@
                             <th>Data de Nascimento</th>
                             <th>Tipo Sanguíneo</th>
                             <th>Status</th>
-                            <th>Protocolo Pré-Natal</th>
+                            <th>Protocolo Em Andamento</th>
                             <!--<th>Endereço</th>-->
-                            <th>Ações</th>
+                            <!-- <th>Ações</th> -->
+                            <th>Detalhes</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -50,13 +53,13 @@
                                 <div class="ms-3">
                                   <p class="fw-bold mb-1">{{paciente.nome}}</p>
                                   <p class="text-muted mb-0">{{paciente.email}}</p>
-                                  <!-- ERRO: NG5002: Incomplete block "gmail". If you meant to write the @ character, you should use the "&#64;" HTML entity instead.-->
+                                  <!-- ERRO FREQUENTE: NG5002: Incomplete block "gmail". If you meant to write the @ character, you should use the "&#64;" HTML entity instead.-->
                                 </div>
                               </div>
                             </td>
 
                             <td> <!-- Célula B: CPF-->
-                                <p class="fw-normal mb-1">{{paciente.cpf}}</p>
+                                <p class="fw-normal mb-1">{{formataCPFService.formataCpf(paciente.cpf)}}</p>
                             </td>
 
                             <td> <!-- Célula C: Data de Nascimento--> 
@@ -71,29 +74,37 @@
                             </td>
 
                             <td><!-- Célula E: Status do Pré-Natal-->
-                              <span class="badge badge-success rounded-pill d-inline">Ativo</span>
+                              <span [ngClass]="statusPacienteService.renderStatusPaciente(paciente)">{{statusPacienteService.listStatusPaciente(paciente)}} </span>
+                              <!-- renderStatus gera o elemento HTML correspondente ao status. -->       <!-- listStatus atribui um string ao booleano-->
                             </td>
 
                             
                             <td><!-- Célula F: Protocolo-->
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    Protocolo Atual
+
+                                <button type="button" [ngClass]="statusPacienteService.renderProtocoloAtual(paciente)" > <!-- renderProtocolo gera o elemento HTML correspondente ao status do protocolo -->
+                                  {{statusPacienteService.listProtocoloAtual(paciente)}} <!-- listProtocolo atribui um string ao booleano-->
                                   </button>
 
-                                  <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    Protocolos Paciente
-                                  </button>
                             </td>
 
-                            <td><!-- Célula G: Editar Paciente-->
-                                <!-- <button type="button" class="btn btn-tertiary" mdbRipple routerLink = "admin/pacientes/editar/{{paciente.id}}">Editar</button>-->
+                            <!-- !!! SERÁ MOVIDO PARA PACIENTES-INFO !!! -->
+                            <!-- Célula G: Editar Paciente-->
+                            <!--
+                            <td>
                                 <button type="button" class="btn btn-tertiary" (click)="editar(paciente)">Editar</button>
-                                <!-- por event binding executa o método editar que abre a modal com o formulário -->
-                            </td>
+                            </td>-->
+                            <!-- por event binding executa o método editar que abre a modal com o formulário -->
+
+                            <!-- !!! SERÁ MOVIDO PARA PACIENTES-INFO !!! -->
+                            <!-- <td>
+                                <button type="button" class="btn btn-secondary" (click)="deletarById(paciente)"mdbRipple>Deletar</button>
+                            </td> -->
 
                             <td>
-                                <button type="button" class="btn btn-secondary" (click)="deletarById(paciente)"mdbRipple>Deletar</button>
+                              <button type="button" class="btn btn-secondary"mdbRipple>Detalhes</button>
                             </td>
+
+
                           </tr> <!-- FIM DO PACIENTE -->
 
                         }
@@ -113,7 +124,7 @@
 
     [CÉLULA A - ÍCONE, NOME, EMAIL]
         * Selecionar automaticamente uma das fotos dentro de public/assets/images/patientIcons para cada paciente renderizado
-        * [FEITO] Gerar automaticamente o trecho "&#64;" para substituir o @ dentro do endereço de email
+        * [DESCARTADO] Gerar automaticamente o trecho "&#64;" para substituir o @ dentro do endereço de email
 
     [CÉLULA B - CPF]
         * Aplicar máscara com . e - (TODO: correto fazer aqui??)

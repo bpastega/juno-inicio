@@ -3,7 +3,7 @@ import { Paciente } from '../../../models/paciente';
 import { RouterLink } from '@angular/router';
 import { PacienteService } from '../../../services/paciente.service';
 import { ImagemService } from '../../../services/imagem.service';
-import { DatePipe, registerLocaleData } from '@angular/common';
+import { DatePipe, NgClass, registerLocaleData } from '@angular/common';
 import Swal from 'sweetalert2';
 //Teste 
 import {
@@ -14,13 +14,15 @@ import {
 import localePT from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
+import { FormataCPFService } from '../../../services/utility/formata-cpf.service';
+import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 
 registerLocaleData(localePT);
 
 @Component({
   selector: 'app-pacientes-list',
   standalone: true,
-  imports: [RouterLink, DatePipe, FormsModule, PacientesFormComponent,MdbModalModule],
+  imports: [RouterLink, DatePipe, FormsModule, PacientesFormComponent,MdbModalModule, NgClass],
   templateUrl: './pacientes-list.component.html',
   styleUrl: './pacientes-list.component.scss'
 })
@@ -40,6 +42,8 @@ export class PacientesListComponent {
   /*Injeta o Service, semelhante ao Autowired*/ 
   pacienteService = inject(PacienteService);
   imagemService = inject(ImagemService);
+  formataCPFService = inject(FormataCPFService);
+  statusPacienteService = inject(StatusPacienteService);
 
   constructor(){
     // this.lista.push(new Paciente(123, 'Amélia Santos', '543.707.590-13', 'ameliasantos@gmail.com', new Date(1995, 11, 17), "A+" ));
