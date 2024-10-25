@@ -1,6 +1,6 @@
 import { Component, inject, LOCALE_ID, TemplateRef, ViewChild } from '@angular/core';
 import { Paciente } from '../../../models/paciente';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PacienteService } from '../../../services/paciente.service';
 import { ImagemService } from '../../../services/imagem.service';
 import { DatePipe, NgClass, registerLocaleData } from '@angular/common';
@@ -45,6 +45,8 @@ export class PacientesListComponent {
   formataCPFService = inject(FormataCPFService);
   statusPacienteService = inject(StatusPacienteService);
 
+  router = inject(Router);
+
   constructor(){
     // this.lista.push(new Paciente(123, 'Amélia Santos', '543.707.590-13', 'ameliasantos@gmail.com', new Date(1995, 11, 17), "A+" ));
    this.findAll();
@@ -67,6 +69,11 @@ export class PacientesListComponent {
         return "Maior de Idade";
       }
     }*/
+
+
+    navigateToInfo(id: number) {
+      this.router.navigate(['/admin/pacientes/info', id]);
+    }
 
     findAll(){
       this.pacienteService.findAll().subscribe({
