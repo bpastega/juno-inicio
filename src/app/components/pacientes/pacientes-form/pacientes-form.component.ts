@@ -5,6 +5,7 @@ import { PacienteService } from '../../../services/paciente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../../../models/paciente';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Endereco } from '../../../models/endereco';
 
 @Component({
   selector: 'app-pacientes-form',
@@ -25,6 +26,9 @@ export class PacientesFormComponent {
   pacienteService = inject(PacienteService);
 
   @Input() paciente: Paciente = new Paciente();
+
+  endereco: Endereco = new Endereco; //tentando adicionar o endereço ao PACIENTE
+
   @Output() retorno = new EventEmitter();
 
   /* -> para refatoraçao caso faça a modal dentro de modal
