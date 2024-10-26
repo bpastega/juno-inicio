@@ -1,85 +1,89 @@
-<!-- https://mdbootstrap.com/docs/angular/navigation/navbar/-->
-
-    
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Navbar brand -->
+<!-- Navbar principal -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+  <div class="container-fluid">
+      <!-- Marca -->
       <a class="navbar-brand" href="#">
-        <img
-            src="assets/images/JunoLogo.png"
-            height="35"
-            alt=""
-            loading="lazy"
-        />
-
-        <small>Juno</small>
-
-
-      </a>
-  
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        (click)="basicNavbar.toggle()"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-        mdbCollapse
-        #basicNavbar="mdbCollapse"
-      >
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin/pacientes">Pacientes</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin/protocolos">Protocolos</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="login">Sair</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-              >Disabled</a
-            >
-          </li>
-        </ul>
-        <!-- Left links -->
-  
-        <!-- Search form -->
-        <!--
-        <form class="d-flex input-group w-auto">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Type query"
-            aria-label="Search"
+          <img
+              src="assets/images/JunoLogo.png"
+              height="35"
+              alt="Juno Logo"
+              loading="lazy"
+              class="me-2"
           />
-          <button class="btn btn-outline-primary" type="button">
-            Search
-          </button>
-        </form>-->
-        
+          <span class="text-primary fw-bold">Juno</span>
+      </a>
+
+      <!-- Botão de alternância para mobile -->
+      <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+      >
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link text-primary" href="admin/pacientes">Pacientes</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-primary" href="admin/protocolos">Protocolos</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-primary" href="login">Sair</a>
+              </li>
+
+              
+
+              
+              
+          </ul>
       </div>
-      <!-- Collapsible wrapper -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
+  </div>
 
+  
+</nav>
 
+<!-- Div com fundo cinza claro e barra de pesquisa
+<div class="bg-light py-4">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-md-6">
+              <form class="d-flex">
+                  <input
+                      type="search"
+                      class="form-control rounded-pill"
+                      placeholder="Pesquisar..."
+                      aria-label="Search"
+                  />
+                  <button class="btn btn-primary ms-2 rounded-pill" type="button">
+                      Buscar
+                  </button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div> -->
 
-<!-- https://www.youtube.com/watch?v=Hh6uLjawNpQ-->
+<!-- Navbar secundária 
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-top">
+  <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Início</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Serviços</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Contato</a>
+          </li>
+      </ul>
+  </div>
+</nav>-->
