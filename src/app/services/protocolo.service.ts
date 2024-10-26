@@ -26,7 +26,7 @@ export class ProtocoloService {
   }
 
   encerrar(id: number): Observable<string>{
-    return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
+    return this.http.delete<string>(this.API+"/encerrar/"+id, {responseType: 'text' as 'json'});
   }
 
   findById(id: number): Observable<Protocolo>{
