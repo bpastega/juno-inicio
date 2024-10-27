@@ -7,7 +7,7 @@
                 <h2 class="card-title">Detalhes - Paciente</h2>
                 <div class="btns">
                     @if(pacienteEncontrado.statusPreNatal == true){
-                        <button type="button" class="btn btn-warning" mdbRipple (click)="encontrarProtocoloAtivo(pacienteEncontrado)"> Encerrar Protocolo Ativo</button>
+                        <button type="button" class="btn btn-warning" mdbRipple> Encerrar Protocolo Ativo</button>
                     }
                     @if(pacienteEncontrado.statusPreNatal == false){
                         <button type="button" class="btn btn-success" mdbRipple> Abrir Novo Protocolo</button>
