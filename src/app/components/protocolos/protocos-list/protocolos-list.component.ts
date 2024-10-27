@@ -9,6 +9,7 @@ import { StatusProtocoloService } from '../../../services/utility/status-protoco
 import { ProtocolosFormComponent } from "../protocolos-form/protocolos-form.component";
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Paciente } from '../../../models/paciente';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,14 +31,18 @@ export class ProtocosListComponent {
   pesquisa: string = '';
 
   protocoloService = inject(ProtocoloService);
-
   statusProtocoloService = inject(StatusProtocoloService)
-
   protocoloEdit!: Protocolo;
+
+  router = inject(Router);
 
 
   constructor(){
     this.findAll();
+  }
+
+  navigateToInfo(id: number) {
+    this.router.navigate(['/admin/protocolos/info', id]);
   }
 
   findAll(){

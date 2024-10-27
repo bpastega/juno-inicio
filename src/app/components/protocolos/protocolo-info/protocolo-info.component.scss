@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
+.card{
+    margin-top: 2rem;
+    font-family: Inconsolata;
+}
+
+.topo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    margin-right: 1rem;
+}
+
+.protocolo{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.infoProtocolo{
+    margin-top: 1.5rem;
+    margin-right: 3rem;
+    margin-bottom: 1.5;
+}
+
+.bold{
+    font-weight: bold;
+}

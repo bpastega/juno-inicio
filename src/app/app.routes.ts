@@ -9,6 +9,7 @@ import { ConsultasListComponent } from './components/consultas/consultas-list/co
 import { ExamesComponent } from './components/exames/exames.component';
 import { TestesListComponent } from './components/testes/testes-list/testes-list.component';
 import { ConsultasOdontologicasListComponent } from './components/consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component';
+import { ProtocoloInfoComponent } from './components/protocolos/protocolo-info/protocolo-info.component';
 
 export const routes: Routes = [
 	/*Dentro da vídeoaula 'Curso - Spring Boot e Angular | 11 - Angular 17: Layout com Material Design PARTE 1 (front-end)' 
@@ -26,6 +27,7 @@ export const routes: Routes = [
 
 
 		{path:"protocolos", component: ProtocosListComponent}, //para visualizar os protocolos
+		{path:"protocolos/info/:id", component: ProtocoloInfoComponent},
 
 		{path:"consultas", component:ConsultasListComponent},
 

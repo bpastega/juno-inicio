@@ -39,6 +39,7 @@
         <th>Status</th>
         <th>Data Abertura</th>
         <th>Ações</th>
+        <th>Detalhes</th>
       </tr>
     </thead>
     <tbody>
@@ -57,6 +58,10 @@
           <br>
           <!-- ao cadastrar passo o id do paciente atrelado ao protocolo da lista -->
           <button (click)="cadastrar(protocolo.paciente.id)" type="button" class="btn btn-secondary" mdbRipple>Criar novo</button>
+        </td>
+
+        <td>
+          <button (click)="navigateToInfo(protocolo.id)" type="button" class="btn btn-secondary" mdbRipple>Detalhes</button>
         </td>
       </tr>
     }

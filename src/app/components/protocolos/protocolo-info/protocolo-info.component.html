@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+
+            <div class="topo">
+                <h2 class="card-title">Detalhes - Protocolo Pré-Natal</h2>
+                <div class="btns">
+                    @if(protocoloEncontrado.statusProtocolo == true){
+                        <button type="button" class="btn btn-warning" mdbRipple> Encerrar Protocolo</button>
+                    }
+                    
+                    <!--@if(protocoloEncontrado.statusProtocolo == false){
+                        <button type="button" class="btn btn-success" mdbRipple> Abrir Novo Protocolo</button>
+                    }-->
+                    <button type="button" class="btn btn-primary">Editar</button>
+                    <button type="button" class="btn btn-danger" mdbRipple> Deletar</button>
+                </div>
+            </div>  
+            
+
+            <div class="protocolo">
+                <p class="infoProtocolo">Nome do Paciente: {{protocoloEncontrado.paciente.nome}}</p>
+                <p class="infoProtocolo">Data de Abertura: {{protocoloEncontrado.dataAbertura | date: 'longDate' :'':'pt-BR'}}</p>
+                <p class="infoProtocolo">Data de Encerramento: {{statusInfoProtocoloService.listDataEncerramento(protocoloEncontrado)}}</p>
+
+                <p class="infoProtocolo">Data da Última Menstruação: {{protocoloEncontrado.dum | date: 'longDate' :'':'pt-BR'}}</p>
+                <p class="infoProtocolo">Data Provável de Parto: {{protocoloEncontrado.dpp | date: 'longDate' :'':'pt-BR'}}</p>
+
+                <div class="infoProtocolo" id="infoStatus">
+                    <p>Status do Protocolo:</p>
+                    <span [ngClass]="statusProtocoloService.renderStatusProtocolo(protocoloEncontrado)">{{statusProtocoloService.listStatusProtocolo(protocoloEncontrado) }}</span>
+                    <!-- Se ele ficar do lado, por algum motivo ele fica distorcido. TODO: tentar arrumar depois-->
+                </div>
+            </div>
+
+            </div>
+          </div>
+    </div>
+</div>
