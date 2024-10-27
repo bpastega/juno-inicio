@@ -6,107 +6,112 @@
           <h5>{{ tituloComponente }}</h5>
 
           <form #formulario1="ngForm">
-            <!-- Campo Nome -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="nome">Nome:</label>
-              <input [(ngModel)]="paciente.nome" mdbInput pattern=".*\S+.*" required type="text" name="nome" class="form-control" />
-        
-            </mdb-form-control>
+            <div class="row mb-4">
+              <div class="col">
+                <!-- Campo Nome -->
+                <mdb-form-control>
+                  <input [(ngModel)]="paciente.nome" mdbInput pattern=".*\S+.*" required type="text" name="nome" class="form-control" />
+                  <label mdbLabel class="form-label" for="nome">Nome:</label>
+                </mdb-form-control>
+              </div>
 
-            <!-- Campo CPF SEM MASCARA, NAO USAR MASCARA NO INPUT OU TRATAR -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="cpf">CPF:</label>
-              <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{11}" required type="text" name="cpf" class="form-control" />
-      
-            </mdb-form-control>
+              <div class="col">
+                <!-- Campo CPF -->
+                <mdb-form-control>
+                  <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{11}" required type="text" name="cpf" class="form-control" />
+                  <label mdbLabel class="form-label" for="cpf">CPF:</label>
+                </mdb-form-control>
+              </div>
+            </div>
 
             <!-- Campo Email -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="email">Email:</label>
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.email" mdbInput type="email" required name="email" class="form-control" />
-             
+              <label mdbLabel class="form-label" for="email">Email:</label>
             </mdb-form-control>
 
             <!-- Campo Data de Nascimento -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="dataNascimento">Data de Nascimento:</label>
-
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.dataNascimento" mdbInput type="date" required name="dataNascimento" class="form-control" />
+              <label mdbLabel class="form-label" for="dataNascimento">Data de Nascimento:</label>
             </mdb-form-control>
 
             <!-- Campo Tipo Sanguíneo -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="tipoSanguineo">Tipo Sanguíneo:</label>
-
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.tipoSanguineo" mdbInput required type="text" name="tipoSanguineo" class="form-control" />
+              <label mdbLabel class="form-label" for="tipoSanguineo">Tipo Sanguíneo:</label>
             </mdb-form-control>
 
             <!-- Campo Status Pré-Natal -->
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="statusPreNatal">Status Pré-Natal:</label>
-
+            <mdb-form-control class="mb-4">
               <select [(ngModel)]="paciente.statusPreNatal" mdbInput required name="statusPreNatal" class="form-select">
                 <option [ngValue]="true">Sim</option>
                 <option [ngValue]="false">Não</option>
               </select>
+              <label mdbLabel class="form-label" for="statusPreNatal">Status Pré-Natal:</label>
             </mdb-form-control>
 
             <hr />
 
-            <!--Area de endereço dando bug pois nao consigo acessar o endereço pelo paciente-->
             <h5>Endereço</h5>
 
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="rua">Rua:</label>
-              
-              <input [(ngModel)]="paciente.endereco.rua" mdbInput required type="text" name="rua" class="form-control" />
-            </mdb-form-control>
+            <div class="row mb-4">
+              <div class="col">
+                <!-- Campo Rua -->
+                <mdb-form-control>
+                  <input [(ngModel)]="paciente.endereco.rua" mdbInput required type="text" name="rua" class="form-control" />
+                  <label mdbLabel class="form-label" for="rua">Rua:</label>
+                </mdb-form-control>
+              </div>
 
-        
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="numero">Número:</label>
+              <div class="col">
+                <!-- Campo Número -->
+                <mdb-form-control>
+                  <input [(ngModel)]="paciente.endereco.numero" mdbInput required type="number" name="numero" class="form-control" />
+                  <label mdbLabel class="form-label" for="numero">Número:</label>
+                </mdb-form-control>
+              </div>
+            </div>
 
-              <input [(ngModel)]="paciente.endereco.numero" mdbInput required type="number" name="numero" class="form-control" />
-            </mdb-form-control>
-
-          
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="bairro">Bairro:</label>
-
+            <!-- Campo Bairro -->
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.endereco.bairro" mdbInput required type="text" name="bairro" class="form-control" />
+              <label mdbLabel class="form-label" for="bairro">Bairro:</label>
             </mdb-form-control>
 
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="cidade">Cidade:</label>
-
+            <!-- Campo Cidade -->
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.endereco.cidade" mdbInput required type="text" name="cidade" class="form-control" />
+              <label mdbLabel class="form-label" for="cidade">Cidade:</label>
             </mdb-form-control>
 
-         
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="cep">CEP:</label>
-
+            <!-- Campo CEP -->
+            <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.endereco.cep" mdbInput pattern="\d{5}-\d{3}" required type="text" name="cep" class="form-control" />
+              <label mdbLabel class="form-label" for="cep">CEP:</label>
             </mdb-form-control>
 
-          
-            <mdb-form-control>
-              <label mdbLabel class="form-label" for="descricao">Descrição:</label>
-
+            <!-- Campo Descrição -->
+            <mdb-form-control class="mb-4">
               <textarea [(ngModel)]="paciente.endereco.descricao" mdbInput name="descricao" class="form-control"></textarea>
+              <label mdbLabel class="form-label" for="descricao">Descrição:</label>
             </mdb-form-control>
-
-            <br />
 
             <!-- Botões -->
-          
-            @if(paciente.id > 0) {
-              
-              <button [disabled]="!formulario1.valid" (click)="atualizar()" class="btn btn-primary">Atualizar</button>
-            } @else {
-              <button [disabled]="!formulario1.valid" (click)="cadastrar()" class="btn btn-primary">Salvar</button>
-            }
-            <a href="admin/pacientes" class="btn btn-default">Voltar</a>
+            <div class="d-flex justify-content-between">
+              <button [disabled]="!formulario1.valid" (click)="paciente.id > 0 ? atualizar() : cadastrar()" class="btn btn-primary">
+                {{ paciente.id > 0 ? 'Atualizar' : 'Salvar' }}
+
+                <!-- o bloco de código acima é uma versão simplificada do código bloco de código abaixo:
+                      @if(paciente.id > 0) {
+                      <button [disabled]="!formulario1.valid" (click)="atualizar()" class="btn btn-primary">Atualizar</button>
+                      } @else {
+                       <button [disabled]="!formulario1.valid" (click)="cadastrar()" class="btn btn-primary">Salvar</button>
+                         } 
+                -->
+              </button>
+              <a href="admin/pacientes" class="btn btn-default">Voltar</a>
+            </div>
           </form>
         </div>
       </div>
