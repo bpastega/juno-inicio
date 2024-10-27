@@ -1,1 +1,62 @@
-<p>consultas-odontologicas-list works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Protocolo de Origem</th>
+                    <!--<th>Paciente Atendido</th>-->
+                    <th>Ações</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                @for(consultaOdontologica of lista; track $index){    
+                  <tr>
+                    <!-- Data de Atendimento-->
+                    <td>
+                        <p class="text-muted mb-0">{{consultaOdontologica.descricao}}</p>
+                    </td>
+
+                    <!-- Descrição-->
+                    <td>
+                        <div>
+                              <p class="text-bold mb-1">{{consultaOdontologica.dataAtendimento}}</p>
+                        </div>
+                    </td>
+
+                    <!-- Paciente Atendido-->
+                    <td>
+                       <p class="fw-normal mb-1">{{consultaOdontologica.protocolo.id}}</p> <!-- Imagino que com a mudança no back isso se resolva? 
+                       Caso contrário, podemos fazer uma função que usa findById com o service de protocolo-->
+                    </td>
+
+                    <td id="editar">
+                      <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
+                    </td>
+
+                    <td id="deletar">
+                        <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                      </td>
+
+                  </tr>
+                }
+
+                </tbody>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-primary act-btn">Placeholder</button> <!-- TODO: adicionar funcionalidades-->
+                    <button type="button" class="btn btn-primary act-btn">Placeholder</button>
+                    <button type="button" class="btn btn-primary act-btn">Placeholder</button>
+                </div>
+
+
+              </table>
+        </div>
+    </div>
+</div>

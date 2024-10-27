@@ -3,16 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 
-.nav-item{
+.container{
     font-family: Inconsolata;
-    margin-right: 1rem;
 }
 
-.navbar-brand{
-    font-size: x-large;
-    font-family: Playwrite GB S;
-    font-style: italic;
-    color: palevioletred;
+
+.col-6{
+    margin-top: 2rem;
+}
+
+.btn{
+    margin-top: 2rem;
+}
+
+.card{
+    margin-top: 2rem;
 }
 
 

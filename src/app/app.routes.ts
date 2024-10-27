@@ -5,6 +5,10 @@ import { PacientesListComponent } from './components/pacientes/pacientes-list/pa
 import { PacientesFormComponent } from './components/pacientes/pacientes-form/pacientes-form.component';
 import { ProtocosListComponent } from './components/protocolos/protocos-list/protocolos-list.component';
 import { PacienteInfoComponent } from './components/pacientes/paciente-info/paciente-info.component';
+import { ConsultasListComponent } from './components/consultas/consultas-list/consultas-list.component';
+import { ExamesComponent } from './components/exames/exames.component';
+import { TestesListComponent } from './components/testes/testes-list/testes-list.component';
+import { ConsultasOdontologicasListComponent } from './components/consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component';
 
 export const routes: Routes = [
 	/*Dentro da vídeoaula 'Curso - Spring Boot e Angular | 11 - Angular 17: Layout com Material Design PARTE 1 (front-end)' 
@@ -21,7 +25,13 @@ export const routes: Routes = [
 		{path:"pacientes/editar/:id", component:PacientesFormComponent},
 
 
-		{path:"protocolos", component: ProtocosListComponent} //para visualizar os protocolos
+		{path:"protocolos", component: ProtocosListComponent}, //para visualizar os protocolos
+
+		{path:"consultas", component:ConsultasListComponent},
+
+		{path: "exames", component:ExamesComponent}, //temporariamente não usaremos, mas o objetivo final é eliminar as 2 rotas abaixo por meio deste
+			{path: "odonto", component:ConsultasOdontologicasListComponent},
+			{path: "testes", component:TestesListComponent}
 
 		
 	]}
