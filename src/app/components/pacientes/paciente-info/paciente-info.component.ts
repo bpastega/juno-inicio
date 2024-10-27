@@ -6,6 +6,9 @@ import { FormataCPFService } from "../../../services/utility/formata-cpf.service
 import { DatePipe, NgClass } from "@angular/common";
 import { StatusPacienteService } from "../../../services/utility/status-paciente.service";
 import { Endereco } from "../../../models/endereco";
+import Swal from "sweetalert2";
+import { Protocolo } from "../../../models/protocolo";
+import { ProtocoloService } from "../../../services/protocolo.service";
 
 
 @Component({
@@ -19,14 +22,22 @@ import { Endereco } from "../../../models/endereco";
 export class PacienteInfoComponent {
   pacienteEncontrado!: Paciente;
   pacienteEndereco!: Endereco;
+  pacienteProtocoloAtivo!: Protocolo;
+
+  protocolosPaciente: Protocolo[] = [];
+  protocolosAtivos: Protocolo[] = [];
 
 
   /*Injections*/
-  pacienteService = inject(PacienteService);
-  rotaAtivada = inject(ActivatedRoute);
-  router = inject(Router);
   formataCPFService = inject(FormataCPFService);
   statusPacienteService = inject(StatusPacienteService);
+  protocoloService = inject(ProtocoloService);
+  pacienteService = inject(PacienteService);
+
+  rotaAtivada = inject(ActivatedRoute);
+  router = inject(Router);
+
+  
   
   constructor(){
     let id = this.rotaAtivada.snapshot.params['id'];
@@ -46,6 +57,68 @@ export class PacienteInfoComponent {
       }
     })
 
+  }
+
+  /*NÃO FUNCIONA*/
+  encontrarProtocoloAtivo(paciente: Paciente) {
+    this.protocoloService.findByPacienteNome(paciente.nome).subscribe({ //percorre todos protocolos daquele paciente
+      next: protocolosEncontrados => {
+        this.protocolosAtivos = protocolosEncontrados.filter(protocolo => protocolo.statusProtocolo == true); // filtra 
+
+        alert(this.protocolosAtivos.length);
+        
+      },
+      error: erro => {
+        Swal.fire('Erro!', erro.error, 'error');
+      }
+    });
+  }
+  
+  /*Nosso objetivo aqui é encontrar o protocolo ativo de determinado paciente*/
+  /*encontrarProtocoloAtivo(paciente: Paciente){
+  
+  this.protocoloService.findByPacienteNome(paciente.nome).subscribe({ //procura os protocolos com o nome daquele paciente
+      next: (protocolosEncontrados) =>{
+        this.protocolosPaciente = protocolosEncontrados; //armazena os protocolos do paciente
+
+        this.protocoloService.findByAtivo().subscribe({ //procura os protocolos ativos
+          next: (protocolosAtivosEncontrados) =>{
+            this.protocolosAtivos = protocolosAtivosEncontrados; //armazena os protocolos ativos encontrados
+          },
+
+          error: (erro) => {
+            Swal.fire('Erro!',erro.error,'error'); 
+          },
+        }); 
+      }, 
+      
+      error: (erro) => {
+        Swal.fire('Erro!',erro.error,'error');
+      },
+  })
+     
+  }*/
+
+  encerrar(protocolo: Protocolo){
+    Swal.fire({
+      title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.protocoloService.encerrar(protocolo.id).subscribe({
+          next: (mensagem) => {
+            Swal.fire(mensagem, '', 'success');
+            //this.findAll();
+          },
+          error: (erro) => {
+            
+            Swal.fire('Erro!',erro.error,'error');
+          },
+        });
+      }
+    });
   }
 
 }
