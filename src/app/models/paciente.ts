@@ -10,7 +10,7 @@ export class Paciente {
     dataNascimento!: Date;
     tipoSanguineo!: string;
 
-    statusPreNatal!: boolean; /*TODO: potencialmente alterar para que o default seja false, fazendo com que o pré natal seja 
+    statusPreNatal: boolean = false; /*TODO: potencialmente alterar para que o default seja false, fazendo com que o pré natal seja 
     inicializado com esse status até que seja determinado o contrário.*/
 
     telefone!: string;

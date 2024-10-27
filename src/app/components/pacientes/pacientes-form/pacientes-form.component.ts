@@ -59,6 +59,7 @@ export class PacientesFormComponent {
         if(this.paciente.endereco==null){
           this.paciente.endereco=new Endereco();
         }
+
       },
       error: erro => {
         alert('Deu erro');
@@ -68,6 +69,11 @@ export class PacientesFormComponent {
   }
 
   cadastrar(){
+    if(this.paciente.protocolos && this.paciente.protocolos.length>0){
+      this.paciente.statusPreNatal = true;
+    }
+
+
     this.pacienteService.save(this.paciente).subscribe({
       next: mensagem => {
 
@@ -93,5 +99,7 @@ export class PacientesFormComponent {
       }
     });
   }
+
+  
 
 }
