@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, TemplateRef, ViewChild } from "@angular/core";
 import { Paciente } from "../../../models/paciente";
 import { PacienteService } from "../../../services/paciente.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -6,6 +6,10 @@ import { FormataCPFService } from "../../../services/utility/formata-cpf.service
 import { DatePipe, NgClass } from "@angular/common";
 import { StatusPacienteService } from "../../../services/utility/status-paciente.service";
 import { Endereco } from "../../../models/endereco";
+import Swal from "sweetalert2";
+import { Protocolo } from "../../../models/protocolo";
+import { ProtocoloService } from "../../../services/protocolo.service";
+import { MdbModalRef, MdbModalService } from "mdb-angular-ui-kit/modal";
 
 
 @Component({
@@ -17,16 +21,30 @@ import { Endereco } from "../../../models/endereco";
 })
 
 export class PacienteInfoComponent {
+  /*Quando o trecho abaixo está presente, a tela de detalhes não renderiza - minha teoria é de que pacientes-list ter a mesma modal está causando conflitos*/
+
+  /*modalService = inject(MdbModalService); // responsável por abrir as modais
+  @ViewChild('modalPacientesForm') modalPacientesForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
+  modalRef!: MdbModalRef<any>; //a referencia da modal aberta para ser fechada*/
+
   pacienteEncontrado!: Paciente;
   pacienteEndereco!: Endereco;
+  pacienteProtocoloAtivo!: Protocolo;
+
+  protocolosPaciente: Protocolo[] = [];
+  protocolosAtivos: Protocolo[] = [];
 
 
   /*Injections*/
-  pacienteService = inject(PacienteService);
-  rotaAtivada = inject(ActivatedRoute);
-  router = inject(Router);
   formataCPFService = inject(FormataCPFService);
   statusPacienteService = inject(StatusPacienteService);
+  protocoloService = inject(ProtocoloService);
+  pacienteService = inject(PacienteService);
+
+  rotaAtivada = inject(ActivatedRoute);
+  router = inject(Router);
+
+  
   
   constructor(){
     let id = this.rotaAtivada.snapshot.params['id'];
@@ -48,4 +66,107 @@ export class PacienteInfoComponent {
 
   }
 
+
+  encerrar(protocolo: Protocolo){
+    Swal.fire({
+      title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.protocoloService.encerrar(protocolo.id).subscribe({
+          next: (mensagem) => {
+            Swal.fire(mensagem, '', 'success');
+            //this.findAll();
+          },
+          error: (erro) => {
+            
+            Swal.fire('Erro!',erro.error,'error');
+          },
+        });
+      }
+    });
+  }
+
+  deletarById(paciente: Paciente){
+    Swal.fire({
+      title: 'Confirme a deleção do paciente ' + paciente.nome + '.',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.pacienteService.delete(paciente.id).subscribe({
+          next: (mensagem) => {
+            Swal.fire(mensagem, '', 'success');
+            this.router.navigate(['/admin/pacientes']);//assim que é deletado o paciente da tela atual, o usuário retornará à página anterior
+          },
+          error: (erro) => {
+            
+            Swal.fire('Erro!',erro.error,'error');
+          },
+        });
+      }
+    });
+  }
+
+  /*retornoForm(mensagem: string) {
+    //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
+
+      this.modalRef.close(); //fecha a moodal
+
+    Swal.fire({
+      title: mensagem,
+      icon: 'success',
+    });
+
+    //this.findAll(); //atualiza e recarrega a lista
+  }*/
+
+
 }
+
+
+
+/*Nosso objetivo aqui é encontrar o protocolo ativo de determinado paciente*/
+/*encontrarProtocoloAtivo(paciente: Paciente){
+
+this.protocoloService.findByPacienteNome(paciente.nome).subscribe({ //procura os protocolos com o nome daquele paciente
+    next: (protocolosEncontrados) =>{
+      this.protocolosPaciente = protocolosEncontrados; //armazena os protocolos do paciente
+
+      this.protocoloService.findByAtivo().subscribe({ //procura os protocolos ativos
+        next: (protocolosAtivosEncontrados) =>{
+          this.protocolosAtivos = protocolosAtivosEncontrados; //armazena os protocolos ativos encontrados
+        },
+
+        error: (erro) => {
+          Swal.fire('Erro!',erro.error,'error'); 
+        },
+      }); 
+    }, 
+    
+    error: (erro) => {
+      Swal.fire('Erro!',erro.error,'error');
+    },
+})
+   
+}*/
+
+
+/*NÃO FUNCIONA
+
+encontrarProtocoloAtivo(paciente: Paciente) {
+  this.protocoloService.findByPacienteNome(paciente.nome).subscribe({ //percorre todos protocolos daquele paciente
+    next: protocolosEncontrados => {
+      this.protocolosAtivos = protocolosEncontrados.filter(protocolo => protocolo.statusProtocolo == true); // filtra 
+
+      alert(this.protocolosAtivos.length);
+      
+    },
+    error: erro => {
+      Swal.fire('Erro!', erro.error, 'error');
+    }
+  });
+}*/ 

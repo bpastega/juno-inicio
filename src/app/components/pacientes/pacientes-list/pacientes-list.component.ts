@@ -53,24 +53,6 @@ export class PacientesListComponent {
    this.findAll();
   }
 
-  /*https://stackoverflow.com/questions/8152426/how-can-i-calculate-the-number-of-years-between-two-dates -- UTF-8 
-  verificaMaioridade(paciente:Paciente, dataAtual = new Date()){
-      const diferencaAnos = dataAtual.getFullYear() - paciente.dataNascimento.getFullYear();
-      const diferencaMeses = dataAtual.getMonth() - paciente.dataNascimento.getMonth();
-      const diferencaDias = dataAtual.getDate() - paciente.dataNascimento.getDate();
-    
-      const doNotSubtractOne = diferencaMeses > 0 || (diferencaMeses === 0 && diferencaDias >= 0);
-      var anosTotais = doNotSubtractOne ? diferencaAnos : diferencaAnos - 1;
-
-      if(anosTotais<18){
-        return "Menor de Idade"
-      }
-
-      else{
-        return "Maior de Idade";
-      }
-    }*/
-
 
     navigateToInfo(id: number) {
       this.router.navigate(['/admin/pacientes/info', id]);
@@ -101,6 +83,32 @@ export class PacientesListComponent {
       });
     }
 
+    cadastrar(){
+      //implementar a lógica de abertura de modal APÓS criar o formulario de paciente
+     
+     this.pacienteEdit= new Paciente(new Endereco());
+     this.modalRef = this.modalService.open(this.modalPacientesForm);
+    }
+
+    editar(paciente: Paciente) {
+      this.pacienteEdit = Object.assign({}, paciente); //cria um clone do objeto para evitar edição automática
+      this.modalRef = this.modalService.open(this.modalPacientesForm);
+    }
+
+    retornoForm(mensagem: string) {
+      //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
+  
+        this.modalRef.close(); //fecha a moodal
+  
+      Swal.fire({
+        title: mensagem,
+        icon: 'success',
+      });
+  
+      this.findAll(); //atualiza e recarrega a lista
+    }
+
+    /* TRECHOS TOFU - REALOCAR!!!
     deletarById(paciente: Paciente){
       Swal.fire({
         title: 'Confirme a deleção do paciente ' + paciente.nome + '.',
@@ -123,17 +131,6 @@ export class PacientesListComponent {
       });
     }
 
-    cadastrar(){
-      //implementar a lógica de abertura de modal APÓS criar o formulario de paciente
-     
-     this.pacienteEdit= new Paciente(new Endereco());
-     this.modalRef = this.modalService.open(this.modalPacientesForm);
-    }
-
-    editar(paciente: Paciente) {
-      this.pacienteEdit = Object.assign({}, paciente); //cria um clone do objeto para evitar edição automática
-      this.modalRef = this.modalService.open(this.modalPacientesForm);
-    }
 
     
   retornoForm(mensagem: string) {
@@ -147,8 +144,25 @@ export class PacientesListComponent {
     });
 
     this.findAll(); //atualiza e recarrega a lista
-  }
+  }*/
 
 }
 
   
+/*https://stackoverflow.com/questions/8152426/how-can-i-calculate-the-number-of-years-between-two-dates -- UTF-8 
+  verificaMaioridade(paciente:Paciente, dataAtual = new Date()){
+      const diferencaAnos = dataAtual.getFullYear() - paciente.dataNascimento.getFullYear();
+      const diferencaMeses = dataAtual.getMonth() - paciente.dataNascimento.getMonth();
+      const diferencaDias = dataAtual.getDate() - paciente.dataNascimento.getDate();
+    
+      const doNotSubtractOne = diferencaMeses > 0 || (diferencaMeses === 0 && diferencaDias >= 0);
+      var anosTotais = doNotSubtractOne ? diferencaAnos : diferencaAnos - 1;
+
+      if(anosTotais<18){
+        return "Menor de Idade"
+      }
+
+      else{
+        return "Maior de Idade";
+      }
+    }*/
