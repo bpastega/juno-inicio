@@ -5,11 +5,14 @@ import { Protocolo } from '../../../models/protocolo';
 import { DatePipe, NgClass } from '@angular/common';
 import { StatusProtocoloService } from '../../../services/utility/status-protocolo.service';
 import { StatusInfoProtocoloService } from '../../../services/utility/status-info-protocolo.service';
+import { ConsultasOdontologicasListComponent } from "../../consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component";
+import { TestesListComponent } from "../../testes/testes-list/testes-list.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-protocolo-info',
   standalone: true,
-  imports: [DatePipe, NgClass],
+  imports: [DatePipe, NgClass, ConsultasOdontologicasListComponent, TestesListComponent],
   templateUrl: './protocolo-info.component.html',
   styleUrl: './protocolo-info.component.scss'
 })
@@ -44,6 +47,29 @@ export class ProtocoloInfoComponent {
       }
     })
 
+  }
+
+  encerrar(protocolo: Protocolo){
+    Swal.fire({
+      title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.protocoloService.encerrar(protocolo.id).subscribe({
+          next: (mensagem) => {
+            Swal.fire(mensagem, '', 'success');
+            this.router.navigate(['/admin/protocolos']);
+            //this.findAll();
+          },
+          error: (erro) => {
+            
+            Swal.fire('Erro!',erro.error,'error');
+          },
+        });
+      }
+    });
   }
 
 }

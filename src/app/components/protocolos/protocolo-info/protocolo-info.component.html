@@ -7,14 +7,14 @@
                 <h2 class="card-title">Detalhes - Protocolo Pré-Natal</h2>
                 <div class="btns">
                     @if(protocoloEncontrado.statusProtocolo == true){
-                        <button type="button" class="btn btn-warning" mdbRipple> Encerrar Protocolo</button>
+                        <button type="button" class="btn btn-warning" (click)="encerrar(protocoloEncontrado)" mdbRipple> Encerrar Protocolo</button>
                     }
-                    
+
                     <!--@if(protocoloEncontrado.statusProtocolo == false){
                         <button type="button" class="btn btn-success" mdbRipple> Abrir Novo Protocolo</button>
                     }-->
                     <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-danger" mdbRipple> Deletar</button>
+                    <!--<button type="button" class="btn btn-danger" mdbRipple> Deletar</button>-->
                 </div>
             </div>  
             
