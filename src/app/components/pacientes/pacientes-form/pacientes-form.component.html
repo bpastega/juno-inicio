@@ -18,7 +18,7 @@
               <div class="col">
                 <!-- Campo CPF -->
                 <mdb-form-control>
-                  <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{11}" required type="text" name="cpf" class="form-control" />
+                  <input [(ngModel)]="paciente.cpf" mdbInput pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required type="text" name="cpf" class="form-control" />
                   <label mdbLabel class="form-label" for="cpf">CPF:</label>
                 </mdb-form-control>
               </div>

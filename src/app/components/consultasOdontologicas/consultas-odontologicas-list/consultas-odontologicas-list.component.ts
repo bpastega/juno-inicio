@@ -28,7 +28,6 @@ export class ConsultasOdontologicasListComponent {
 
     this.consultaOdontologicaService.findAll().subscribe({ /*Dentro do back, o findAll retorna APENAS candidatos ativos. Por isso, não se faz necessário realizar essa filtragem no front.*/ 
       next: lista => { //quando o back retornar o que se espera
-        console.log(lista)
         this.lista = lista;
       },
       error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
