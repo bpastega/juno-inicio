@@ -1,1 +1,69 @@
-<p>consultas-list works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- TODO: ADICIONAR Trecho correspondente aos botões e barra de pesquisa no topo da tabela-->
+                  
+
+                    <table class="table align-middle mb-0 bg-white" >
+                      
+                        <thead class="bg-light">
+                          <tr>
+                            <th>Nome do Paciente</th>
+                            <th>Data da Consulta</th>
+                            <th>Protocolo Correspondente</th> <!-- service: CONSULTA AVULSA / ACESSAR PROTOCOLO-->
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                            <th>Ações</th>
+                            
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        @for (consulta of lista; track $index) {
+                          <tr>
+                            <td> <!-- Célula A: Nome e Email do Paciente-->
+                             <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">{{consulta.paciente.nome}}</p> 
+                                  <p class="text-muted mb-0">{{consulta.paciente.email}}</p>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td> <!-- Célula B: Data da Consulta-->
+                                <p class="fw-normal mb-1">{{consulta.dataConsulta | date: 'longDate' :'':'pt-BR'}}</p>
+                            </td>
+
+                            <td><!-- Célula C: Protocolo Correspondente-->
+
+                                <!--<span [ngClass]="statusPacienteService.renderStatusPaciente(paciente)">{{statusPacienteService.listStatusPaciente(paciente)}} </span>-->
+                            </td>
+
+                            <td> <!-- Célula D: Descrição -->
+                                <p class="text-muted mb-0">{{consulta.descricao}}</p>
+                            </td>
+
+                            
+                            <td><!-- Célula E: Ações-->
+
+                            </td>
+                            
+                            <td><!-- Célula F: Ações-->
+
+                            </td>
+
+
+                          </tr> <!-- FIM DO PROTOCOLO -->
+
+                        }
+
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
