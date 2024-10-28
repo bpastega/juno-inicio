@@ -6,6 +6,6 @@ export class TesteRapido {
     exameSangue!: boolean;
     exameUrina!: boolean;
     descricao!:string;
-    protocolo!: Protocolo;
+    protocoloPreNatal!: Protocolo;
 
 }

@@ -3,7 +3,6 @@ import { Protocolo } from '../../../models/protocolo';
 import { ProtocoloService } from '../../../services/protocolo.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 import { NgClass } from '@angular/common';
 import { StatusProtocoloService } from '../../../services/utility/status-protocolo.service';
 import { ProtocolosFormComponent } from "../protocolos-form/protocolos-form.component";

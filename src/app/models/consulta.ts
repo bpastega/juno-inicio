@@ -5,7 +5,7 @@ export class Consulta {
     id!: number;
     dataConsulta!: Date;
     paciente!: Paciente;
-    protocolo!: Protocolo;
+    protocoloPreNatal!: Protocolo;
     descricao!: string;
     
 }
