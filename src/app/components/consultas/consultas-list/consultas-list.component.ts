@@ -3,6 +3,7 @@ import { PacienteService } from '../../../services/paciente.service';
 import { Consulta } from '../../../models/consulta';
 import { ConsultaService } from '../../../services/consulta.service';
 import { DatePipe, NgClass } from '@angular/common';
+import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 
 @Component({
   selector: 'app-consultas-list',
@@ -18,6 +19,7 @@ export class ConsultasListComponent {
   /*Injections*/
   pacienteService = inject(PacienteService); //será usado para filtrar consulta com base no nome do paciente
   consultaService = inject(ConsultaService);
+  statusPacienteService = inject(StatusPacienteService);
 
   constructor(){
     this.findAll();

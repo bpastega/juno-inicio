@@ -28,7 +28,6 @@
                              <div class="d-flex align-items-center">
                                 <div class="ms-3">
                                   <p class="fw-bold mb-1">{{consulta.paciente.nome}}</p> 
-                                  <p class="text-muted mb-0">{{consulta.paciente.email}}</p>
                                 </div>
                               </div>
                             </td>
@@ -39,7 +38,7 @@
 
                             <td><!-- Célula C: Protocolo Correspondente-->
 
-                                <!--<span [ngClass]="statusPacienteService.renderStatusPaciente(paciente)">{{statusPacienteService.listStatusPaciente(paciente)}} </span>-->
+                                <span [ngClass]="statusPacienteService.renderStatusPaciente(consulta.paciente)">{{statusPacienteService.listStatusPaciente(consulta.paciente)}} </span>
                             </td>
 
                             <td> <!-- Célula D: Descrição -->
@@ -48,11 +47,12 @@
 
                             
                             <td><!-- Célula E: Ações-->
+                              <button type="button" class="btn btn-primary" mdbRipple>Editar</button>
 
                             </td>
                             
                             <td><!-- Célula F: Ações-->
-
+                              <button type="button" class="btn btn-danger" mdbRipple>Deletar</button>
                             </td>
 
 
