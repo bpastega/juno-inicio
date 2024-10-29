@@ -42,7 +42,7 @@
               <!-- chama o método que recebe o paciente encontrado no componente -->
               <button type="button" (click)="deletarById(pacienteEncontrado)" class="btn btn-tertiary" mdbRipple><fa-icon [icon]="faTrash"></fa-icon></button>
             </div>
-          </div>
+          </div> <!-- Fim do header-->
   
           <!-- Abas de Navegação -->
           <ul class="nav nav-tabs mt-3" role="tablist">
@@ -74,9 +74,8 @@
                 <p><strong>Tipo Sanguíneo:</strong> {{ pacienteEncontrado.tipoSanguineo }}</p>
                 <p><strong>Telefone:</strong> {{ pacienteEncontrado.telefone }}</p>
                 <p>
-                  <strong>Status Pré-Natal:</strong>
-                  <span [ngClass]="statusPacienteService.renderStatusPaciente(pacienteEncontrado)">
-                    {{ statusPacienteService.listStatusPaciente(pacienteEncontrado) }}
+                  <strong>Status Pré-Natal:</strong>                                                <!-- Precisa ficar na mesma linha para não ter gap na tag-->
+                  <span [ngClass]="statusPacienteService.renderStatusPaciente(pacienteEncontrado)">{{statusPacienteService.listStatusPaciente(pacienteEncontrado) }}
                   </span>
                 </p>
               </div>
@@ -125,6 +124,10 @@
               <p>Futura listagem de testes rápidos realizados pelo paciente.</p>
             </div>
           </div>
+
+
+
+
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { TesteRapido } from '../../../models/teste-rapido';
 import { TesteRapidoService } from '../../../services/teste-rapido.service';
 import { StatusTesteService } from '../../../services/utility/status-teste.service';
@@ -16,6 +16,8 @@ export class TestesListComponent {
 
   testeRapidoService = inject(TesteRapidoService);
   statusTesteService = inject(StatusTesteService);
+
+  @Input() modoLeitura: boolean = true;
 
   constructor(){
     this.listAll();

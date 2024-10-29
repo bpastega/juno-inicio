@@ -9,8 +9,11 @@
                     <th>Data</th>
                     <th>Nome do Paciente</th>
                     <th>Tipo de Exame</th>
-                    <th>Ações</th>
-                    <th>Ações</th>
+                    @if (!modoLeitura) {
+                      <th>Ações</th>
+                      <th>Ações</th>
+                    }
+                    
                   </tr>
                 </thead>
 
@@ -43,27 +46,29 @@
                       </span>
                     </td>
 
-
-                    <!-- Ações -->
-                    <td id="editar">
-                      <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
-                    </td>
-
-                    <!-- Ações -->
-                    <td id="deletar">
-                        <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                    @if(!modoLeitura){
+                      <!-- Ações -->
+                      <td id="editar">
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
                       </td>
+  
+                      <!-- Ações -->
+                      <td id="deletar">
+                          <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                      </td>
+                    }
+                    
 
                   </tr>
                 }
 
                 </tbody>
 
-                <div class="actions">
-                    <button type="button" class="btn btn-primary act-btn">Placeholder</button> <!-- TODO: adicionar funcionalidades-->
+                <!--<div class="actions">
+                    <button type="button" class="btn btn-primary act-btn">Placeholder</button> 
                     <button type="button" class="btn btn-primary act-btn">Placeholder</button>
                     <button type="button" class="btn btn-primary act-btn">Placeholder</button>
-                </div>
+                </div>-->
 
 
               </table>

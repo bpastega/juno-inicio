@@ -12,6 +12,17 @@
     margin-top: 2rem;
 }
 
+/* Set equal width for each cell */
+.table th, .table td {
+    width: 25%; /* Adjust this value based on the number of columns */
+    text-align: center; /* Center-align content if desired */
+}
+
+
+.table p {
+    margin-bottom: 0.25rem; /* Reduce paragraph margin */
+}
+
 .btn{
     margin-top: 2rem;
 }

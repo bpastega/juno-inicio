@@ -3,6 +3,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                  <h5 class="card-title">Listagem de Consultas</h5>
+
                     <!-- TODO: ADICIONAR Trecho correspondente aos botões e barra de pesquisa no topo da tabela-->
                   
 
@@ -14,8 +16,11 @@
                             <th>Data da Consulta</th>
                             <th>Protocolo Correspondente</th> <!-- service: CONSULTA AVULSA / ACESSAR PROTOCOLO-->
                             <th>Descrição</th>
-                            <th>Ações</th>
-                            <th>Ações</th>
+                            @if(!modoLeitura){
+                              <th>Ações</th>
+                              <th>Ações</th>
+                            }
+                            
                             
                             <th></th>
                           </tr>
@@ -45,15 +50,17 @@
                                 <p class="text-muted mb-0">{{consulta.descricao}}</p>
                             </td>
 
+                            @if(!modoLeitura){
+                              <td><!-- Célula E: Ações-->
+                                <button type="button" class="btn btn-primary" mdbRipple>Editar</button>
+  
+                              </td>
+                              
+                              <td><!-- Célula F: Ações-->
+                                <button type="button" class="btn btn-danger" mdbRipple>Deletar</button>
+                              </td>
+                            }
                             
-                            <td><!-- Célula E: Ações-->
-                              <button type="button" class="btn btn-primary" mdbRipple>Editar</button>
-
-                            </td>
-                            
-                            <td><!-- Célula F: Ações-->
-                              <button type="button" class="btn btn-danger" mdbRipple>Deletar</button>
-                            </td>
 
 
                           </tr> <!-- FIM DO PROTOCOLO -->

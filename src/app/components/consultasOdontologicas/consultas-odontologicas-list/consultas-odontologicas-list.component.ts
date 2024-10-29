@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ConsultaOdontologica } from '../../../models/consulta-odontologica';
 import { ConsultaOdontologicaService } from '../../../services/consulta-odontologica.service';
 import { Protocolo } from '../../../models/protocolo';
@@ -19,6 +19,8 @@ export class ConsultasOdontologicasListComponent {
 
   consultaOdontologicaService = inject(ConsultaOdontologicaService);
   protocoloService = inject(ProtocoloService);
+
+  @Input() modoLeitura: boolean = true;
 
   constructor(){
     this.listAll();

@@ -16,9 +16,6 @@ import { Endereco } from '../../../models/endereco';
 })
 export class PacientesFormComponent {
 
-
-
-
   modalRef!: MdbModalRef<any>; //a referencia da modal aberta para ser fechada
 
   router = inject(Router);

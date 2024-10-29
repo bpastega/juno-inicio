@@ -8,8 +8,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Consultas Odontológicas</h5>
 
-                  <!--<app-testes-list></app-testes-list>-->
-                  <app-consultas-odontologicas-list></app-consultas-odontologicas-list>
+                    <app-consultas-odontologicas-list [modoLeitura]="true"></app-consultas-odontologicas-list>
 
                   </div>
               </div>
@@ -22,11 +21,8 @@
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Testes Rápidos</h5>
-                 <!-- <app-consultas-odontologicas-list></app-consultas-odontologicas-list> -->
-                        <app-testes-list></app-testes-list>
 
-
-
+                    <app-testes-list [modoLeitura]="true"></app-testes-list>
 
                 </div>
              </div>

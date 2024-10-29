@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { PacienteService } from '../../../services/paciente.service';
 import { Consulta } from '../../../models/consulta';
 import { ConsultaService } from '../../../services/consulta.service';
@@ -20,6 +20,8 @@ export class ConsultasListComponent {
   pacienteService = inject(PacienteService); //será usado para filtrar consulta com base no nome do paciente
   consultaService = inject(ConsultaService);
   statusPacienteService = inject(StatusPacienteService);
+
+  @Input() modoLeitura: boolean = true;
 
   constructor(){
     this.findAll();

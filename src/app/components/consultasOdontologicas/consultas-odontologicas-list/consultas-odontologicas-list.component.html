@@ -7,10 +7,14 @@
                   <tr>
                     <th>Descrição</th>
                     <th>Data</th>
-                    <th>Protocolo de Origem</th>
-                    <!--<th>Paciente Atendido</th>-->
-                    <th>Ações</th>
-                    <th>Ações</th>
+                    <!--<th>Protocolo de Origem</th>-->
+                    <th>Nome do Paciente</th>
+
+                    @if (!modoLeitura) {
+                      <th>Ações</th>
+                      <th>Ações</th>
+                    }
+                    
                   </tr>
                 </thead>
 
@@ -32,28 +36,30 @@
 
                     <!-- Paciente Atendido-->
                     <td>
-                       <p class="fw-normal mb-1">{{consultaOdontologica.protocoloPreNatal.id}}</p> <!-- Imagino que com a mudança no back isso se resolva? 
-                       Caso contrário, podemos fazer uma função que usa findById com o service de protocolo-->
+                       <p class="fw-normal mb-1">{{consultaOdontologica.protocoloPreNatal.paciente.nome}}</p> 
                     </td>
 
-                    <td id="editar">
-                      <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
-                    </td>
-
-                    <td id="deletar">
-                        <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                    @if (!modoLeitura) {
+                      <td id="editar">
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
                       </td>
+  
+                      <td id="deletar">
+                          <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                      </td>
+                    }
+                    
 
                   </tr>
                 }
 
                 </tbody>
 
-                <div class="actions">
-                    <button type="button" class="btn btn-primary act-btn">Placeholder</button> <!-- TODO: adicionar funcionalidades-->
+                <!--<div class="actions">
+                    <button type="button" class="btn btn-primary act-btn">Placeholder</button> 
                     <button type="button" class="btn btn-primary act-btn">Placeholder</button>
                     <button type="button" class="btn btn-primary act-btn">Placeholder</button>
-                </div>
+                </div>-->
 
 
               </table>
