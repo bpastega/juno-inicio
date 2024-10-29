@@ -25,7 +25,7 @@ export class PacienteService {
     return this.http.post<string>(this.API+'/save', paciente, {responseType: 'text' as 'json'})
   }
   update(paciente: Paciente):Observable<string>{
-    return this.http.put<string>(this.API+'/update',paciente.id,  {responseType: 'text' as 'json'})
+    return this.http.put<string>(this.API+'/update/'+paciente.id, paciente,  {responseType: 'text' as 'json'})
   }
 
   delete(id: number): Observable<string>{

@@ -19,13 +19,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
 import { ProtocosListComponent } from "../../protocolos/protocos-list/protocolos-list.component";
 import { ExamesComponent } from "../../exames/exames.component";
+import { ConsultasListComponent } from "../../consultas/consultas-list/consultas-list.component";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent, ConsultasListComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
