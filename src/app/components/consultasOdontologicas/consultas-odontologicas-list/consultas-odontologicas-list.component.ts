@@ -3,6 +3,7 @@ import { ConsultaOdontologica } from '../../../models/consulta-odontologica';
 import { ConsultaOdontologicaService } from '../../../services/consulta-odontologica.service';
 import { Protocolo } from '../../../models/protocolo';
 import { ProtocoloService } from '../../../services/protocolo.service';
+import { Paciente } from '../../../models/paciente';
 
 @Component({
   selector: 'app-consultas-odontologicas-list',
@@ -21,8 +22,11 @@ export class ConsultasOdontologicasListComponent {
   protocoloService = inject(ProtocoloService);
 
   @Input() modoLeitura: boolean = true;
+  @Input() modoPacienteUnico: boolean = false;
+  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
+    /*TODO*/ 
     this.listAll();
   }
 

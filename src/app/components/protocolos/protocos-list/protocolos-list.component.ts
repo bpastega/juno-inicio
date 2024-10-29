@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { Protocolo } from '../../../models/protocolo';
 import { ProtocoloService } from '../../../services/protocolo.service';
 import Swal from 'sweetalert2';
@@ -35,9 +35,19 @@ export class ProtocosListComponent {
 
   router = inject(Router);
 
+  @Input() modoPacienteUnico: boolean = false;
+  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
-    this.findAll();
+    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
+      this.findAll();
+    }
+
+    else{
+      this.lista = this.paciente.protocolos; //TESTAR ESSE TRECHO!!!
+
+    }
+    
   }
 
   navigateToInfo(id: number) {

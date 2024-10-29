@@ -12,7 +12,9 @@
                       
                         <thead class="bg-light">
                           <tr>
-                            <th>Nome do Paciente</th>
+                            @if (!modoPacienteUnico) {
+                              <th>Nome do Paciente</th>
+                            }
                             <th>Data da Consulta</th>
                             <th>Protocolo Correspondente</th> <!-- service: CONSULTA AVULSA / ACESSAR PROTOCOLO-->
                             <th>Descrição</th>
@@ -29,13 +31,16 @@
 
                         @for (consulta of lista; track $index) {
                           <tr>
-                            <td> <!-- Célula A: Nome e Email do Paciente-->
-                             <div class="d-flex align-items-center">
-                                <div class="ms-3">
-                                  <p class="fw-bold mb-1">{{consulta.paciente.nome}}</p> 
-                                </div>
-                              </div>
-                            </td>
+                            @if (!modoPacienteUnico) {
+                              <td> <!-- Célula A: Nome e Email do Paciente-->
+                                <div class="d-flex align-items-center">
+                                   <div class="ms-3">
+                                     <p class="fw-bold mb-1">{{consulta.paciente.nome}}</p> 
+                                   </div>
+                                 </div>
+                               </td>
+                            }
+                            
 
                             <td> <!-- Célula B: Data da Consulta-->
                                 <p class="fw-normal mb-1">{{consulta.dataConsulta | date: 'longDate' :'':'pt-BR'}}</p>

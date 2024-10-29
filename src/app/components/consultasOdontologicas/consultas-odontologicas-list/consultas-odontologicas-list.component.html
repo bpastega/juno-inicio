@@ -8,7 +8,10 @@
                     <th>Descrição</th>
                     <th>Data</th>
                     <!--<th>Protocolo de Origem</th>-->
+                    @if (!modoPacienteUnico) {
                     <th>Nome do Paciente</th>
+                    }
+                    
 
                     @if (!modoLeitura) {
                       <th>Ações</th>
@@ -35,10 +38,12 @@
                     </td>
 
                     <!-- Paciente Atendido-->
-                    <td>
-                       <p class="fw-normal mb-1">{{consultaOdontologica.protocoloPreNatal.paciente.nome}}</p> 
-                    </td>
-
+                    @if (!modoPacienteUnico) {
+                      <td>
+                        <p class="fw-normal mb-1">{{consultaOdontologica.protocoloPreNatal.paciente.nome}}</p> 
+                     </td> 
+                    }
+                  
                     @if (!modoLeitura) {
                       <td id="editar">
                         <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>

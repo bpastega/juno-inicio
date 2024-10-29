@@ -4,6 +4,7 @@ import { Consulta } from '../../../models/consulta';
 import { ConsultaService } from '../../../services/consulta.service';
 import { DatePipe, NgClass } from '@angular/common';
 import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
+import { Paciente } from '../../../models/paciente';
 
 @Component({
   selector: 'app-consultas-list',
@@ -22,9 +23,17 @@ export class ConsultasListComponent {
   statusPacienteService = inject(StatusPacienteService);
 
   @Input() modoLeitura: boolean = true;
+  @Input() modoPacienteUnico: boolean = false;
+  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
-    this.findAll();
+    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
+      this.findAll();
+    }
+
+    else{
+      this.lista = this.paciente.consultas; //TESTAR ESSE TRECHO!!!
+    }
   }
 
   findAll(){

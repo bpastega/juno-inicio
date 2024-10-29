@@ -3,8 +3,13 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Listagem de Protocolos</h5>
-
+            @if(modoPacienteUnico){
+              <h5 class="card-title">Listagem de Protocolos - Paciente Único</h5>
+            }
+            @else {
+              <h5 class="card-title">Listagem de Protocolos</h5>
+            }
+            
   <div class="input-group">
   <!-- Campo de busca pelo nome do paciente -->
       <input (keyup.enter)="findByPacienteNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do nome..."
@@ -34,7 +39,9 @@
     <thead class="bg-light">
       <tr>
         <!-- <th>ID</th> -->
+        @if(!modoPacienteUnico){
         <th>Nome do Paciente</th> 
+        }
         <th>Status</th>
         <th>Data Abertura</th>
         <th>Detalhes</th>
@@ -43,7 +50,9 @@
     <tbody>
       @for (protocolo of lista; track $index){
       <tr>
-        <td>{{ protocolo.paciente.nome }}</td> 
+        @if (!modoPacienteUnico) {
+          <td>{{ protocolo.paciente.nome }}</td> 
+        }
         <td>
           <span [ngClass]="statusProtocoloService.renderStatusProtocolo(protocolo)">{{statusProtocoloService.listStatusProtocolo(protocolo)}}
           </span>

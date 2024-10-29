@@ -3,6 +3,7 @@ import { TesteRapido } from '../../../models/teste-rapido';
 import { TesteRapidoService } from '../../../services/teste-rapido.service';
 import { StatusTesteService } from '../../../services/utility/status-teste.service';
 import { NgClass } from '@angular/common';
+import { Paciente } from '../../../models/paciente';
 
 @Component({
   selector: 'app-testes-list',
@@ -18,9 +19,12 @@ export class TestesListComponent {
   statusTesteService = inject(StatusTesteService);
 
   @Input() modoLeitura: boolean = true;
+  @Input() modoPacienteUnico: boolean = false;
+  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
-    this.listAll();
+    /*TODO: IMPLEMENTAR UMA MANEIRA DE PEGAR TODOS OS TESTES RÁPIDOS COM BASE NO PACIENTE*/ 
+      this.listAll();
   }
 
   listAll(){ 

@@ -17,13 +17,14 @@ import { StatusProtocoloService } from "../../../services/utility/status-protoco
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
+import { ProtocosListComponent } from "../../protocolos/protocos-list/protocolos-list.component";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
@@ -189,7 +190,6 @@ export class PacienteInfoComponent {
         icon: 'success',
       });
   
-       // é necessario o findAll??? atualiza e recarrega a lista
     }
 
     
