@@ -13,16 +13,26 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from "mdb-angular-ui-kit
 import { ProtocolosFormComponent } from "../../protocolos/protocolos-form/protocolos-form.component";
 import { StatusProtocoloService } from "../../../services/utility/status-protocolo.service";
 
+// para usar icones nos botoes:
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent,MdbModalModule],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent,MdbModalModule, FontAwesomeModule ],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
 
 export class PacienteInfoComponent {
+
+  //para uso de icones nos botões
+  faEdit = faEdit;
+  faTrash = faTrash;
+
   /*Quando o trecho abaixo está presente, a tela de detalhes não renderiza - minha teoria é de que pacientes-list ter a mesma modal está causando conflitos*/
 
   /*modalService = inject(MdbModalService); // responsável por abrir as modais

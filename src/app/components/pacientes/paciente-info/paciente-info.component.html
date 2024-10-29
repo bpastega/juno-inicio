@@ -1,114 +1,134 @@
 <div class="container">
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <div class="topo">
-          <h2 class="card-title">Detalhes - Paciente</h2>
-          <div class="btns">
-            @if(pacienteEncontrado.statusPreNatal == true){
-
-                <!-- encerrarProtocoloAtivo apenas executa encerrarProtocolo se pacienteProtocoloAtivo
-                  tiver um valor valido.
-                
-                -->
-            <button
-              (click)="encerrarProtocoloAtivo()"
-              type="button"
-              class="btn btn-secondary"
-              mdbRipple
-              [disabled]="isEncerrarButtonDisabled()"
-            >
-              Encerrar
-            </button>
-            } @if(pacienteEncontrado.statusPreNatal == false){
-
-            <button
-              (click)="cadastrarProtocolo(pacienteEncontrado.id)"
-              type="button"
-              class="btn btn-secondary"
-              mdbRipple
-            >
-              Novo Protocolo
-            </button>
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <div class="header">
+            <h2 class="card-title">Detalhes do Paciente</h2>
+            <div class="actions">
+              <!-- Lógicas mantidas para os botões de Adicionar e Encerrar Protocolo -->
+              @if(pacienteEncontrado.statusPreNatal == true){
+                <button
+                  (click)="encerrarProtocoloAtivo()"
+                  type="button"
+                  class="btn btn-secondary"
+                  mdbRipple
+                  [disabled]="isEncerrarButtonDisabled()"
+                >
+                  Encerrar Protocolo
+                </button>
             }
-            <button type="button" class="btn btn-primary">Editar</button>
-            <button type="button" class="btn btn-danger" mdbRipple>
-              Deletar
-            </button>
+              @if(pacienteEncontrado.statusPreNatal == false){
+                <button
+                  (click)="cadastrarProtocolo(pacienteEncontrado.id)"
+                  type="button"
+                  class="btn btn-secondary"
+                  mdbRipple
+                >
+                  Novo Protocolo
+                </button>
+            }
+              <button type="button" class="btn btn-primary"><fa-icon [icon]="faEdit"></fa-icon></button>
+              <button type="button" class="btn btn-danger" mdbRipple><fa-icon [icon]="faTrash"></fa-icon></button>
+            </div>
           </div>
-        </div>
-
-        <div class="paciente">
-          <p class="infoPaciente">Nome: {{ pacienteEncontrado.nome }}</p>
-          <p class="infoPaciente">
-            CPF: {{ formataCPFService.formataCpf(pacienteEncontrado.cpf) }}
-          </p>
-          <p class="infoPaciente">Email: {{ pacienteEncontrado.email }}</p>
-          <p class="infoPaciente">
-            Data de Nascimento:
-            {{
-              pacienteEncontrado.dataNascimento
-                | date : "longDate" : "" : "pt-BR"
-            }}
-          </p>
-          <p class="infoPaciente">
-            Tipo Sanguíneo: {{ pacienteEncontrado.tipoSanguineo }}
-          </p>
-          <div class="infoPaciente" id="infoPreNatal">
-            <p>Status Pré-Natal:</p>
-            <span
-              [ngClass]="
-                statusPacienteService.renderStatusPaciente(pacienteEncontrado)
-              "
-              >{{
-                statusPacienteService.listStatusPaciente(pacienteEncontrado)
-              }}</span
-            >
-            <!-- Se ele ficar do lado, por algum motivo ele fica distorcido. TODO: tentar arrumar depois-->
+  
+          <!-- Abas de Navegação -->
+          <ul class="nav nav-tabs mt-3" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-bs-toggle="tab" href="#dadosPaciente" role="tab">Informações do Paciente</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#exames" role="tab">Exames</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#protocolos" role="tab">Protocolos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#consultas" role="tab">Consultas Odontológicas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#testesRapidos" role="tab">Testes Rápidos</a>
+            </li>
+          </ul>
+  
+          <div class="tab-content mt-3">
+            <!-- Informações do Paciente -->
+            <div class="tab-pane fade show active" id="dadosPaciente" role="tabpanel">
+              <div class="paciente-info">
+                <p><strong>Nome:</strong> {{ pacienteEncontrado.nome }}</p>
+                <p><strong>CPF:</strong> {{ formataCPFService.formataCpf(pacienteEncontrado.cpf) }}</p>
+                <p><strong>Email:</strong> {{ pacienteEncontrado.email }}</p>
+                <p><strong>Data de Nascimento:</strong> {{ pacienteEncontrado.dataNascimento | date : "longDate" : "" : "pt-BR" }}</p>
+                <p><strong>Tipo Sanguíneo:</strong> {{ pacienteEncontrado.tipoSanguineo }}</p>
+                <p><strong>Telefone:</strong> {{ pacienteEncontrado.telefone }}</p>
+                <p>
+                  <strong>Status Pré-Natal:</strong>
+                  <span [ngClass]="statusPacienteService.renderStatusPaciente(pacienteEncontrado)">
+                    {{ statusPacienteService.listStatusPaciente(pacienteEncontrado) }}
+                  </span>
+                </p>
+              </div>
+  
+              <hr />
+              <h5>Endereço</h5>
+              <div class="endereco-info">
+                <p><strong>CEP:</strong> {{ pacienteEndereco.cep }}</p>
+                <p><strong>Número:</strong> {{ pacienteEndereco.numero }}</p>
+                <p><strong>Rua:</strong> {{ pacienteEndereco.rua }}</p>
+                <p><strong>Bairro:</strong> {{ pacienteEndereco.bairro }}</p>
+                <p><strong>Cidade:</strong> {{ pacienteEndereco.cidade }}</p>
+                <p><strong>Descrição:</strong> {{ pacienteEndereco.descricao }}</p>
+              </div>
+            </div>
+  
+            <!-- Listagem de Exames -->
+            <div class="tab-pane fade" id="exames" role="tabpanel">
+              <h5>Exames</h5>
+              <p>Futura listagem de exames realizados pelo paciente.</p>
+            </div>
+  
+            <!-- Listagem de Protocolos -->
+            <div class="tab-pane fade" id="protocolos" role="tabpanel">
+              <h5>Protocolos</h5>
+              <button
+                (click)="cadastrarProtocolo(pacienteEncontrado.id)"
+                type="button"
+                class="btn btn-secondary mb-3"
+                mdbRipple
+              >
+                Adicionar Novo Protocolo
+              </button>
+              <p>Futura listagem de protocolos do paciente.</p>
+            </div>
+  
+            <!-- Listagem de Consultas Odontológicas -->
+            <div class="tab-pane fade" id="consultas" role="tabpanel">
+              <h5>Consultas Odontológicas</h5>
+              <p>Futura listagem de consultas odontológicas do paciente.</p>
+            </div>
+  
+            <!-- Listagem de Testes Rápidos -->
+            <div class="tab-pane fade" id="testesRapidos" role="tabpanel">
+              <h5>Testes Rápidos</h5>
+              <p>Futura listagem de testes rápidos realizados pelo paciente.</p>
+            </div>
           </div>
-          <p class="infoPaciente">
-            Telefone: {{ pacienteEncontrado.telefone }}
-          </p>
-        </div>
-
-        <hr />
-        <h5>Endereço</h5>
-
-        <div class="enderecoPaciente">
-          <p class="infoEndereco">CEP: {{ pacienteEndereco.cep }}</p>
-          <p class="infoEndereco">Número: {{ pacienteEndereco.numero }}</p>
-          <p class="infoEndereco">Rua: {{ pacienteEndereco.rua }}</p>
-          <p class="infoEndereco">Bairro: {{ pacienteEndereco.bairro }}</p>
-          <p class="infoEndereco">Cidade: {{ pacienteEndereco.cidade }}</p>
-          <p class="infoEndereco">
-            Descrição: {{ pacienteEndereco.descricao }}
-          </p>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- Modal para formulário do Protocolo dentro do Details de Paciente -->
-<!-- MODAL -->
-<ng-template #modalProtocoloForm>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Dados de Protocolo</h5>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          (click)="modalRef.close()"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <app-protocolos-form
-          [protocolo]="protocoloEdit"
-          (retorno)="retornoForm($event)"
-        ></app-protocolos-form>
+  
+  <!-- Modal para formulário do Protocolo -->
+  <ng-template #modalProtocoloForm>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Dados de Protocolo</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+        </div>
+        <div class="modal-body">
+          <app-protocolos-form [protocolo]="protocoloEdit" (retorno)="retornoForm($event)"></app-protocolos-form>
+        </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
