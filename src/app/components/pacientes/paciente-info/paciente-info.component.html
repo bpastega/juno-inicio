@@ -95,7 +95,6 @@
             <!-- Listagem de Exames -->
             <div class="tab-pane fade" id="exames" role="tabpanel">
               <h5>Exames</h5>
-              <p>Futura listagem de exames realizados pelo paciente.</p>
             </div>
   
             <!-- Listagem de Protocolos -->
@@ -109,7 +108,8 @@
               >
                 Adicionar Novo Protocolo
               </button>
-              <p>Futura listagem de protocolos do paciente.</p>
+
+              <app-protocolos-list [modoPacienteUnico]="true" [paciente]="pacienteEncontrado"></app-protocolos-list>
             </div>
   
             <!-- Listagem de Consultas Odontológicas -->

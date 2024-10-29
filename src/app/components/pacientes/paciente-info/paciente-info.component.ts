@@ -18,13 +18,14 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
 import { ProtocosListComponent } from "../../protocolos/protocos-list/protocolos-list.component";
+import { ExamesComponent } from "../../exames/exames.component";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })

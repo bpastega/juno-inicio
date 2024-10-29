@@ -10,6 +10,7 @@ body{
     background-color: #EF8481;
 }
 
+
 /*.logoJuno{ //logo + nome
     position: relative;
     left: 2vh;
@@ -28,10 +29,11 @@ body{
 }
 
 .nomeJuno{
-    color: #EF8481;
+    color: palevioletred;
     font-size: xx-large;
     font-family: Playwrite GB S;
     font-style: italic;
+    font-weight: 700 !important;
 
     margin-left: 0.5rem;
 }
@@ -77,12 +79,12 @@ body{
 .btn-primary {
     font-size: medium;
     //background-color: #8883F0 !important;
-    background-color: #EF8481;
+    background-color: palevioletred;
   }
   .btn-primary:hover,
   .btn-primary:active,
   .btn-primary:visited,
   .btn-primary:focus {
-    background-color: #3f3b8a !important;
+    background-color: #8882F0 !important;
 }
 
