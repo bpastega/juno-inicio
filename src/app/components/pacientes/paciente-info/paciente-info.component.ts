@@ -16,13 +16,14 @@ import { StatusProtocoloService } from "../../../services/utility/status-protoco
 // para usar icones nos botoes:
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PacientesFormComponent } from "../pacientes-form/pacientes-form.component";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent,MdbModalModule, FontAwesomeModule ],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
@@ -43,6 +44,8 @@ export class PacienteInfoComponent {
 
   modalService = inject(MdbModalService); // responsável por abrir as modais
   @ViewChild('modalProtocoloForm') modalProtocoloForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
+  @ViewChild('modalPacientesForm') modalPacientesForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
+
   modalRef!: MdbModalRef<any>; //a referencia da modal aberta para ser fechada
 
 
@@ -69,6 +72,9 @@ export class PacienteInfoComponent {
 
   rotaAtivada = inject(ActivatedRoute);
   router = inject(Router);
+
+  pacienteEdit!: Paciente; //esse objeto será utilizado para transportar o paciente clicado no botão editar
+
 
   
   
@@ -201,7 +207,15 @@ export class PacienteInfoComponent {
     
 
 
-        }    }
+        }    
+      // lógica para editar paciente
+
+      editarPaciente(paciente: Paciente) {
+        this.pacienteEdit = Object.assign({}, paciente); //cria um clone do objeto para evitar edição automática
+        this.modalRef = this.modalService.open(this.modalPacientesForm);
+      }
+      
+      }
 
 
 

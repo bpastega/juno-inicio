@@ -25,10 +25,19 @@
             </div>
 
             <!-- Campo Email -->
+            
             <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.email" mdbInput type="email" required name="email" class="form-control" />
               <label mdbLabel class="form-label" for="email">Email:</label>
             </mdb-form-control>
+
+             <!-- Campo telefone ERRO NO PATTERN 
+
+            <mdb-form-control class="mb-4">
+              <input [(ngModel)]="paciente.telefone" mdbInput pattern="^\\(\\d{2}\\) \\d{4,5}-\\d{4}$" type="telefone" required name="telefone" class="form-control" />
+              <label mdbLabel class="form-label" for="telefone">Telefone:</label>
+            </mdb-form-control>
+            -->
 
             <!-- Campo Data de Nascimento -->
             <mdb-form-control class="mb-4">
@@ -36,13 +45,28 @@
               <label mdbLabel class="form-label" for="dataNascimento">Data de Nascimento:</label>
             </mdb-form-control>
 
-            <!-- Campo Tipo Sanguíneo -->
+            <!-- Campo Tipo Sanguíneo 
             <mdb-form-control class="mb-4">
               <input [(ngModel)]="paciente.tipoSanguineo" mdbInput required type="text" name="tipoSanguineo" class="form-control" />
               <label mdbLabel class="form-label" for="tipoSanguineo">Tipo Sanguíneo:</label>
+            </mdb-form-control>-->
+            <mdb-form-control class="mb-4">
+              <select [(ngModel)]="paciente.tipoSanguineo" mdbInput required type="text" name="tipoSanguineo" class="form-select">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+              <label mdbLabel class="form-label" for="tipoSanguineo">Tipo Sanguíneo:</label>
             </mdb-form-control>
 
-            <!-- Campo Status Pré-Natal -->
+            
+
+            <!-- Campo Status Pré-Natal 
             <mdb-form-control class="mb-4">
               <select [(ngModel)]="paciente.statusPreNatal" mdbInput required name="statusPreNatal" class="form-select">
                 <option [ngValue]="true">Sim</option>
@@ -50,7 +74,7 @@
               </select>
               <label mdbLabel class="form-label" for="statusPreNatal">Status Pré-Natal:</label>
             </mdb-form-control>
-
+-->
             <hr />
 
             <h5>Endereço</h5>

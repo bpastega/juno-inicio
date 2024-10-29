@@ -10,7 +10,7 @@ export class Protocolo {
     dataAbertura!: Date;
     aberturaAprovada!: boolean;
     dataEncerramento!: Date;
-    statusProtocolo!: boolean;
+    statusProtocolo: boolean = true;
     dum!: Date;
     dpp!: Date;
 }

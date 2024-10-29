@@ -8,8 +8,6 @@
   <!-- Campo de busca pelo nome do paciente -->
       <input (keyup.enter)="findByPacienteNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do nome..."
       aria-label="Recipient's username with two button addons" />
-
-
       <button (click)="findByPacienteNome()" class="btn btn-outline-primary" type="button" mdbRipple rippleColor="danger" >
         Pesquisar
       </button>

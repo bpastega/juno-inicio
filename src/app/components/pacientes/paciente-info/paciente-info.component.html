@@ -3,7 +3,17 @@
       <div class="card">
         <div class="card-body">
           <div class="header">
-            <h2 class="card-title">Detalhes do Paciente</h2>
+
+            <!-- Exibe o nome do paciente na tela de detalhes -->
+            <h2 class="card-title">{{pacienteEncontrado.nome}}
+
+              <span [ngClass]="['status-pequeno', statusPacienteService.renderStatusPaciente(pacienteEncontrado)]">
+                {{ statusPacienteService.listStatusPaciente(pacienteEncontrado) }}
+              </span>
+              
+
+            </h2>
+            
             <div class="actions">
               <!-- Lógicas mantidas para os botões de Adicionar e Encerrar Protocolo -->
               @if(pacienteEncontrado.statusPreNatal == true){
@@ -16,6 +26,7 @@
                 >
                   Encerrar Protocolo
                 </button>
+
             }
               @if(pacienteEncontrado.statusPreNatal == false){
                 <button
@@ -27,8 +38,9 @@
                   Novo Protocolo
                 </button>
             }
-              <button type="button" class="btn btn-primary"><fa-icon [icon]="faEdit"></fa-icon></button>
-              <button type="button" class="btn btn-danger" mdbRipple><fa-icon [icon]="faTrash"></fa-icon></button>
+              <button type="button" (click)="editarPaciente(pacienteEncontrado)" class="btn btn-tertiary"><fa-icon [icon]="faEdit"></fa-icon></button>
+              <!-- chama o método que recebe o paciente encontrado no componente -->
+              <button type="button" (click)="deletarById(pacienteEncontrado)" class="btn btn-tertiary" mdbRipple><fa-icon [icon]="faTrash"></fa-icon></button>
             </div>
           </div>
   
@@ -120,7 +132,7 @@
   
   <!-- Modal para formulário do Protocolo -->
   <ng-template #modalProtocoloForm>
-    <div class="modal-dialog">
+    <div class="modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Dados de Protocolo</h5>
@@ -131,4 +143,27 @@
         </div>
       </div>
     </div>
+  </ng-template>
+
+  <!-- Modal para formulário de edição de Paciente -->
+
+  <ng-template #modalPacientesForm>
+    <div class="modal-fullscreen">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Dados de Paciente</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      
+      
+       <app-pacientes-form [paciente]="pacienteEdit" (retorno)="retornoForm($event)"></app-pacientes-form>
+  
+    </div>
+  </div>
+  
   </ng-template>

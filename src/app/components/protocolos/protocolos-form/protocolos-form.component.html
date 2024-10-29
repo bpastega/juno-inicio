@@ -1,70 +1,114 @@
 <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5>{{ tituloComponente }}</h5>
-  
-            <form #formularioProtocolo="ngForm">
-              <div class="row mb-4">
-                <div class="col">
-                  <!-- Campo Data de Abertura -->
-                  <mdb-form-control>
-                    <input [(ngModel)]="protocolo.dataAbertura" mdbInput type="date" required name="dataAbertura" class="form-control" />
-                    <label mdbLabel class="form-label" for="dataAbertura">Data de Abertura:</label>
-                  </mdb-form-control>
-                </div>
-  
-                <div class="col">
-                  <!-- Campo Abertura Aprovada -->
-                  <mdb-form-control>
-                    <select [(ngModel)]="protocolo.aberturaAprovada" mdbInput required name="aberturaAprovada" class="form-select">
-                      <option [ngValue]="true">Sim</option>
-                      <option [ngValue]="false">Não</option>
-                    </select>
-                    <label mdbLabel class="form-label" for="aberturaAprovada">Abertura Aprovada:</label>
-                  </mdb-form-control>
-                </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5>{{ tituloComponente }}</h5>
+
+          <form #formularioProtocolo="ngForm">
+            <div class="row mb-4">
+              <div class="col">
+                <!-- Campo Data de Abertura -->
+                <mdb-form-control>
+                  <input
+                    [(ngModel)]="protocolo.dataAbertura"
+                    mdbInput
+                    type="date"
+                    required
+                    name="dataAbertura"
+                    class="form-control"
+                  />
+                  <label mdbLabel class="form-label" for="dataAbertura"
+                    >Data de Abertura:</label
+                  >
+                </mdb-form-control>
               </div>
-  
-              <!-- Campo Data de Encerramento 
+              <!-- Campo Abertura Aprovada 
+              <div class="col">
+                <mdb-form-control>
+                  <select
+                    [(ngModel)]="protocolo.aberturaAprovada"
+                    mdbInput
+                    required
+                    name="aberturaAprovada"
+                    class="form-select"
+                  >
+                    <option [ngValue]="true">Sim</option>
+                    <option [ngValue]="false">Não</option>
+                  </select>
+                  <label mdbLabel class="form-label" for="aberturaAprovada"
+                    >Abertura Aprovada:</label
+                  >
+                </mdb-form-control>
+              </div>
+-->
+
+            </div>
+
+            <!-- Campo Data de Encerramento 
               <mdb-form-control class="mb-4">
                 <input [(ngModel)]="protocolo.dataEncerramento" mdbInput type="date" name="dataEncerramento" class="form-control" />
                 <label mdbLabel class="form-label" for="dataEncerramento">Data de Encerramento:</label>
               </mdb-form-control>-->
-  
-              <!-- Campo Status do Protocolo -->
-              <mdb-form-control class="mb-4">
-                <select [(ngModel)]="protocolo.statusProtocolo" mdbInput required name="statusProtocolo" class="form-select">
-                  <option [ngValue]="true">Ativo</option>
-                  <option [ngValue]="false">Inativo</option>
-                </select>
-                <label mdbLabel class="form-label" for="statusProtocolo">Status do Protocolo:</label>
-              </mdb-form-control>
-  
-              <!-- Campo DUM -->
-              <mdb-form-control class="mb-4">
-                <input [(ngModel)]="protocolo.dum" mdbInput type="date" required name="dum" class="form-control" />
-                <label mdbLabel class="form-label" for="dum">DUM:</label>
-              </mdb-form-control>
-  
-              <!-- Campo DPP -->
-              <mdb-form-control class="mb-4">
-                <input [(ngModel)]="protocolo.dpp" mdbInput type="date" required name="dpp" class="form-control" />
-                <label mdbLabel class="form-label" for="dpp">DPP:</label>
-              </mdb-form-control>
-  
-              <!-- Botões -->
-              <div class="d-flex justify-content-between">
-                <button [disabled]="!formularioProtocolo.valid" (click)="protocolo.id > 0 ? atualizar() : cadastrar()" class="btn btn-primary">
-                  {{ protocolo.id > 0 ? 'Atualizar' : 'Salvar' }}
-                </button>
-                <a href="admin/protocolos" class="btn btn-default">Voltar</a>
-              </div>
-            </form>
-          </div>
+
+            <!-- Campo Status do Protocolo ## ERRO: caso retirar essa parte o status é enviado como FALSO
+            <mdb-form-control class="mb-4">
+              <select
+                [(ngModel)]="protocolo.statusProtocolo"
+                mdbInput
+                required
+                name="statusProtocolo"
+                class="form-select"
+              >
+                <option [ngValue]="true">Ativo</option>
+                <option [ngValue]="false">Inativo</option>
+              </select>
+              <label mdbLabel class="form-label" for="statusProtocolo"
+                >Status do Protocolo:</label
+              >
+            </mdb-form-control>
+          -->
+
+            <!-- Campo DUM -->
+            <mdb-form-control class="mb-4">
+              <input
+                [(ngModel)]="protocolo.dum"
+                mdbInput
+                type="date"
+                required
+                name="dum"
+                class="form-control"
+              />
+              <label mdbLabel class="form-label" for="dum">DUM:</label>
+            </mdb-form-control>
+
+            <!-- Campo DPP -->
+            <mdb-form-control class="mb-4">
+              <input
+                [(ngModel)]="protocolo.dpp"
+                mdbInput
+                type="date"
+                required
+                name="dpp"
+                class="form-control"
+              />
+              <label mdbLabel class="form-label" for="dpp">DPP:</label>
+            </mdb-form-control>
+
+            <!-- Botões -->
+            <div class="d-flex justify-content-between">
+              <button
+                [disabled]="!formularioProtocolo.valid"
+                (click)="protocolo.id > 0 ? atualizar() : cadastrar()"
+                class="btn btn-primary"
+              >
+                {{ protocolo.id > 0 ? "Atualizar" : "Salvar" }}
+              </button>
+              <a href="admin/protocolos" class="btn btn-default">Voltar</a>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
