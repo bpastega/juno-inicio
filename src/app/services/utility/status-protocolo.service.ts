@@ -36,4 +36,11 @@ export class StatusProtocoloService {
       return "";
     }
   }
+
+  /* verifica se o status é ativo */
+  isAtivo(protocolo: Protocolo): boolean {
+    return protocolo.statusProtocolo == true; //true ativo
+  }
+
+  
 }

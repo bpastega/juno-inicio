@@ -9,13 +9,15 @@ import { Endereco } from "../../../models/endereco";
 import Swal from "sweetalert2";
 import { Protocolo } from "../../../models/protocolo";
 import { ProtocoloService } from "../../../services/protocolo.service";
-import { MdbModalRef, MdbModalService } from "mdb-angular-ui-kit/modal";
+import { MdbModalModule, MdbModalRef, MdbModalService } from "mdb-angular-ui-kit/modal";
+import { ProtocolosFormComponent } from "../../protocolos/protocolos-form/protocolos-form.component";
+import { StatusProtocoloService } from "../../../services/utility/status-protocolo.service";
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent,MdbModalModule],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
@@ -26,10 +28,24 @@ export class PacienteInfoComponent {
   /*modalService = inject(MdbModalService); // responsável por abrir as modais
   @ViewChild('modalPacientesForm') modalPacientesForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
   modalRef!: MdbModalRef<any>; //a referencia da modal aberta para ser fechada*/
+  
+  // configuração da modal que contem o form de protocolo
+
+  modalService = inject(MdbModalService); // responsável por abrir as modais
+  @ViewChild('modalProtocoloForm') modalProtocoloForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
+  modalRef!: MdbModalRef<any>; //a referencia da modal aberta para ser fechada
+
+
+  // configuração de protocolo
+  protocoloService = inject(ProtocoloService);
+  statusProtocoloService = inject(StatusProtocoloService)
+  protocoloEdit!: Protocolo;
 
   pacienteEncontrado!: Paciente;
   pacienteEndereco!: Endereco;
-  pacienteProtocoloAtivo!: Protocolo;
+  pacienteProtocoloAtivo: Protocolo | null = null;
+
+  // pacienteProtocoloAtivo!: Protocolo;
 
   protocolosPaciente: Protocolo[] = [];
   protocolosAtivos: Protocolo[] = [];
@@ -38,7 +54,7 @@ export class PacienteInfoComponent {
   /*Injections*/
   formataCPFService = inject(FormataCPFService);
   statusPacienteService = inject(StatusPacienteService);
-  protocoloService = inject(ProtocoloService);
+  //protocoloService = inject(ProtocoloService);
   pacienteService = inject(PacienteService);
 
   rotaAtivada = inject(ActivatedRoute);
@@ -58,6 +74,12 @@ export class PacienteInfoComponent {
       next: paciente => {
         this.pacienteEncontrado = paciente;
         this.pacienteEndereco = paciente.endereco;
+
+        // lógica para encontrar o protocolo ativo
+        this.pacienteProtocoloAtivo = paciente.protocolos.find(
+          (protocolo) => this.statusProtocoloService.isAtivo(protocolo)
+        ) ?? null;
+        
       },
       error: erro => {
         alert('Paciente não encontrado'); //TODO: SWEET ALERT 
@@ -66,28 +88,6 @@ export class PacienteInfoComponent {
 
   }
 
-
-  encerrar(protocolo: Protocolo){
-    Swal.fire({
-      title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
-      showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: `Cancelar`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.protocoloService.encerrar(protocolo.id).subscribe({
-          next: (mensagem) => {
-            Swal.fire(mensagem, '', 'success');
-            //this.findAll();
-          },
-          error: (erro) => {
-            
-            Swal.fire('Erro!',erro.error,'error');
-          },
-        });
-      }
-    });
-  }
 
   deletarById(paciente: Paciente){
     Swal.fire({
@@ -109,6 +109,8 @@ export class PacienteInfoComponent {
         });
       }
     });
+
+    /* CONFIGURAÇÃO DO PROTOCOLO */
   }
 
   /*retornoForm(mensagem: string) {
@@ -125,7 +127,71 @@ export class PacienteInfoComponent {
   }*/
 
 
-}
+    cadastrarProtocolo(pacienteEncontradoID: number){
+      this.protocoloEdit = new Protocolo();
+      //talvez pegar o id do paciente?
+      this.protocoloEdit.paciente = {id: pacienteEncontradoID} as Paciente;
+      this.modalRef = this.modalService.open(this.modalProtocoloForm);
+    }
+
+    editarProtocolo(protocolo: Protocolo) {
+      this.protocoloEdit = Object.assign({}, protocolo); //cria um clone do objeto para evitar edição automática
+      this.modalRef = this.modalService.open(this.modalProtocoloForm);
+    }
+
+
+    encerrarProtocolo(protocolo: Protocolo){
+      Swal.fire({
+        title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: `Cancelar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.protocoloService.encerrar(protocolo.id).subscribe({
+            next: (mensagem) => {
+              Swal.fire(mensagem, '', 'success');
+             // necessario listar? this.findAll();
+            },
+            error: (erro) => {
+              
+              Swal.fire('Erro!',erro.error,'error');
+            },
+          });
+        }
+      });
+    }
+
+
+    retornoForm(mensagem: string) {
+      //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
+  
+        this.modalRef.close(); //fecha a moodal
+  
+      Swal.fire({
+        title: mensagem,
+        icon: 'success',
+      });
+  
+       // é necessario o findAll??? atualiza e recarrega a lista
+    }
+
+    
+
+    //determinaA se o pacienteProtocoloAtivo está presente
+    isEncerrarButtonDisabled(): boolean {
+      return !this.pacienteProtocoloAtivo;
+    }
+
+    /*verifica se pacienteProtocoloAtivo não é null ANTES de passar para o método encerrarProtocolo. */
+    encerrarProtocoloAtivo(): void {
+      if (this.pacienteProtocoloAtivo) {
+        this.encerrarProtocolo(this.pacienteProtocoloAtivo);
+      }
+    
+
+
+        }    }
 
 
 

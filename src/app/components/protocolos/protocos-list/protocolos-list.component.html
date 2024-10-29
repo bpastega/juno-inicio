@@ -38,7 +38,6 @@
         <th>Nome do Paciente</th> 
         <th>Status</th>
         <th>Data Abertura</th>
-        <th>Ações</th>
         <th>Detalhes</th>
       </tr>
     </thead>
@@ -51,14 +50,6 @@
           </span>
         </td>
         <td>{{ protocolo.dataAbertura}}</td>
-        <td>
-          <button (click)="encerrar(protocolo)" type="button" class="btn btn-secondary"mdbRipple>Encerrar</button>
-       
-          <br>
-          <br>
-          <!-- ao cadastrar passo o id do paciente atrelado ao protocolo da lista -->
-          <button (click)="cadastrar(protocolo.paciente.id)" type="button" class="btn btn-secondary" mdbRipple>Criar novo</button>
-        </td>
 
         <td>
           <button (click)="navigateToInfo(protocolo.id)" type="button" class="btn btn-secondary" mdbRipple>Detalhes</button>
@@ -75,24 +66,3 @@
 </div>
 
 
-     <!-- MODAL  -->
-    <ng-template #modalProtocoloForm>
-      <div class="modal-fullscreen">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Dados de Protocolo</h5>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          (click)="modalRef.close()"
-        ></button>
-      </div>
-      <div class="modal-body">
-        
-        
-        <app-protocolos-form [protocolo]="protocoloEdit" (retorno)="retornoForm($event)"></app-protocolos-form>
-    
-      </div>
-    </div>
-    
-    </ng-template>

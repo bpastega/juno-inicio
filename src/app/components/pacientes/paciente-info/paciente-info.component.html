@@ -1,50 +1,114 @@
 <div class="container">
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="topo">
+          <h2 class="card-title">Detalhes - Paciente</h2>
+          <div class="btns">
+            @if(pacienteEncontrado.statusPreNatal == true){
 
-            <div class="topo">
-                <h2 class="card-title">Detalhes - Paciente</h2>
-                <div class="btns">
-                    @if(pacienteEncontrado.statusPreNatal == true){
-                        <button type="button" class="btn btn-warning" mdbRipple> Encerrar Protocolo Ativo</button>
-                    }
-                    @if(pacienteEncontrado.statusPreNatal == false){
-                        <button type="button" class="btn btn-success" mdbRipple> Abrir Novo Protocolo</button>
-                    }
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <button type="button" class="btn btn-danger" mdbRipple> Deletar</button>
-                </div>
-            </div>  
-            
+                <!-- encerrarProtocoloAtivo apenas executa encerrarProtocolo se pacienteProtocoloAtivo
+                  tiver um valor valido.
+                
+                -->
+            <button
+              (click)="encerrarProtocoloAtivo()"
+              type="button"
+              class="btn btn-secondary"
+              mdbRipple
+              [disabled]="isEncerrarButtonDisabled()"
+            >
+              Encerrar
+            </button>
+            } @if(pacienteEncontrado.statusPreNatal == false){
 
-            <div class="paciente">
-                <p class="infoPaciente">Nome: {{pacienteEncontrado.nome}}</p>
-                <p class="infoPaciente">CPF: {{formataCPFService.formataCpf(pacienteEncontrado.cpf)}}</p>
-                <p class="infoPaciente">Email: {{pacienteEncontrado.email}}</p>
-                <p class="infoPaciente">Data de Nascimento: {{pacienteEncontrado.dataNascimento | date: 'longDate' :'':'pt-BR'}}</p>
-                <p class="infoPaciente">Tipo Sanguíneo: {{pacienteEncontrado.tipoSanguineo}}</p>
-                <div class="infoPaciente" id="infoPreNatal">
-                    <p>Status Pré-Natal:</p>
-                    <span [ngClass]="statusPacienteService.renderStatusPaciente(pacienteEncontrado)">{{statusPacienteService.listStatusPaciente(pacienteEncontrado) }}</span>
-                    <!-- Se ele ficar do lado, por algum motivo ele fica distorcido. TODO: tentar arrumar depois-->
-                </div>
-                <p class="infoPaciente">Telefone: {{pacienteEncontrado.telefone}}</p>
-            </div>
-
-            <hr>
-                <h5>Endereço</h5>
-
-            <div class="enderecoPaciente">
-                <p class="infoEndereco">CEP: {{pacienteEndereco.cep}}</p>
-                <p class="infoEndereco">Número: {{pacienteEndereco.numero}}</p>
-                <p class="infoEndereco">Rua: {{pacienteEndereco.rua}}</p>
-                <p class="infoEndereco">Bairro: {{pacienteEndereco.bairro}}</p>
-                <p class="infoEndereco">Cidade: {{pacienteEndereco.cidade}}</p>
-                <p class="infoEndereco">Descrição: {{pacienteEndereco.descricao}}</p>
-            </div>
-
-            </div>
+            <button
+              (click)="cadastrarProtocolo(pacienteEncontrado.id)"
+              type="button"
+              class="btn btn-secondary"
+              mdbRipple
+            >
+              Novo Protocolo
+            </button>
+            }
+            <button type="button" class="btn btn-primary">Editar</button>
+            <button type="button" class="btn btn-danger" mdbRipple>
+              Deletar
+            </button>
           </div>
+        </div>
+
+        <div class="paciente">
+          <p class="infoPaciente">Nome: {{ pacienteEncontrado.nome }}</p>
+          <p class="infoPaciente">
+            CPF: {{ formataCPFService.formataCpf(pacienteEncontrado.cpf) }}
+          </p>
+          <p class="infoPaciente">Email: {{ pacienteEncontrado.email }}</p>
+          <p class="infoPaciente">
+            Data de Nascimento:
+            {{
+              pacienteEncontrado.dataNascimento
+                | date : "longDate" : "" : "pt-BR"
+            }}
+          </p>
+          <p class="infoPaciente">
+            Tipo Sanguíneo: {{ pacienteEncontrado.tipoSanguineo }}
+          </p>
+          <div class="infoPaciente" id="infoPreNatal">
+            <p>Status Pré-Natal:</p>
+            <span
+              [ngClass]="
+                statusPacienteService.renderStatusPaciente(pacienteEncontrado)
+              "
+              >{{
+                statusPacienteService.listStatusPaciente(pacienteEncontrado)
+              }}</span
+            >
+            <!-- Se ele ficar do lado, por algum motivo ele fica distorcido. TODO: tentar arrumar depois-->
+          </div>
+          <p class="infoPaciente">
+            Telefone: {{ pacienteEncontrado.telefone }}
+          </p>
+        </div>
+
+        <hr />
+        <h5>Endereço</h5>
+
+        <div class="enderecoPaciente">
+          <p class="infoEndereco">CEP: {{ pacienteEndereco.cep }}</p>
+          <p class="infoEndereco">Número: {{ pacienteEndereco.numero }}</p>
+          <p class="infoEndereco">Rua: {{ pacienteEndereco.rua }}</p>
+          <p class="infoEndereco">Bairro: {{ pacienteEndereco.bairro }}</p>
+          <p class="infoEndereco">Cidade: {{ pacienteEndereco.cidade }}</p>
+          <p class="infoEndereco">
+            Descrição: {{ pacienteEndereco.descricao }}
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<!-- Modal para formulário do Protocolo dentro do Details de Paciente -->
+<!-- MODAL -->
+<ng-template #modalProtocoloForm>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dados de Protocolo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modalRef.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-protocolos-form
+          [protocolo]="protocoloEdit"
+          (retorno)="retornoForm($event)"
+        ></app-protocolos-form>
+      </div>
+    </div>
+  </div>
+</ng-template>

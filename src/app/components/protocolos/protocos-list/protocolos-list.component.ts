@@ -113,17 +113,6 @@ export class ProtocosListComponent {
     });
   }
 
-  cadastrar(pacienteId: number){ //recebo o id do paciente pela modal para impedir que o paciente seja enviado como nulo na hora da criaçao do protocolo
-   
-   this.protocoloEdit= new Protocolo();
-   this.protocoloEdit.paciente = { id: pacienteId } as Paciente;
-   this.modalRef = this.modalService.open(this.modalProtocoloForm);
-  }
-
-  editar(protocolo: Protocolo) {
-    this.protocoloEdit = Object.assign({}, protocolo); //cria um clone do objeto para evitar edição automática
-    this.modalRef = this.modalService.open(this.modalProtocoloForm);
-  }
 
   retornoForm(mensagem: string) {
     //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
