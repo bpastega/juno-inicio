@@ -1,3 +1,4 @@
+import { Consulta } from "./consulta";
 import { Endereco } from "./endereco";
 import { Protocolo } from "./protocolo";
 
@@ -16,6 +17,9 @@ export class Paciente {
     telefone!: string;
     endereco!: Endereco;
     protocolos!: Protocolo[];
+
+    //após alteração no back
+    consultas!: Consulta[];
 
    constructor(endereco:Endereco){
         this.endereco=endereco;
