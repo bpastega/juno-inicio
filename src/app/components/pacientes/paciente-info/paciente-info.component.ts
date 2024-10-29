@@ -98,6 +98,7 @@ export class PacienteInfoComponent {
         this.pacienteProtocoloAtivo = paciente.protocolos.find(
           (protocolo) => this.statusProtocoloService.isAtivo(protocolo)
         ) ?? null;
+
         
       },
       error: erro => {
@@ -110,7 +111,7 @@ export class PacienteInfoComponent {
 
   deletarById(paciente: Paciente){
     Swal.fire({
-      title: 'Confirme a deleção do paciente ' + paciente.nome + '.',
+      title: 'Confirme a deleção do paciente.',
       showCancelButton: true,
       confirmButtonText: 'Confirmar',
       cancelButtonText: `Cancelar`,
@@ -161,7 +162,7 @@ export class PacienteInfoComponent {
 
     encerrarProtocolo(protocolo: Protocolo){
       Swal.fire({
-        title: 'Realmente deseja encerrar o protocolo de ' + protocolo.paciente.nome + '?',
+        title: 'Realmente deseja encerrar o protocolo?',
         showCancelButton: true,
         confirmButtonText: 'Confirmar',
         cancelButtonText: `Cancelar`,
@@ -170,7 +171,7 @@ export class PacienteInfoComponent {
           this.protocoloService.encerrar(protocolo.id).subscribe({
             next: (mensagem) => {
               Swal.fire(mensagem, '', 'success');
-             // necessario listar? this.findAll();
+              
             },
             error: (erro) => {
               
