@@ -1,1 +1,55 @@
-<p>consultas-form works!</p>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5>{{ tituloComponente }}</h5>
+
+                <form #formularioConsulta="ngForm">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <!-- Campo Data da Consulta -->
+
+                            <mdb-form-control>
+                                <input
+                                  [(ngModel)]="consulta.dataConsulta"
+                                  mdbInput
+                                  type="date"
+                                  required
+                                  name="dataConsulta"
+                                  class="form-control"
+                                />
+                                <label mdbLabel class="form-label" for="dataConsulta"
+                                  >Data da Consulta:</label>
+                            </mdb-form-control>
+
+                            <!-- Campo Descrição -->
+                            <mdb-form-control class="mb-4">
+                                <textarea [(ngModel)]="consulta.descricao" mdbInput name="descricao" class="form-control"></textarea>
+                                <label mdbLabel class="form-label" for="descricao">Descrição:</label>
+                            </mdb-form-control>
+
+                             <!-- Botões -->
+                            <div class="d-flex justify-content-between">
+                                <button
+                                [disabled]="!formularioConsulta.valid"
+                                (click)="consulta.id > 0 ? atualizar() : cadastrar()"
+                                class="btn btn-primary"
+                                >
+                                {{ consulta.id > 0 ? "Atualizar" : "Salvar" }}
+                                </button>
+                                <a href="admin/consultas" class="btn btn-default">Voltar</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
