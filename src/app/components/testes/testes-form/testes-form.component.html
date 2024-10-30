@@ -1,1 +1,50 @@
-MODAL TESTE RAPIDO AQUI FUTURO FORM
+<div class="container">
+    <div class="row">
+        <div class="card-body">
+            <h5>{{ tituloComponente }}</h5>
+
+            <form #formularioTesteRapido="ngForm">
+                <div class="row mb-4">
+                    <div class="col">
+
+                        <!-- Campo de Data do Teste-->
+                        <mdb-form-control>
+                            <input
+                              [(ngModel)]="teste.dataTeste"
+                              mdbInput
+                              type="date"
+                              required
+                              name="dataTeste"
+                              class="form-control"
+                            />
+                            <label mdbLabel class="form-label" for="dataTeste"
+                              >Data do Teste:</label>
+                        </mdb-form-control>
+
+                        <!-- Campo Descrição -->
+                        <mdb-form-control class="mb-4">
+                            <textarea [(ngModel)]="teste.descricao" mdbInput name="descricao" class="form-control"></textarea>
+                            <label mdbLabel class="form-label" for="descricao">Descrição:</label>
+                        </mdb-form-control>
+
+                        <!-- Botões -->
+                        <div class="d-flex justify-content-between">
+                            <button
+                            [disabled]="!formularioTesteRapido.valid"
+                            (click)="teste.id > 0 ? atualizar() : cadastrar()"
+                            class="btn btn-primary"
+                            >
+                            {{ teste.id > 0 ? "Atualizar" : "Salvar" }}
+                            </button>
+                            <a href="admin/consultas" class="btn btn-default">Voltar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</div>

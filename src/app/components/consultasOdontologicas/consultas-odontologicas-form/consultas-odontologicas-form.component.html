@@ -1,1 +1,50 @@
-<p>consultas-odontologicas-form works!</p>
+<div class="container">
+    <div class="row">
+        <div class="card-body">
+            <h5>{{ tituloComponente }}</h5>
+
+            <form #formularioConsultaOdontologica="ngForm">
+                <div class="row mb-4">
+                    <div class="col">
+
+                        <!-- Campo Data do Atendimento -->
+
+                        <mdb-form-control>
+                            <input
+                              [(ngModel)]="consultaOdontologica.dataAtendimento"
+                              mdbInput
+                              type="date"
+                              required
+                              name="dataAtendimento"
+                              class="form-control"
+                            />
+                            <label mdbLabel class="form-label" for="dataAtendimento"
+                              >Data do Atendimento:</label>
+                        </mdb-form-control>
+
+                        <!-- Campo Descrição -->
+                        <mdb-form-control class="mb-4">
+                            <textarea [(ngModel)]="consultaOdontologica.descricao" mdbInput name="descricao" class="form-control"></textarea>
+                            <label mdbLabel class="form-label" for="descricao">Descrição:</label>
+                        </mdb-form-control>
+
+                         <!-- Botões -->
+                         <div class="d-flex justify-content-between">
+                            <button
+                            [disabled]="!formularioConsultaOdontologica.valid"
+                            (click)="consultaOdontologica.id > 0 ? atualizar() : cadastrar()"
+                            class="btn btn-primary"
+                            >
+                            {{ consultaOdontologica.id > 0 ? "Atualizar" : "Salvar" }}
+                            </button>
+                            <a href="admin/consultas" class="btn btn-default">Voltar</a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

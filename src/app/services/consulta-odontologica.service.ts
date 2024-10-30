@@ -22,7 +22,7 @@ export class ConsultaOdontologicaService {
     return this.http.post<string>(this.API+'/save', consultaOdontologica, {responseType: 'text' as 'json'})
   }
   update(consultaOdontologica: ConsultaOdontologica):Observable<string>{
-    return this.http.put<string>(this.API+'/update',consultaOdontologica.id,  {responseType: 'text' as 'json'})
+    return this.http.put<string>(this.API+'/update/'+consultaOdontologica.id, consultaOdontologica, {responseType: 'text' as 'json'})
   }
 
   encerrar(id: number): Observable<string>{

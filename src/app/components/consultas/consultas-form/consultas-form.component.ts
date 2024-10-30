@@ -5,8 +5,6 @@ import { ConsultaService } from '../../../services/consulta.service';
 import { Consulta } from '../../../models/consulta';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
-import { Paciente } from '../../../models/paciente';
-import { Protocolo } from '../../../models/protocolo';
 
 @Component({
   selector: 'app-consultas-form',
