@@ -4,6 +4,8 @@ import { TesteRapidoService } from '../../../services/teste-rapido.service';
 import { StatusTesteService } from '../../../services/utility/status-teste.service';
 import { NgClass } from '@angular/common';
 import { Paciente } from '../../../models/paciente';
+import { faL } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-testes-list',
@@ -15,28 +17,32 @@ import { Paciente } from '../../../models/paciente';
 export class TestesListComponent {
   lista: TesteRapido[] = [];
 
+  rotaAtivada = inject(ActivatedRoute);
+
   testeRapidoService = inject(TesteRapidoService);
   statusTesteService = inject(StatusTesteService);
 
-  @Input() modoLeitura: boolean = true;
-  @Input() modoPacienteUnico: boolean = false;
-  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
+  @Input() modoLeitura!: boolean;
+  @Input() modoPacienteUnico!: boolean;
 
   constructor(){
-    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
-      this.listAll();
+
+    if(this.modoPacienteUnico == true){
+      let id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(id);
     }
 
     else{
-      this.listAllPaciente(this.paciente.id); //TESTAR ESSE TRECHO!!!
+      this.listAll();
     }
+    
   }
 
   listAll(){ 
 
     this.testeRapidoService.findAll().subscribe({  
-      next: lista => { //quando o back retornar o que se espera
-        this.lista = lista;
+      next: testes => { //quando o back retornar o que se espera
+        this.lista = testes;
       },
       error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
         alert("Erro");
@@ -51,7 +57,7 @@ export class TestesListComponent {
         this.lista = lista;
       },
       error: erro =>{
-        alert("Erro");
+        alert("Erro aqui!!");
       }
     })
   }

@@ -82,8 +82,6 @@ export class PacienteInfoComponent {
 
   pacienteEdit!: Paciente; //esse objeto será utilizado para transportar o paciente clicado no botão editar
 
-
-  
   
   constructor(){
     let id = this.rotaAtivada.snapshot.params['id'];

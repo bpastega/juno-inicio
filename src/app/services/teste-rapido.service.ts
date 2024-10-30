@@ -35,6 +35,6 @@ export class TesteRapidoService {
   }
 
   findAllByPacienteId(id: number): Observable<TesteRapido[]>{
-    return this.http.get<TesteRapido[]>(this.API+"/findAllByPacienteId/"+id, {responseType: 'text' as 'json'});
+    return this.http.get<TesteRapido[]>(this.API+"/findAllByPacienteId/"+id);
   }
 }
