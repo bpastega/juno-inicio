@@ -9,32 +9,66 @@
 
                         <!-- Campo de Data do Teste-->
                         <mdb-form-control>
-                            <input
-                              [(ngModel)]="teste.dataTeste"
-                              mdbInput
-                              type="date"
-                              required
-                              name="dataTeste"
-                              class="form-control"
-                            />
-                            <label mdbLabel class="form-label" for="dataTeste"
-                              >Data do Teste:</label>
+                            <input [(ngModel)]="teste.dataTeste" mdbInput type="date" required name="dataTeste"
+                                class="form-control" />
+                            <label mdbLabel class="form-label" for="dataTeste">Data do Teste:</label>
                         </mdb-form-control>
 
                         <!-- Campo Descrição -->
                         <mdb-form-control class="mb-4">
-                            <textarea [(ngModel)]="teste.descricao" mdbInput name="descricao" class="form-control"></textarea>
+                            <textarea [(ngModel)]="teste.descricao" mdbInput name="descricao"
+                                class="form-control"></textarea>
                             <label mdbLabel class="form-label" for="descricao">Descrição:</label>
                         </mdb-form-control>
 
+                        <!-- Campo de Tipagem de Exame (Hemograma) -->
+                            <div class="col">
+                                <mdb-form-control>
+                                <label mdbLabel class="form-label" for="verificaHemograma"
+                                >O teste inclui Hemograma?</label>
+
+                                <select
+                                    [(ngModel)]="teste.exameSangue"
+                                    mdbInput
+                                    required
+                                    name="exameSangue"
+                                    class="form-select"
+                                >
+                                    <option [ngValue]="true">Sim</option>
+                                    <option [ngValue]="false">Não</option>
+                                </select>
+                                
+                                </mdb-form-control>
+                            </div>
+                        
+
+                        <!-- Campo de Tipagem de Exame (Urocultura) -->
+                        <div class="col">
+                            <mdb-form-control>
+                            <label mdbLabel class="form-label" for="verificaUrocultura"
+                            >O teste inclui Urocultura?</label>
+
+                            <select
+                                [(ngModel)]="teste.exameUrina"
+                                mdbInput
+                                required
+                                name="exameUrina"
+                                class="form-select"
+                            >
+                                <option [ngValue]="true">Sim</option>
+                                <option [ngValue]="false">Não</option>
+                            </select>
+                            
+                            </mdb-form-control>
+                        </div>
+
+
+
                         <!-- Botões -->
                         <div class="d-flex justify-content-between">
-                            <button
-                            [disabled]="!formularioTesteRapido.valid"
-                            (click)="teste.id > 0 ? atualizar() : cadastrar()"
-                            class="btn btn-primary"
-                            >
-                            {{ teste.id > 0 ? "Atualizar" : "Salvar" }}
+                            <button [disabled]="!formularioTesteRapido.valid"
+                                (click)="teste.id > 0 ? atualizar() : cadastrar()" class="btn btn-primary">
+                                {{ teste.id > 0 ? "Atualizar" : "Salvar" }}
                             </button>
                             <a href="admin/consultas" class="btn btn-default">Voltar</a>
                         </div>
@@ -44,7 +78,7 @@
                 </div>
 
             </form>
-            
+
         </div>
     </div>
 </div>

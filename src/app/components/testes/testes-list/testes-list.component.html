@@ -54,12 +54,12 @@
                     @if(!modoLeitura){
                       <!-- Ações -->
                       <td id="editar">
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">Editar</button>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="editarTesteRapido(testeRapido)">Editar</button>
                       </td>
   
                       <!-- Ações -->
                       <td id="deletar">
-                          <button type="button" class="btn btn-secondary" mdbRipple>Deletar</button>
+                          <button type="button" class="btn btn-secondary" (click)="deletarById(testeRapido.id)" mdbRipple>Deletar</button>
                       </td>
                     }
                     
@@ -80,3 +80,24 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para formulário dos Testes Rápidos -->
+<ng-template #modalTestesRapidosForm>
+  <div class="modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dados dos Testes Rápidos</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modalRef.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-testes-form [teste]="testeEdit" (retorno)="retornoForm($event)">
+        </app-testes-form>
+      </div>
+    </div>
+  </div>
+</ng-template>

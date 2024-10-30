@@ -190,3 +190,25 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Modal para formulário de edição de Testes Ráoidos -->
+<ng-template #modalTestesRapidosForm>
+  <div class="modal-fullscreen">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Dados dos Testes Rápidos</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <app-consultas-odontologicas-form
+      [consultaOdontologica]="consultaOdontologicaEdit"
+      (retorno)="retornoForm($event)">
+
+      </app-consultas-odontologicas-form>
+    </div>
+  </div>
+</ng-template>

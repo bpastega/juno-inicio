@@ -23,7 +23,7 @@ export class TesteRapidoService {
   }
 
   update(teste: TesteRapido): Observable<string> {
-    return this.http.put<string>(this.API+'/update', teste, { responseType: 'text' as 'json' });
+    return this.http.put<string>(this.API+'/update/'+teste.id, teste, { responseType: 'text' as 'json' });
   }
 
   encerrar(id: number): Observable<string> {
