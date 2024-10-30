@@ -8,15 +8,24 @@ import { StatusInfoProtocoloService } from '../../../services/utility/status-inf
 import { ConsultasOdontologicasListComponent } from "../../consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component";
 import { TestesListComponent } from "../../testes/testes-list/testes-list.component";
 import Swal from 'sweetalert2';
+// para usar icones nos botoes:
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-protocolo-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ConsultasOdontologicasListComponent, TestesListComponent],
+  imports: [DatePipe, NgClass,FontAwesomeModule ,ConsultasOdontologicasListComponent, TestesListComponent],
   templateUrl: './protocolo-info.component.html',
   styleUrl: './protocolo-info.component.scss'
 })
 export class ProtocoloInfoComponent {
+
+  
+  //para uso de icones nos botões
+  faEdit = faEdit;
+  faTrash = faTrash;
+
 
   protocoloEncontrado!: Protocolo;
 

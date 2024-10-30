@@ -1,40 +1,51 @@
 <div class="container">
     <div class="row">
-        <div class="card">
-            <div class="card-body">
+      <div class="card">
+        <div class="card-body">
+          <div class="header">
+            <h2 class="card-title">{{protocoloEncontrado.paciente.nome}}</h2>
 
-            <div class="topo">
-                <h2 class="card-title">Detalhes - Protocolo Pré-Natal</h2>
-                <div class="btns">
-                    @if(protocoloEncontrado.statusProtocolo == true){
-                        <button type="button" class="btn btn-warning" (click)="encerrar(protocoloEncontrado)" mdbRipple> Encerrar Protocolo</button>
-                    }
-
-                    <!--@if(protocoloEncontrado.statusProtocolo == false){
-                        <button type="button" class="btn btn-success" mdbRipple> Abrir Novo Protocolo</button>
-                    }-->
-                    <button type="button" class="btn btn-primary">Editar</button>
-                    <!--<button type="button" class="btn btn-danger" mdbRipple> Deletar</button>-->
-                </div>
-            </div>  
             
-
-            <div class="protocolo">
-                <p class="infoProtocolo">Nome do Paciente: {{protocoloEncontrado.paciente.nome}}</p>
-                <p class="infoProtocolo">Data de Abertura: {{protocoloEncontrado.dataAbertura | date: 'longDate' :'':'pt-BR'}}</p>
-                <p class="infoProtocolo">Data de Encerramento: {{statusInfoProtocoloService.listDataEncerramento(protocoloEncontrado)}}</p>
-
-                <p class="infoProtocolo">Data da Última Menstruação: {{protocoloEncontrado.dum | date: 'longDate' :'':'pt-BR'}}</p>
-                <p class="infoProtocolo">Data Provável de Parto: {{protocoloEncontrado.dpp | date: 'longDate' :'':'pt-BR'}}</p>
-
-                <div class="infoProtocolo" id="infoStatus">
-                    <p>Status do Protocolo:</p>
-                    <span [ngClass]="statusProtocoloService.renderStatusProtocolo(protocoloEncontrado)">{{statusProtocoloService.listStatusProtocolo(protocoloEncontrado) }}</span>
-                    <!-- Se ele ficar do lado, por algum motivo ele fica distorcido. TODO: tentar arrumar depois-->
-                </div>
-            </div>
-
+          </div>
+          <div class="actions">
+            <!-- Condições para botões de ação baseadas no status do protocolo -->
+            @if (protocoloEncontrado.statusProtocolo == true) {
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="encerrar(protocoloEncontrado)"
+              mdbRipple
+            >
+              Encerrar Protocolo
+            </button>
+            }
+            <button type="button" class="btn btn-tertiary">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </div>
+          <!-- Informações do Protocolo -->
+          <div class="protocolo-info">
+            <p><strong>Nome do Paciente:</strong> {{ protocoloEncontrado.paciente.nome }}</p>
+            <p><strong>Data de Abertura:</strong> {{ protocoloEncontrado.dataAbertura | date : "longDate" : "" : "pt-BR" }}</p>
+            <p><strong>Data de Encerramento:</strong> {{ statusInfoProtocoloService.listDataEncerramento(protocoloEncontrado) }}</p>
+            <p><strong>Data da Última Menstruação:</strong> {{ protocoloEncontrado.dum | date : "longDate" : "" : "pt-BR" }}</p>
+            <p><strong>Data Provável de Parto:</strong> {{ protocoloEncontrado.dpp | date : "longDate" : "" : "pt-BR" }}</p>
+            
+            <div id="status-info">
+              <p><strong>Status do Protocolo:</strong></p>
+              <span
+                [ngClass]="statusProtocoloService.renderStatusProtocolo(protocoloEncontrado)"
+              >
+                {{ statusProtocoloService.listStatusProtocolo(protocoloEncontrado) }}
+              </span>
             </div>
           </div>
+          
+        </div>
+        
+      </div>
+      
     </div>
-</div>
+    
+  </div>
+  
