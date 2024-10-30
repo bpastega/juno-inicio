@@ -101,8 +101,8 @@
           <mdb-tab title="Consultas Odontológicas">
             <!-- TODO tag que parametros passar? -->
             <app-consultas-odontologicas-list
-              [modoLeitura]="false"
-              [modoPacienteUnico]="true"
+              [modoLeitura]=false 
+              [modoPacienteUnico]=true
               ></app-consultas-odontologicas-list>
 
           </mdb-tab>
@@ -110,8 +110,8 @@
           <mdb-tab title="Testes Rápidos" [disabled]="!pacienteEncontrado">
             <!-- TODO tags que parametro passar -->
             <app-testes-list 
-            [modoLeitura]="false"
-            [modoPacienteUnico]="true"
+            [modoLeitura]=false 
+            [modoPacienteUnico]=true
              ></app-testes-list>
           </mdb-tab>
         </mdb-tabs>

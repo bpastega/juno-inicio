@@ -4,6 +4,7 @@ import { ConsultaOdontologicaService } from '../../../services/consulta-odontolo
 import { Protocolo } from '../../../models/protocolo';
 import { ProtocoloService } from '../../../services/protocolo.service';
 import { Paciente } from '../../../models/paciente';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-consultas-odontologicas-list',
@@ -18,28 +19,30 @@ export class ConsultasOdontologicasListComponent {
   /*Lista de Protocolos que estarão ligados às consultas odontológicas*/ 
   listaProtocolo: Protocolo[] = [];
 
+  rotaAtivada = inject(ActivatedRoute);
+
   consultaOdontologicaService = inject(ConsultaOdontologicaService);
   protocoloService = inject(ProtocoloService);
 
-  @Input() modoLeitura: boolean = true;
-  @Input() modoPacienteUnico: boolean = false;
-  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
+  @Input() modoLeitura!: boolean;
+  @Input() modoPacienteUnico!: boolean;
 
   constructor(){
-    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
-      this.listAll();
+    if(this.modoPacienteUnico == true){
+      let id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(id);
     }
 
     else{
-      this.listAllPaciente(this.paciente.id); //TESTAR ESSE TRECHO!!!
+      this.listAll();
     }
   }
 
   listAll(){ 
 
     this.consultaOdontologicaService.findAll().subscribe({ /*Dentro do back, o findAll retorna APENAS candidatos ativos. Por isso, não se faz necessário realizar essa filtragem no front.*/ 
-      next: lista => { //quando o back retornar o que se espera
-        this.lista = lista;
+      next: consultas => { //quando o back retornar o que se espera
+        this.lista = consultas;
       },
       error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
         alert("Erro");
