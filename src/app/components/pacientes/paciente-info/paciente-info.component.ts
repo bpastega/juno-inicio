@@ -12,6 +12,8 @@ import { ProtocoloService } from "../../../services/protocolo.service";
 import { MdbModalModule, MdbModalRef, MdbModalService } from "mdb-angular-ui-kit/modal";
 import { ProtocolosFormComponent } from "../../protocolos/protocolos-form/protocolos-form.component";
 import { StatusProtocoloService } from "../../../services/utility/status-protocolo.service";
+import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
+
 
 // para usar icones nos botoes:
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -20,13 +22,15 @@ import { PacientesFormComponent } from "../pacientes-form/pacientes-form.compone
 import { ProtocosListComponent } from "../../protocolos/protocos-list/protocolos-list.component";
 import { ExamesComponent } from "../../exames/exames.component";
 import { ConsultasListComponent } from "../../consultas/consultas-list/consultas-list.component";
+import { TestesListComponent } from "../../testes/testes-list/testes-list.component";
+import { ConsultasOdontologicasListComponent } from "../../consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent, ConsultasListComponent],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent, ConsultasListComponent, TestesListComponent, MdbTabsModule, ConsultasOdontologicasListComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })

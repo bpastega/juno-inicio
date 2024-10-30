@@ -136,4 +136,15 @@ export class ProtocosListComponent {
 
     this.findAll(); //atualiza e recarrega a lista
   }
+
+
+  // para configuração das tabs de exibiçao MODOPACIENTEUNICO
+  ngOnInit() {
+    this.protocoloService.findAll().subscribe((protocolos) => {
+      // filtra apenas os protocolos do paciente encontrado
+      this.lista = protocolos.filter(
+        (protocolo) => protocolo.paciente.id === this.paciente.id
+      );
+    });
+  }
 }
