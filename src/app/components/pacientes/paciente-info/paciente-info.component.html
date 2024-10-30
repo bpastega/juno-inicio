@@ -108,7 +108,9 @@
 
           <mdb-tab title="Testes Rápidos" [disabled]="!pacienteEncontrado">
             <!-- TODO tags que parametro passar -->
-            <app-testes-list [paciente]="pacienteEncontrado"></app-testes-list>
+            <app-testes-list 
+            [modoPacienteUnico]="true"
+            [paciente]="pacienteEncontrado"></app-testes-list>
           </mdb-tab>
         </mdb-tabs>
       </div>

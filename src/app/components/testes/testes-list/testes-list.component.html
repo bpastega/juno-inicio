@@ -7,7 +7,9 @@
                   <tr>
                     <th>Descrição</th>
                     <th>Data</th>
+                    @if(!modoPacienteUnico){
                     <th>Nome do Paciente</th>
+                    }
                     <th>Tipo de Exame</th>
                     @if (!modoLeitura) {
                       <th>Ações</th>
@@ -34,11 +36,14 @@
                     </td>
 
                     <!-- Paciente Atendido-->
+
+                    @if(!modoPacienteUnico){
                     <td>
                         <div>
                             <p class="text-bold mb-1">{{testeRapido.protocoloPreNatal.paciente.nome}}</p>
                         </div>
                     </td>
+                    }
 
                     <!-- Tipo de Exame-->
                     <td>
