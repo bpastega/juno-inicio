@@ -5,14 +5,16 @@ import { ConsultaService } from '../../../services/consulta.service';
 import { DatePipe, NgClass } from '@angular/common';
 import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 import { Paciente } from '../../../models/paciente';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ConsultasFormComponent } from "../consultas-form/consultas-form.component";
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @Component({
   selector: 'app-consultas-list',
   standalone: true,
-  imports: [DatePipe, NgClass, ConsultasFormComponent],
+  imports: [DatePipe, NgClass, ConsultasFormComponent, MdbFormsModule, FormsModule, MdbModalModule],
   templateUrl: './consultas-list.component.html',
   styleUrl: './consultas-list.component.scss'
 })
