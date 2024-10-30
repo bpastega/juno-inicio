@@ -87,9 +87,12 @@
             </div>
           </mdb-tab>
           
-          <mdb-tab title="Exames">
+          <mdb-tab title="Consultas">
             
-             <app-consultas-list>
+             <app-consultas-list 
+             [modoLeitura]="false"
+             [modoPacienteUnico]="true"
+             >
               
              </app-consultas-list>
           </mdb-tab>

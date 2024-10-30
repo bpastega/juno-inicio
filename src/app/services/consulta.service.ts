@@ -21,7 +21,7 @@ export class ConsultaService {
     return this.http.post<string>(this.API+'/save', consulta, {responseType: 'text' as 'json'})
   }
   update(consulta: Consulta):Observable<string>{
-    return this.http.put<string>(this.API+'/update',consulta.id,  {responseType: 'text' as 'json'})
+    return this.http.put<string>(this.API+'/update/'+consulta.id, consulta, {responseType: 'text' as 'json'})
   }
 
   encerrar(id: number): Observable<string>{
