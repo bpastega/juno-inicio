@@ -1,4 +1,4 @@
-import { Component, inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, Input, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { ConsultaOdontologica } from '../../../models/consulta-odontologica';
 import { ConsultaOdontologicaService } from '../../../services/consulta-odontologica.service';
 import { Protocolo } from '../../../models/protocolo';
@@ -38,7 +38,16 @@ export class ConsultasOdontologicasListComponent {
   @Input() modoLeitura!: boolean;
   @Input() modoPacienteUnico!: boolean;
 
-  constructor(){
+  ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
+    if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(id);
+    } else {
+      this.listAll();
+    }
+  }
+
+  /*constructor(){
     if(this.modoPacienteUnico == true){
       let id = this.rotaAtivada.snapshot.params['id'];
       this.listAllPaciente(id);
@@ -47,7 +56,7 @@ export class ConsultasOdontologicasListComponent {
     else{
       this.listAll();
     }
-  }
+  }*/
 
   listAll(){ 
 

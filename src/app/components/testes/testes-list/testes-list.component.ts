@@ -1,4 +1,4 @@
-import { Component, inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, Input, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { TesteRapido } from '../../../models/teste-rapido';
 import { TesteRapidoService } from '../../../services/teste-rapido.service';
 import { StatusTesteService } from '../../../services/utility/status-teste.service';
@@ -35,7 +35,16 @@ export class TestesListComponent {
   @Input() modoLeitura!: boolean;
   @Input() modoPacienteUnico!: boolean;
 
-  constructor(){
+  ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
+    if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(id);
+    } else {
+      this.listAll();
+    }
+  }
+
+  /*constructor(){
 
     if(this.modoPacienteUnico == true){
       let id = this.rotaAtivada.snapshot.params['id'];
@@ -46,7 +55,7 @@ export class TestesListComponent {
       this.listAll();
     }
     
-  }
+  }*/
 
   listAll(){ 
 
