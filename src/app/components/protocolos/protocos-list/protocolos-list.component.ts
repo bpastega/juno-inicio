@@ -139,6 +139,7 @@ export class ProtocosListComponent {
 
 
   // para configuração das tabs de exibiçao MODOPACIENTEUNICO
+  // TODO possivelmente retirar e substituir por filtragem no BACKEND
   ngOnInit() {
     this.protocoloService.findAll().subscribe((protocolos) => {
       // filtra apenas os protocolos do paciente encontrado
