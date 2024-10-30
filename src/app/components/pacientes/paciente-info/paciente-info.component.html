@@ -26,6 +26,8 @@
             >
               Encerrar Protocolo
             </button>
+
+          
             } 
             @if (pacienteEncontrado.statusPreNatal == false) {
             <button
@@ -84,11 +86,13 @@
               <p><strong>Descrição:</strong> {{ pacienteEndereco.descricao }}</p>
             </div>
           </mdb-tab>
-          <!--
+          
           <mdb-tab title="Exames">
             
-             <app-exames></app-exames> 
-          </mdb-tab>-->
+             <app-consultas-list>
+              
+             </app-consultas-list>
+          </mdb-tab>
 
           <mdb-tab title="Protocolos">
             <!-- TODO tag que parametros passar? -->

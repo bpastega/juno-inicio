@@ -151,6 +151,8 @@ export class PacienteInfoComponent {
   }*/
 
 
+  
+
     cadastrarProtocolo(pacienteEncontradoID: number){
       this.protocoloEdit = new Protocolo();
       //talvez pegar o id do paciente?

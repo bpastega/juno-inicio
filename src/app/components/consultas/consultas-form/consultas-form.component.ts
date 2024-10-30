@@ -34,7 +34,7 @@ export class ConsultasFormComponent {
   }
 
   cadastrar() {
-    if (this.consulta) {
+    if (this.consulta.paciente.id) {
       this.consultaService.save(this.consulta).subscribe({
         next: mensagem => {
           this.retorno.emit(mensagem);

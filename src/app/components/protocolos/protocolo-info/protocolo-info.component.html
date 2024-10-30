@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="card">
+        @if (protocoloEncontrado){
         <div class="card-body">
           <div class="header">
             <h2 class="card-title">{{protocoloEncontrado.paciente.nome}}</h2>
@@ -17,6 +18,27 @@
               mdbRipple
             >
               Encerrar Protocolo
+            </button>
+
+            <button  (click)="novaConsulta(protocoloEncontrado.paciente.id)"
+            type="button"
+            class="btn btn-secondary"
+            mdbRipple>
+            Nova Consulta
+            </button>
+
+            <button  (click)="novoTesteRapido(protocoloEncontrado.id)"
+            type="button"
+            class="btn btn-secondary"
+            mdbRipple>
+            Novo Teste Rápido
+            </button>
+
+            <button  (click)="novaConsultaOdontologica(protocoloEncontrado.id)"
+            type="button"
+            class="btn btn-secondary"
+            mdbRipple>
+            Nova Consulta Odontológica
             </button>
             }
             <button type="button" class="btn btn-tertiary">
@@ -42,10 +64,74 @@
           </div>
           
         </div>
-        
+      }
       </div>
       
     </div>
     
   </div>
+  <!-- Modal para formulário de edição de Consultas-->
+<ng-template #modalConsultasForm>
+  <div class="modal-lg">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Dados de Consultas</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+
+      <app-consultas-form [consulta]="consultaEdit"
+      (retorno)="retornoForm($event)"
+      ></app-consultas-form>
+
+    </div>
+  </div>
+</ng-template>
+
+  <!-- Modal para formulário de edição de Testes Rapidos-->
+  <ng-template #modalTestesForm>
+    <div class="modal-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dados de Testes Rápidos</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modalRef.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
   
+        <app-testes-form [teste]="testeEdit"
+        (retorno)="retornoForm($event)"
+        ></app-testes-form>
+  
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Modal para formulário de edição de Consultas Odontológicas-->
+  <ng-template #modalConsultasOdontologicasForm>
+    <div class="modal-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dados de Consultas Odontológicas</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modalRef.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+  
+        <app-consultas-odontologicas-form [consultaOdontologica]="consultaOdontologicaEdit"
+        (retorno)="retornoForm($event)"
+        ></app-consultas-odontologicas-form>
+  
+      </div>
+    </div>
+  </ng-template>
