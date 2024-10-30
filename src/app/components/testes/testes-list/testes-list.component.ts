@@ -22,8 +22,8 @@ export class TestesListComponent {
   testeRapidoService = inject(TesteRapidoService);
   statusTesteService = inject(StatusTesteService);
 
-  @Input() modoLeitura: boolean = false;
-  @Input() modoPacienteUnico: boolean = true;
+  @Input() modoLeitura!: boolean;
+  @Input() modoPacienteUnico!: boolean;
 
   constructor(){
 
