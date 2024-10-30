@@ -100,7 +100,9 @@
 
           <mdb-tab title="Consultas Odontológicas">
             <!-- TODO tag que parametros passar? -->
-            <app-consultas-odontologicas-list></app-consultas-odontologicas-list>
+            <app-consultas-odontologicas-list
+              [modoPacienteUnico]="true"
+              [paciente]="pacienteEncontrado"></app-consultas-odontologicas-list>
 
           </mdb-tab>
 

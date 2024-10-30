@@ -23,8 +23,13 @@ export class TestesListComponent {
   @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
-    /*TODO: IMPLEMENTAR UMA MANEIRA DE PEGAR TODOS OS TESTES RÁPIDOS COM BASE NO PACIENTE*/ 
+    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
       this.listAll();
+    }
+
+    else{
+      this.listAllPaciente(this.paciente.id); //TESTAR ESSE TRECHO!!!
+    }
   }
 
   listAll(){ 
@@ -38,6 +43,17 @@ export class TestesListComponent {
       }
     });
 
+  }
+
+  listAllPaciente(id: number){
+    this.testeRapidoService.findAllByPacienteId(id).subscribe({
+      next: lista =>{
+        this.lista = lista;
+      },
+      error: erro =>{
+        alert("Erro");
+      }
+    })
   }
 
 }

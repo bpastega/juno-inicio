@@ -17,6 +17,8 @@ import { PacientesFormComponent } from "../pacientes-form/pacientes-form.compone
 import { FormataCPFService } from '../../../services/utility/formata-cpf.service';
 import { StatusPacienteService } from '../../../services/utility/status-paciente.service';
 import { Endereco } from '../../../models/endereco';
+import { ProtocoloService } from '../../../services/protocolo.service';
+import { Protocolo } from '../../../models/protocolo';
 
 registerLocaleData(localePT);
 
@@ -37,7 +39,7 @@ export class PacientesListComponent {
 
   pesquisa: string = '';
 
-  
+  protocoloRedirect!: Protocolo;
   pacienteEdit!: Paciente; //esse objeto será utilizado para transportar o paciente clicado no botão editar
 
   /*Injeta o Service, semelhante ao Autowired*/ 
@@ -45,6 +47,7 @@ export class PacientesListComponent {
   imagemService = inject(ImagemService);
   formataCPFService = inject(FormataCPFService);
   statusPacienteService = inject(StatusPacienteService);
+  protocoloService = inject(ProtocoloService);
 
   router = inject(Router);
 
@@ -53,6 +56,18 @@ export class PacientesListComponent {
    this.findAll();
   }
 
+    navigateToDetalhes(paciente: Paciente){ 
+
+      this.protocoloService.findAtivoByIdPaciente(paciente.id).subscribe({
+        next: (protocolo) => {
+          this.router.navigate(['/admin/protocolos/info/'+protocolo.id]);
+        },
+        error: (erro) => {
+          Swal.fire('Erro',erro.error,'error');
+        },
+      });
+
+    }
 
     navigateToInfo(id: number) {
       this.router.navigate(['/admin/pacientes/info', id]);

@@ -33,4 +33,8 @@ export class ConsultaOdontologicaService {
     return this.http.get<ConsultaOdontologica>(this.API+"/findById/"+id);
   }
 
+  findAllByPacienteId(id: number): Observable<ConsultaOdontologica[]>{
+    return this.http.get<ConsultaOdontologica[]>(this.API+"/findAllByPacienteId/"+id, {responseType: 'text' as 'json'});
+  }
+
 }

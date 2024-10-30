@@ -82,7 +82,7 @@
                             
                             <td><!-- Célula F: Protocolo-->
 
-                                <button type="button" [ngClass]="statusPacienteService.renderProtocoloAtual(paciente)" > <!-- renderProtocolo gera o elemento HTML correspondente ao status do protocolo -->
+                                <button type="button" [ngClass]="statusPacienteService.renderProtocoloAtual(paciente)" (click)="navigateToDetalhes(paciente)"> <!-- renderProtocolo gera o elemento HTML correspondente ao status do protocolo -->
                                   {{statusPacienteService.listProtocoloAtual(paciente)}} <!-- listProtocolo atribui um string ao booleano-->
                                   </button>
 

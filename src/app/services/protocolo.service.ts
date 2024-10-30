@@ -47,6 +47,9 @@ export class ProtocoloService {
     return this.http.get<Protocolo[]>(this.API + "/findByInativo");
   }
 
+  findAtivoByIdPaciente(idPaciente: number): Observable<Protocolo>{
+    return this.http.get<Protocolo>(this.API+"/findAtivoByIdPaciente/"+idPaciente);
+  }
 
 
 }

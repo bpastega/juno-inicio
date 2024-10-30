@@ -26,8 +26,13 @@ export class ConsultasOdontologicasListComponent {
   @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
   constructor(){
-    /*TODO*/ 
-    this.listAll();
+    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
+      this.listAll();
+    }
+
+    else{
+      this.listAllPaciente(this.paciente.id); //TESTAR ESSE TRECHO!!!
+    }
   }
 
   listAll(){ 
@@ -41,6 +46,17 @@ export class ConsultasOdontologicasListComponent {
       }
     });
 
+  }
+
+  listAllPaciente(id: number){
+    this.consultaOdontologicaService.findAllByPacienteId(id).subscribe({
+      next: lista =>{
+        this.lista = lista;
+      },
+      error: erro =>{
+        alert("Erro");
+      }
+    })
   }
 
 
