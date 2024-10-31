@@ -1,4 +1,4 @@
-import { Component, inject, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, Input, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { PacienteService } from '../../../services/paciente.service';
 import { Consulta } from '../../../models/consulta';
 import { ConsultaService } from '../../../services/consulta.service';
@@ -10,6 +10,7 @@ import { ConsultasFormComponent } from "../consultas-form/consultas-form.compone
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultas-list',
@@ -29,6 +30,9 @@ export class ConsultasListComponent {
   consultaService = inject(ConsultaService);
   statusPacienteService = inject(StatusPacienteService);
 
+  rotaAtivada = inject(ActivatedRoute);
+  router = inject(Router);
+
   modalService = inject(MdbModalService); // responsável por abrir as modais
   @ViewChild('modalConsultasForm') modalConsultasForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
 
@@ -36,16 +40,26 @@ export class ConsultasListComponent {
 
   @Input() modoLeitura: boolean = true;
   @Input() modoPacienteUnico: boolean = false;
-  @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
+
+  ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
+    if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.findAllPaciente(id);
+    } else {
+      this.findAll();
+    }
+  }
 
   constructor(){
-    if(!this.modoPacienteUnico){ //caso mostrar protocolos de todos os pacientes
+    if(this.modoPacienteUnico == false){
       this.findAll();
     }
 
     else{
-      this.lista = this.paciente.consultas; //TESTAR ESSE TRECHO!!!
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.findAllPaciente(id);
     }
+    this.findAll();
   }
 
   findAll(){
@@ -54,12 +68,22 @@ export class ConsultasListComponent {
         this.lista=lista;
       },
       error: erro =>{
-       // Swal.fire('Erro',erro.error,'error');
-       // alert('Errooooo!!')//futuramente adicionar sweetalert2
+       alert("Erro");
        console.log(erro);
       }
     })
     
+  }
+
+  findAllPaciente(id: number){
+    this.consultaService.findAllByPacienteId(id).subscribe({
+      next: lista =>{
+        this.lista = lista;
+      },
+      error: erro =>{
+        alert("Erro aqui!");
+      }
+    })
   }
 
   editarConsulta(consulta: Consulta) {

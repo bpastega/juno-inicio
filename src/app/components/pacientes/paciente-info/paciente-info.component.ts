@@ -116,7 +116,7 @@ export class PacienteInfoComponent {
 
   deletarById(paciente: Paciente){
     Swal.fire({
-      title: 'Confirme a deleção do paciente.',
+      title: 'Tem certeza? Deletar o paciente removerá todas as informações associadas a ele.',
       showCancelButton: true,
       confirmButtonText: 'Confirmar',
       cancelButtonText: `Cancelar`,
@@ -178,7 +178,8 @@ export class PacienteInfoComponent {
           this.protocoloService.encerrar(protocolo.id).subscribe({
             next: (mensagem) => {
               Swal.fire(mensagem, '', 'success');
-              
+              let id = this.rotaAtivada.snapshot.params['id'];
+              this.findById(id);
             },
             error: (erro) => {
               
@@ -194,6 +195,8 @@ export class PacienteInfoComponent {
       //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
   
         this.modalRef.close(); //fecha a moodal
+        let id = this.rotaAtivada.snapshot.params['id'];
+        this.findById(id);
   
       Swal.fire({
         title: mensagem,

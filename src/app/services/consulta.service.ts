@@ -32,4 +32,8 @@ export class ConsultaService {
     return this.http.get<Consulta>(this.API+"/findById/"+id);
   }
 
+  findAllByPacienteId(id: number): Observable<Consulta[]>{
+    return this.http.get<Consulta[]>(this.API+"/findAllByPacienteId/"+id);
+  }
+
 }
