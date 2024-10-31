@@ -107,7 +107,22 @@ export class PacienteInfoComponent {
         
       },
       error: erro => {
-        alert('Paciente não encontrado'); //TODO: SWEET ALERT 
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     })
 
@@ -116,7 +131,7 @@ export class PacienteInfoComponent {
 
   deletarById(paciente: Paciente){
     Swal.fire({
-      title: 'Tem certeza? Deletar o paciente removerá todas as informações associadas a ele.',
+      title: 'Confirme a deleção do paciente. Todos os dados serão perdidos e não poderão ser recuperados.',
       showCancelButton: true,
       confirmButtonText: 'Confirmar',
       cancelButtonText: `Cancelar`,
@@ -129,7 +144,22 @@ export class PacienteInfoComponent {
           },
           error: (erro) => {
             
-            Swal.fire('Erro!',erro.error,'error');
+            let mensagemErro = "Erro desconhecido";
+
+            if (erro.error) {
+                try {
+                    // interpreto o erro como JSON se for string
+                    const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+        
+                    // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                    mensagemErro = Object.values(errorResponse).join(', ');
+                } catch (e) {
+                    mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+                }
+            }
+        
+            
+            Swal.fire(mensagemErro);
           },
         });
       }
@@ -158,6 +188,8 @@ export class PacienteInfoComponent {
       this.protocoloEdit = new Protocolo();
       //talvez pegar o id do paciente?
       this.protocoloEdit.paciente = {id: pacienteEncontradoID} as Paciente;
+    //  this.findById(pacienteEncontradoID); // recarrega o protocolo para atualização
+
       this.modalRef = this.modalService.open(this.modalProtocoloForm);
     }
 
@@ -177,13 +209,29 @@ export class PacienteInfoComponent {
         if (result.isConfirmed) {
           this.protocoloService.encerrar(protocolo.id).subscribe({
             next: (mensagem) => {
+              // this.findById(protocolo.id); // recarrega o protocolo para atualização
               Swal.fire(mensagem, '', 'success');
               let id = this.rotaAtivada.snapshot.params['id'];
               this.findById(id);
             },
             error: (erro) => {
               
-              Swal.fire('Erro!',erro.error,'error');
+              let mensagemErro = "Erro desconhecido";
+
+              if (erro.error) {
+                  try {
+                      // interpreto o erro como JSON se for string
+                      const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+          
+                      // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                      mensagemErro = Object.values(errorResponse).join(', ');
+                  } catch (e) {
+                      mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+                  }
+              }
+          
+              
+              Swal.fire(mensagemErro);
             },
           });
         }
@@ -226,6 +274,7 @@ export class PacienteInfoComponent {
       editarPaciente(paciente: Paciente) {
         this.pacienteEdit = Object.assign({}, paciente); //cria um clone do objeto para evitar edição automática
         this.modalRef = this.modalService.open(this.modalPacientesForm);
+        
       }
       
       }

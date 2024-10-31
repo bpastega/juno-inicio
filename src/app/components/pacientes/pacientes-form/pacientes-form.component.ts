@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../../../models/paciente';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Endereco } from '../../../models/endereco';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pacientes-form',
@@ -31,10 +32,6 @@ export class PacientesFormComponent {
 
   @Output() retorno = new EventEmitter();
 
-  /* -> para refatoraçao caso faça a modal dentro de modal
-   @Input() paciente: Paciente = new Paciente();
-  @Output() retorno = new EventEmitter();
-  */
 
   constructor(){
     this.paciente.endereco= new Endereco();
@@ -59,7 +56,22 @@ export class PacientesFormComponent {
 
       },
       error: erro => {
-        alert('Deu erro');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     })
 
@@ -78,7 +90,22 @@ export class PacientesFormComponent {
 
       },
       error: erro => {
-        alert('Deu erro');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     });
 
@@ -92,7 +119,23 @@ export class PacientesFormComponent {
 
       },
       error: erro =>{
-        alert('Deu erro');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
+      
       }
     });
   }

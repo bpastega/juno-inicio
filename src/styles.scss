@@ -2,6 +2,9 @@
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
 
+.swal2-container {
+    z-index: 5000 !important;
+}
 
 body{
     //background-color: rgb(255, 255, 255); 
@@ -27,3 +30,4 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow-y: auto; 
   }
+

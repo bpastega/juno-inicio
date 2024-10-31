@@ -63,7 +63,22 @@ export class TestesListComponent {
         this.lista = testes;
       },
       error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
-        alert("Erro");
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     });
 
@@ -75,7 +90,22 @@ export class TestesListComponent {
         this.lista = lista;
       },
       error: erro =>{
-        alert("Erro aqui!!");
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     })
   }
@@ -100,7 +130,22 @@ export class TestesListComponent {
           },
           error: (erro) => {
             
-            Swal.fire('Erro!',erro.error,'error');
+            let mensagemErro = "Erro desconhecido";
+
+            if (erro.error) {
+                try {
+                    // interpreto o erro como JSON se for string
+                    const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+        
+                    // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                    mensagemErro = Object.values(errorResponse).join(', ');
+                } catch (e) {
+                    mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+                }
+            }
+        
+            
+            Swal.fire(mensagemErro);
           },
         });
       }

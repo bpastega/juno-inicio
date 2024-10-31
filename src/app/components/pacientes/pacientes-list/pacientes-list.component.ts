@@ -79,9 +79,22 @@ export class PacientesListComponent {
           this.lista=lista;
         },
         error: erro =>{
-         // Swal.fire('Erro',erro.error,'error');
-         // alert('Errooooo!!')//futuramente adicionar sweetalert2
-         console.log(erro);
+          let mensagemErro = "Erro desconhecido";
+
+          if (erro.error) {
+              try {
+                  // interpreto o erro como JSON se for string
+                  const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+      
+                  // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                  mensagemErro = Object.values(errorResponse).join(', ');
+              } catch (e) {
+                  mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+              }
+          }
+      
+          
+          Swal.fire(mensagemErro);
         }
       })
       
@@ -93,7 +106,7 @@ export class PacientesListComponent {
           this.lista = lista;
         },
         error: (erro) => {
-          Swal.fire('Erro',erro.error,'error');
+          Swal.fire('Digite um nome!', erro.error, 'error'); 
         },
       });
     }

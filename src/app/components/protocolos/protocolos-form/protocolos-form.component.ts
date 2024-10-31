@@ -5,6 +5,7 @@ import { ProtocoloService } from '../../../services/protocolo.service';
 import { Protocolo } from '../../../models/protocolo';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-protocolos-form',
@@ -39,7 +40,22 @@ export class ProtocolosFormComponent {
           this.retorno.emit(mensagem);
         },
         error: erro => {
-          alert('Erro ao criar!');
+          let mensagemErro = "Erro desconhecido";
+
+          if (erro.error) {
+              try {
+                  // interpreto o erro como JSON se for string
+                  const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+      
+                  // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                  mensagemErro = Object.values(errorResponse).join(', ');
+              } catch (e) {
+                  mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+              }
+          }
+      
+          
+          Swal.fire(mensagemErro);
         }
       });
     } else {
@@ -54,7 +70,22 @@ export class ProtocolosFormComponent {
 
       },
       error: erro =>{
-        alert('Erro ao atualizar');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       }
     });
   }

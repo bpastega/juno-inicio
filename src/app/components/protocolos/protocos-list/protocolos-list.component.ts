@@ -60,7 +60,22 @@ export class ProtocosListComponent {
         this.lista=lista;
       },
       error: erro =>{
-        Swal.fire('Erro',erro.error,'error');
+          let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
        // alert("Errooo!!")//alterar aqui futuramente para exibir o erro do back
       }
     })
@@ -73,7 +88,7 @@ export class ProtocosListComponent {
         this.lista=lista;
       },
       error: (erro)=>{
-        Swal.fire('Erro', erro.error,'error');
+        Swal.fire('Digite o nome do paciente!', erro.error, 'error');
       },
     });
   }
@@ -84,7 +99,22 @@ export class ProtocosListComponent {
         this.lista=lista;
       },
       error: (erro)=>{
-        Swal.fire('Erro', erro.error,'error');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       },
     });
   }
@@ -95,7 +125,22 @@ export class ProtocosListComponent {
         this.lista=lista;
       },
       error: (erro)=>{
-        Swal.fire('Erro', erro.error,'error');
+        let mensagemErro = "Erro desconhecido";
+
+        if (erro.error) {
+            try {
+                // interpreto o erro como JSON se for string
+                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+    
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+            } catch (e) {
+                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+            }
+        }
+    
+        
+        Swal.fire(mensagemErro);
       },
     });
   }
@@ -116,7 +161,22 @@ export class ProtocosListComponent {
           },
           error: (erro) => {
             
-            Swal.fire('Erro!',erro.error,'error');
+            let mensagemErro = "Erro desconhecido";
+
+            if (erro.error) {
+                try {
+                    // interpreto o erro como JSON se for string
+                    const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
+        
+                    // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                    mensagemErro = Object.values(errorResponse).join(', ');
+                } catch (e) {
+                    mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
+                }
+            }
+        
+            
+            Swal.fire(mensagemErro);
           },
         });
       }
