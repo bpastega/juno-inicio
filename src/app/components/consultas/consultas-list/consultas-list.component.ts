@@ -55,11 +55,14 @@ export class ConsultasListComponent {
       this.findAll();
     }
 
+    else if(this.modoPacienteUnico == true){
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.findAllPaciente(id);
+    }
     else{
       const id = this.rotaAtivada.snapshot.params['id'];
       this.findAllPaciente(id);
     }
-    this.findAll();
   }
 
   findAll(){
