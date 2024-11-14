@@ -41,6 +41,13 @@ export class LoginService {
     return "";
   }
 
+  getUsuarioLogado(){
+    let user = this.jwtDecode() as Usuario;
+    console.log(user);
+    return user;
+    
+  }
+
   hasPermission(role: string) {
     let user = this.jwtDecode() as Usuario;
     if (user.role == role)

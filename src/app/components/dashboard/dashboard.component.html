@@ -5,10 +5,12 @@
                 <div class="card-body">
                   <h5 class="card-title">Dashboard</h5>
                   <div class="info">
-                    <p class="text-muted mb-0">Nome: </p>
+                    <p class="text-muted mb-0">Nome: {{usuario.email}}</p>
                     <p class="text-muted mb-0">Data de Acesso: {{ dataAtual | date: 'longDate' :'':'pt-BR'}}</p>
                     <p class="text-muted mb-0">Nível de Acesso:</p>
                   </div>
+
+                  <div id="chart"></div>
                   <p class="card-text"></p>
                   
                 </div>
