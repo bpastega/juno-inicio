@@ -27,7 +27,7 @@ export class LoginComponent {
       next: token =>{
         if(token){ //usuário e senha corretos
           this.loginService.addToken(token);
-          this.router.navigate(['admin/pacientes'])
+          this.router.navigate(['admin/dashboard'])
         }
         else{ //usuário ou senha incorretos
           alert("Usuário ou senha incorretos");

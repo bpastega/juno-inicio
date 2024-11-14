@@ -10,6 +10,7 @@ import { ExamesComponent } from './components/exames/exames.component';
 import { TestesListComponent } from './components/testes/testes-list/testes-list.component';
 import { ConsultasOdontologicasListComponent } from './components/consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component';
 import { ProtocoloInfoComponent } from './components/protocolos/protocolo-info/protocolo-info.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
 	/*Dentro da vídeoaula 'Curso - Spring Boot e Angular | 11 - Angular 17: Layout com Material Design PARTE 1 (front-end)' 
@@ -20,6 +21,7 @@ export const routes: Routes = [
 	{path:"login", component: LoginComponent}, //não terá menu embutido
 
 	{path: "admin", component:PrincipalComponent, children: [ //todos os paths incluídos aqui terão o menu fixo embutido
+		{path: "dashboard", component: DashboardComponent},
 		{path:"pacientes", component:PacientesListComponent},
 		{path:"pacientes/info/:id", component: PacienteInfoComponent},
 		{path:"pacientes/cadastrar", component:PacientesFormComponent}, 
