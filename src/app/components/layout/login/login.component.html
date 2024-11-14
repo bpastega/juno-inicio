@@ -20,14 +20,14 @@
                     <div class="elementosLogin">
                         <div class="campoEmail">
                             <mdb-form-control>
-                                <input mdbLabel type="email" placeholder="" id="email" class="form-control" [(ngModel)]="email"/> <!-- two way databind-->
+                                <input mdbLabel type="email" placeholder="" id="email" class="form-control" [(ngModel)]="login.email"/> <!-- two way databind-->
                                 <label mdbInput class="form-label" for="email">Email</label>
                             </mdb-form-control>
                         </div>
                         
                         <div class="campoSenha">
                             <mdb-form-control>
-                                <input mdbLabel type="password" id="senha" class="form-control" [(ngModel)]="senha"/>
+                                <input mdbLabel type="password" id="senha" class="form-control" [(ngModel)]="login.password"/>
                                 <label mdbInput class="form-label" for="senha">Senha</label>
                             </mdb-form-control>
                         </div>
