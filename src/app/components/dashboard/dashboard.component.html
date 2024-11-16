@@ -1,21 +1,56 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Dashboard</h5>
-                  <div class="info">
+ 
+   <!--
+  <div class="info">
                     <p class="text-muted mb-0">Nome: {{usuario.email}}</p>
                     <p class="text-muted mb-0">Data de Acesso: {{ dataAtual | date: 'longDate' :'':'pt-BR'}}</p>
                     <p class="text-muted mb-0">Nível de Acesso:</p>
                   </div>
-
-                  <div id="chart"></div>
-                  <p class="card-text"></p>
-                  
-                </div>
-              </div>
-
+   -->
+  <div class="row mt-4">
+    <!-- Gráfico 1 -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Gráfico 1</h5> -->
+          <div id="chart1"></div>
         </div>
+      </div>
     </div>
+    <!-- Gráfico 2 -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Gráfico 2</h5> -->
+          <div id="chart2"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Gráfico 3 -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Gráfico 3</h5> -->
+          <div id="chart3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Linha com a caixa maior -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Dados de Acesso</h5>
+          <div class="info">
+            <p class="text-muted mb-0">Nome: {{usuario.email}}</p>
+            <p class="text-muted mb-0">Data de Acesso: {{ dataAtual | date: 'longDate' :'':'pt-BR'}}</p>
+            <p class="text-muted mb-0">Nível de Acesso:</p>
+          </div>
+          <!-- <div id="chartResumo"></div> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
