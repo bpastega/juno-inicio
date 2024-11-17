@@ -6,6 +6,7 @@
       <img src="assets/images/JunoLogo.png" height="35" alt="Juno Logo" loading="lazy" class="me-2" />
       <span class="text-primary fw-bold" id="JunoTextLogo">Juno</span>
     </a>
+    
 
     <!-- Botão de alternância para mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -17,22 +18,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link text-primary" href="admin/pacientes">Pacientes</a>
-          </li>
+          @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
+            <li class="nav-item">
+              <a class="nav-link text-primary" href="admin/pacientes">Pacientes</a>
+            </li>
+          }
 
+          @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
           <li class="nav-item">
             <a class="nav-link text-primary" href="admin/protocolos">Protocolos</a>
           </li>
+          }
 
+          @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
           <li class="nav-item">
             <a class="nav-link text-primary" href="admin/consultas">Consultas</a>
           </li>
+          }
 
+          @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
           <li class="nav-item">
             <a class="nav-link text-primary" href="admin/exames">Exames</a>
           </li>
-
+          }
 
           <li class="nav-item" id="nav-sair">
             <a class="nav-link text-primary" href="login">Sair</a>

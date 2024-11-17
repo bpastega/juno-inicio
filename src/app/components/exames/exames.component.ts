@@ -13,5 +13,6 @@ import { MdbModalModule, MdbModalService } from 'mdb-angular-ui-kit/modal';
   styleUrl: './exames.component.scss'
 })
 export class ExamesComponent {
+  
 
 }

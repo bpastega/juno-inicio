@@ -44,9 +44,9 @@
         <div class="card-body">
           <h5 class="card-title">Dados de Acesso</h5>
           <div class="info">
-            <p class="text-muted mb-0">Nome: {{usuario.email}}</p>
+            <p class="text-muted mb-0">Email: {{usuario.email}}</p>
             <p class="text-muted mb-0">Data de Acesso: {{ dataAtual | date: 'longDate' :'':'pt-BR'}}</p>
-            <p class="text-muted mb-0">Nível de Acesso:</p>
+            <p class="text-muted mb-0">Nível de Acesso: {{usuario.role}}</p>
           </div>
           <!-- <div id="chartResumo"></div> -->
         </div>
