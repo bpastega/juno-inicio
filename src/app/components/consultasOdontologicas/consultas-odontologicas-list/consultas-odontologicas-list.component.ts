@@ -36,7 +36,7 @@ export class ConsultasOdontologicasListComponent {
   modalRef!: MdbModalRef<any>;
 
   @Input() modoLeitura!: boolean;
-  @Input() modoPacienteUnico!: boolean;
+  @Input() modoPacienteUnico: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
     if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
