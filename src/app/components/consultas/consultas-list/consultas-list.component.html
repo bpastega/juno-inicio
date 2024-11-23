@@ -53,7 +53,7 @@
                             <td> <!-- Célula D: Descrição -->
                                 <p class="text-muted mb-0">{{consulta.descricao}}</p>
                             </td>
-                            @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
+                            
                             @if(!modoLeitura){
                               <td><!-- Célula E: Ações-->
                                 <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="editarConsulta(consulta)" mdbRipple>Editar</button>
@@ -64,7 +64,7 @@
                                 <button type="button" class="btn btn-secondary" (click)="deletarById(consulta.id)" mdbRipple>Deletar</button>
                               </td>
                             }
-                          }
+                          
 
 
                           </tr> <!-- FIM DO PROTOCOLO -->

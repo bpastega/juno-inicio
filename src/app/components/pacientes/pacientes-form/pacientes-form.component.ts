@@ -40,6 +40,8 @@ export class PacientesFormComponent {
       //this.modoNovo = false; //
       this.tituloComponente = "Editar paciente";   //se o id for maior que 0 entao o paciente JÁ existe no banco, entao editamos.
       this.findById(id);
+      //talvez nessa parte atributir o paciente a consultas?
+      //this.paciente.consultas=this.paciente.consultas;
   
     }
   }
@@ -50,9 +52,11 @@ export class PacientesFormComponent {
     this.pacienteService.findById(id).subscribe({
       next: pacienteAUX => {
         this.paciente = pacienteAUX;
+        console.log(pacienteAUX);
         if(this.paciente.endereco==null){
           this.paciente.endereco=new Endereco();
         }
+
 
       },
       error: erro => {
