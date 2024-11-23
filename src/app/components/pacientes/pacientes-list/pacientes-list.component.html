@@ -7,6 +7,7 @@
                   <h5 class="card-title">Listagem de Pacientes</h5>
 
                   <!-- Trecho correspondente aos botões e barra de pesquisa no topo da tabela-->
+                  @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
                   <div class="input-group">
                     <input (keyup.enter)="findByNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do nome..."
                       aria-label="Recipient's username with two button addons" />
@@ -21,7 +22,7 @@
                     <!-- por event binding no click executa o método cadastrar que abre o modal com o formulário -->
                     
                   </div>
-                  
+                }
                     <table class="table align-middle mb-0 bg-white" >
                       
                         <thead class="bg-light">

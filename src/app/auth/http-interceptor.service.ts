@@ -2,36 +2,53 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
+  const router = inject(Router);
 
-  let router = inject(Router);
-
-  let token = localStorage.getItem('token');
-  if (token && !router.url.includes('/login')) {
+  // token existe no localStorage?
+  const token = localStorage.getItem('token');
+  if (token) {
+    //cabeçalho de autorização com o token
     request = request.clone({
-      setHeaders: { Authorization: 'Bearer ' + token },
+      setHeaders: { Authorization: `Bearer ${token}` },
     });
   }
 
   return next(request).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
-	  
-	  
-        if (err.status === 401) {
-          alert('401 - tratar aqui');
-          router.navigate(['/login']);
-        } else if (err.status === 403) {
-          alert('403 - tratar aqui');
-		  router.navigate(['/login']);
-        } else {
-          console.error('HTTP error:', err);
+        switch (err.status) {
+          case 401:
+            Swal.fire({
+              icon: 'error',
+              title: 'Erro 401',
+              text: 'Não autenticado. Faça login novamente.',
+            }).then(() => {
+              router.navigate(['/login']);
+            });
+            break;
+          case 403:
+            Swal.fire({
+              icon: 'error',
+              title: 'Erro 403',
+              text: 'Você não tem permissão para acessar este recurso.',
+            });
+            break;
+          default:
+            Swal.fire({
+              icon: 'error',
+              title: `Erro ${err.status}`,
+              text: err.message || 'Ocorreu um erro desconhecido.',
+            });
         }
-		
-		
       } else {
-        console.error('An error occurred:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro inesperado',
+          text: 'Algo deu errado. Por favor, tente novamente.',
+        });
       }
 
       return throwError(() => err);

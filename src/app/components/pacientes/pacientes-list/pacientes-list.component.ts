@@ -19,6 +19,7 @@ import { StatusPacienteService } from '../../../services/utility/status-paciente
 import { Endereco } from '../../../models/endereco';
 import { ProtocoloService } from '../../../services/protocolo.service';
 import { Protocolo } from '../../../models/protocolo';
+import { LoginService } from '../../../auth/login.service';
 
 registerLocaleData(localePT);
 
@@ -30,6 +31,9 @@ registerLocaleData(localePT);
   styleUrl: './pacientes-list.component.scss'
 })
 export class PacientesListComponent {
+
+  loginService = inject(LoginService); //para tratamento de permissoes
+
 
   modalService = inject(MdbModalService); // responsável por abrir as modais
   @ViewChild('modalPacientesForm') modalPacientesForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
