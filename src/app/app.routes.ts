@@ -28,6 +28,7 @@ export const routes: Routes = [
 		{path:"pacientes/info/:id", component: PacienteInfoComponent},
 		{path:"pacientes/cadastrar", component:PacientesFormComponent}, 
 		{path:"pacientes/editar/:id", component:PacientesFormComponent},
+		
 
 		{path:"protocolos", component: ProtocosListComponent}, //para visualizar os protocolos
 		{path:"protocolos/info/:id", component: ProtocoloInfoComponent},

@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-consultas-list',
@@ -20,6 +21,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './consultas-list.component.scss'
 })
 export class ConsultasListComponent {
+
+  loginService = inject(LoginService);
 
   lista: Consulta[] = [];
 

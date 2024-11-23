@@ -117,26 +117,28 @@ export class PacientesFormComponent {
         
         this.retorno.emit(mensagem);
 
-      },
-      error: erro =>{
+      },error: erro => {
         let mensagemErro = "Erro desconhecido";
-
+    
+        if (erro.status === 403) {
+            mensagemErro = "Você não tem permissão para realizar essa operação.";
+        }
+    
         if (erro.error) {
             try {
-                // interpreto o erro como JSON se for string
+                // interpreta o erro como JSON se for uma string
                 const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
     
-                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                // concatena todas as mensagens de erro
                 mensagemErro = Object.values(errorResponse).join(', ');
             } catch (e) {
                 mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
             }
         }
     
-        
+        console.error("Erro no serviço:", erro);  // Mostra mais detalhes do erro
         Swal.fire(mensagemErro);
-      
-      }
+    }
     });
   }
 
