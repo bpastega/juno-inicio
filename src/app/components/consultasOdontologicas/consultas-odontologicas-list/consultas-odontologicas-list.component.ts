@@ -47,16 +47,17 @@ export class ConsultasOdontologicasListComponent {
     }
   }
 
-  /*constructor(){
-    if(this.modoPacienteUnico == true){
-      let id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(id);
+
+  constructor(){
+    if(this.modoPacienteUnico == false){
+      this.listAll();
     }
 
     else{
-      this.listAll();
+      const id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(id);
     }
-  }*/
+  }
 
   listAll(){ 
 
