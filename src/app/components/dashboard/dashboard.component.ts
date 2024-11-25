@@ -6,6 +6,7 @@ import { LoginService } from '../../auth/login.service';
 import { TesteRapidoService } from '../../services/teste-rapido.service';
 import { first, firstValueFrom, forkJoin, lastValueFrom } from 'rxjs';
 import { PacienteService } from '../../services/paciente.service';
+import { ProtocoloService } from '../../services/protocolo.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,9 +27,13 @@ export class DashboardComponent implements AfterViewInit {
   pacientesAtivos!: number;
   pacientesInativos!: number;
 
+  protocolosAtivos!: number;
+  protocolosInativos!: number;
+
   loginService = inject(LoginService);
   testeRapidoService = inject(TesteRapidoService);
   pacienteService = inject(PacienteService);
+  protocoloService = inject(ProtocoloService);
 
   constructor() {
     this.usuario = this.loginService.getUsuarioLogado();
@@ -40,10 +45,11 @@ export class DashboardComponent implements AfterViewInit {
     this.usuario = this.loginService.getUsuarioLogado();
     await this.countAllTestesRapidos();
     await this.countAllPacientes();
+    await this.countAllProtocolos();
   
     // Render the charts after the data has been loaded
-    this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Inativo', 'Ativo']);
-    this.renderChart('chart2', 'donut', 'Status de Protocolos', [25, 50, 25], ['Inativo', 'Ativo', 'Pendente']);
+    this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Ativo', 'Inativo']);
+    this.renderChart('chart2', 'donut', 'Status de Protocolos', [this.protocolosAtivos, this.protocolosInativos], ['Ativo', 'Inativo']);
     this.renderChart('chart3', 'donut', 'Tipos de Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
     // this.renderChart('chartResumo', 'donut', 'Distribuição', [50, 30, 20], ['Ativo', 'Inativo', 'Pendente']);
   }
@@ -104,6 +110,17 @@ export class DashboardComponent implements AfterViewInit {
         console.error('Error occurred while fetching data:', err);
         this.pacientesAtivos = 0;
         this.pacientesInativos = 0;
+      }
+    }
+
+    async countAllProtocolos(){
+      try{
+        this.protocolosAtivos = await firstValueFrom(this.protocoloService.countAllProtocolosAtivos());
+        this.protocolosInativos = await firstValueFrom(this.protocoloService.countAllProtocolosInativos());
+      } catch (err){
+        console.error('Error occurred while fetching data:', err);
+        this.protocolosAtivos = 0;
+        this.protocolosInativos = 0;
       }
     }
     
