@@ -26,13 +26,15 @@ import { TestesListComponent } from "../../testes/testes-list/testes-list.compon
 import { ConsultasOdontologicasListComponent } from "../../consultasOdontologicas/consultas-odontologicas-list/consultas-odontologicas-list.component";
 import { ConsultasOdontologicasFormComponent } from "../../consultasOdontologicas/consultas-odontologicas-form/consultas-odontologicas-form.component";
 import { ConsultaOdontologica } from "../../../models/consulta-odontologica";
+import { TestesFormComponent } from "../../testes/testes-form/testes-form.component";
+import { TesteRapido } from "../../../models/teste-rapido";
 
 
 
 @Component({
   selector: 'app-paciente-info',
   standalone: true,
-  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent, ConsultasListComponent, TestesListComponent, MdbTabsModule, ConsultasOdontologicasListComponent, ConsultasOdontologicasFormComponent],
+  imports: [DatePipe, NgClass, ProtocolosFormComponent, MdbModalModule, FontAwesomeModule, PacientesFormComponent, ProtocosListComponent, ExamesComponent, ConsultasListComponent, TestesListComponent, MdbTabsModule, ConsultasOdontologicasListComponent, ConsultasOdontologicasFormComponent, TestesFormComponent],
   templateUrl: './paciente-info.component.html',
   styleUrl: './paciente-info.component.scss'
 })
@@ -84,6 +86,7 @@ export class PacienteInfoComponent {
 
   pacienteEdit!: Paciente; //esse objeto será utilizado para transportar o paciente clicado no botão editar
   consultaOdontologicaEdit!: ConsultaOdontologica;
+  testeRapidoEdit!: TesteRapido;
 
   
   constructor(){

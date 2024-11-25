@@ -4,26 +4,49 @@
       @if (protocoloEncontrado){
       <div class="card-body">
         <div class="header">
-          <h2 class="card-title">{{protocoloEncontrado.paciente.nome}}</h2>
+          <h2 class="card-title">{{ protocoloEncontrado.paciente.nome }}</h2>
 
           <div class="actions">
             <!-- Condições para botões de ação baseadas no status do protocolo -->
             @if (protocoloEncontrado.statusProtocolo == true) {
-            <button type="button" class="btn btn-secondary" (click)="encerrar(protocoloEncontrado)" mdbRipple>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="encerrar(protocoloEncontrado)"
+              mdbRipple
+            >
               Encerrar Protocolo
             </button>
 
-            <button (click)="novaConsulta(protocoloEncontrado.paciente.id)" type="button" class="btn btn-secondary"
-              mdbRipple>
+            <button
+              (click)="novaConsulta(protocoloEncontrado.paciente.id)"
+              type="button"
+              class="btn btn-secondary"
+              mdbRipple
+            >
               Nova Consulta
             </button>
 
-            <button (click)="novoTesteRapido(protocoloEncontrado.id)" type="button" class="btn btn-secondary" mdbRipple>
+            <button
+              (click)="novoTesteRapido(protocoloEncontrado.id)"
+              type="button"
+              class="btn btn-secondary"
+              mdbRipple
+            >
               Novo Teste Rápido
             </button>
 
-            <button (click)="novaConsultaOdontologica(protocoloEncontrado.id)" type="button" class="btn btn-secondary"
+            <!-- <button (click)="novaConsultaOdontologica(protocoloEncontrado.id)" type="button" class="btn btn-secondary"
               mdbRipple>
+              Nova Consulta Odontológica
+            </button> -->
+            <button
+              (click)="novaConsultaOdontologica(protocoloEncontrado.id)"
+              type="button"
+              class="btn btn-secondary"
+              mdbRipple
+              disabled
+            >
               Nova Consulta Odontológica
             </button>
             }
@@ -31,46 +54,74 @@
               <fa-icon [icon]="faEdit"></fa-icon>
             </button>
           </div>
-
         </div>
         <!-- Informações do Protocolo -->
         <div class="protocolo-info">
-          <p><strong>Nome do Paciente:</strong> {{ protocoloEncontrado.paciente.nome }}</p>
-          <p><strong>Data de Abertura:</strong> {{ protocoloEncontrado.dataAbertura | date : "longDate" : "" : "pt-BR"
-            }}</p>
-          <p><strong>Data de Encerramento:</strong> {{
-            statusInfoProtocoloService.listDataEncerramento(protocoloEncontrado) }}</p>
-          <p><strong>Data da Última Menstruação:</strong> {{ protocoloEncontrado.dum | date : "longDate" : "" : "pt-BR"
-            }}</p>
-          <p><strong>Data Provável de Parto:</strong> {{ protocoloEncontrado.dpp | date : "longDate" : "" : "pt-BR" }}
+          <p>
+            <strong>Nome do Paciente:</strong>
+            {{ protocoloEncontrado.paciente.nome }}
+          </p>
+          <p>
+            <strong>Data de Abertura:</strong>
+            {{
+              protocoloEncontrado.dataAbertura
+                | date : "longDate" : "" : "pt-BR"
+            }}
+          </p>
+          <p>
+            <strong>Data de Encerramento:</strong>
+            {{
+              statusInfoProtocoloService.listDataEncerramento(
+                protocoloEncontrado
+              )
+            }}
+          </p>
+          <p>
+            <strong>Data da Última Menstruação:</strong>
+            {{ protocoloEncontrado.dum | date : "longDate" : "" : "pt-BR" }}
+          </p>
+          <p>
+            <strong>Data Provável de Parto:</strong>
+            {{ protocoloEncontrado.dpp | date : "longDate" : "" : "pt-BR" }}
           </p>
 
           <div id="status-info">
             <p><strong>Status do Protocolo:</strong></p>
-            <span [ngClass]="statusProtocoloService.renderStatusProtocolo(protocoloEncontrado)">
-              {{ statusProtocoloService.listStatusProtocolo(protocoloEncontrado) }}
+            <span
+              [ngClass]="
+                statusProtocoloService.renderStatusProtocolo(
+                  protocoloEncontrado
+                )
+              "
+            >
+              {{
+                statusProtocoloService.listStatusProtocolo(protocoloEncontrado)
+              }}
             </span>
           </div>
         </div>
-
       </div>
       }
     </div>
-
   </div>
-
 </div>
 <!-- Modal para formulário de edição de Consultas-->
 <ng-template #modalConsultasForm>
   <div class="modal-lg">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Dados de Consultas</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
     </div>
     <div class="modal-body">
-
-      <app-consultas-form [consulta]="consultaEdit" (retorno)="retornoForm($event)"></app-consultas-form>
-
+      <app-consultas-form
+        [consulta]="consultaEdit"
+        (retorno)="retornoForm($event)"
+      ></app-consultas-form>
     </div>
   </div>
 </ng-template>
@@ -79,13 +130,21 @@
 <ng-template #modalTestesForm>
   <div class="modal-lg">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Dados de Testes Rápidos</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+      <h5 class="modal-title" id="exampleModalLabel">
+        Dados de Testes Rápidos
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
     </div>
     <div class="modal-body">
-
-      <app-testes-form [teste]="testeEdit" (retorno)="retornoForm($event)"></app-testes-form>
-
+      <app-testes-form
+        [teste]="testeEdit"
+        (retorno)="retornoForm($event)"
+      ></app-testes-form>
     </div>
   </div>
 </ng-template>
@@ -94,14 +153,21 @@
 <ng-template #modalConsultasOdontologicasForm>
   <div class="modal-lg">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Dados de Consultas Odontológicas</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+      <h5 class="modal-title" id="exampleModalLabel">
+        Dados de Consultas Odontológicas
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
     </div>
     <div class="modal-body">
-
-      <app-consultas-odontologicas-form [consultaOdontologica]="consultaOdontologicaEdit"
-        (retorno)="retornoForm($event)"></app-consultas-odontologicas-form>
-
+      <app-consultas-odontologicas-form
+        [consultaOdontologica]="consultaOdontologicaEdit"
+        (retorno)="retornoForm($event)"
+      ></app-consultas-odontologicas-form>
     </div>
   </div>
 </ng-template>

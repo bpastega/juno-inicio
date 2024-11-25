@@ -9,11 +9,12 @@ import Swal from 'sweetalert2';
 import { Consulta } from '../../../models/consulta';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ConsultasOdontologicasFormComponent } from "../consultas-odontologicas-form/consultas-odontologicas-form.component";
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-consultas-odontologicas-list',
   standalone: true,
-  imports: [ConsultasOdontologicasFormComponent],
+  imports: [NgClass,ConsultasOdontologicasFormComponent],
   templateUrl: './consultas-odontologicas-list.component.html',
   styleUrl: './consultas-odontologicas-list.component.scss'
 })
@@ -57,6 +58,19 @@ export class ConsultasOdontologicasListComponent {
       this.listAll();
     }
   }*/
+
+    constructor(){
+      if(this.modoPacienteUnico == false){
+        this.listAll();
+      }
+  
+      else{
+        const id = this.rotaAtivada.snapshot.params['id'];
+        this.listAllPaciente(id);
+      }
+      
+    }
+  
 
   listAll(){ 
 

@@ -206,11 +206,14 @@
       ></button>
     </div>
     <div class="modal-body">
-      <app-consultas-odontologicas-form
-      [consultaOdontologica]="consultaOdontologicaEdit"
+      <!-- <app-testes-form> 
+      [testeRapido]="testeRapidoEdit" (retorno)="retornoForm($event)"
+      </app-testes-form> -->
+      <app-testes-form
+      [teste]="testeRapidoEdit"
       (retorno)="retornoForm($event)">
 
-      </app-consultas-odontologicas-form>
+      </app-testes-form>
     </div>
   </div>
 </ng-template>
