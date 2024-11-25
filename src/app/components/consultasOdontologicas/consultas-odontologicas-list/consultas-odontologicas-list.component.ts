@@ -60,19 +60,6 @@ export class ConsultasOdontologicasListComponent {
     }
   }
 
-    constructor(){
-      if(this.modoPacienteUnico == false){
-        this.listAll();
-      }
-  
-      else{
-        const id = this.rotaAtivada.snapshot.params['id'];
-        this.listAllPaciente(id);
-      }
-      
-    }
-  
-
   listAll(){ 
 
     this.consultaOdontologicaService.findAll().subscribe({ /*Dentro do back, o findAll retorna APENAS candidatos ativos. Por isso, não se faz necessário realizar essa filtragem no front.*/ 

@@ -4,7 +4,8 @@ import { Usuario } from '../../auth/usuario';
 import ApexCharts from 'apexcharts';
 import { LoginService } from '../../auth/login.service';
 import { TesteRapidoService } from '../../services/teste-rapido.service';
-import { firstValueFrom, forkJoin, lastValueFrom } from 'rxjs';
+import { first, firstValueFrom, forkJoin, lastValueFrom } from 'rxjs';
+import { PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +23,12 @@ export class DashboardComponent implements AfterViewInit {
   testeRapidoCompleto!: number;
   testeRapidoGenerico!: number;
 
+  pacientesAtivos!: number;
+  pacientesInativos!: number;
+
   loginService = inject(LoginService);
   testeRapidoService = inject(TesteRapidoService);
+  pacienteService = inject(PacienteService);
 
   constructor() {
     this.usuario = this.loginService.getUsuarioLogado();
@@ -34,11 +39,12 @@ export class DashboardComponent implements AfterViewInit {
     // Wait for the data to be loaded before proceeding
     this.usuario = this.loginService.getUsuarioLogado();
     await this.countAllTestesRapidos();
+    await this.countAllPacientes();
   
     // Render the charts after the data has been loaded
-    this.renderChart('chart1', 'donut', 'Consultas Odontológicas', [50, 20, 30], ['Inativo', 'Ativo', 'Pendente']);
-    this.renderChart('chart2', 'donut', 'Pré-natal', [25, 50, 25], ['Inativo', 'Ativo', 'Pendente']);
-    this.renderChart('chart3', 'donut', 'Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
+    this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Inativo', 'Ativo']);
+    this.renderChart('chart2', 'donut', 'Status de Protocolos', [25, 50, 25], ['Inativo', 'Ativo', 'Pendente']);
+    this.renderChart('chart3', 'donut', 'Tipos de Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
     // this.renderChart('chartResumo', 'donut', 'Distribuição', [50, 30, 20], ['Ativo', 'Inativo', 'Pendente']);
   }
   
@@ -86,6 +92,18 @@ export class DashboardComponent implements AfterViewInit {
         this.testeRapidoUrina = 0;
         this.testeRapidoCompleto = 0;
         this.testeRapidoGenerico = 0;
+      }
+    }
+
+    async countAllPacientes() {
+      try {
+        this.pacientesAtivos = await firstValueFrom(this.pacienteService.countAllPacientesAtivos());
+        this.pacientesInativos = await firstValueFrom(this.pacienteService.countAllPacientesInativos())
+        console.log('Data loaded successfully');
+      } catch (err) {
+        console.error('Error occurred while fetching data:', err);
+        this.pacientesAtivos = 0;
+        this.pacientesInativos = 0;
       }
     }
     

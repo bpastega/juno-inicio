@@ -44,5 +44,14 @@ export class PacienteService {
   findByCidade(cidade: string): Observable<Paciente[]> {
       return this.http.get<Paciente[]>(this.API + "/findByCidade/" + cidade);
     }
+
+  /*Dashboard*/
+  countAllPacientesAtivos(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllPacientesAtivos');
+  }
+
+  countAllPacientesInativos(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllPacientesInativos');
+  }
   
 }
