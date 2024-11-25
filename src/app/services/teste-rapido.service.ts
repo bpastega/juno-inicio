@@ -37,4 +37,21 @@ export class TesteRapidoService {
   findAllByPacienteId(id: number): Observable<TesteRapido[]>{
     return this.http.get<TesteRapido[]>(this.API+"/findAllByPacienteId/"+id);
   }
+
+  /*Dashboard*/
+  countAllByExameSangue(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllByExameSangue');
+  }
+
+  countAllByExameUrina(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllByExameUrina');
+  }
+
+  countAllByExameCompleto(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllByExameCompleto');
+  }
+
+  countAllByExameGenerico(): Observable<number>{
+    return this.http.get<number>(this.API+'/countAllByExameGenerico');
+  }
 }
