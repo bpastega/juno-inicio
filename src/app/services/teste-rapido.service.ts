@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TesteRapido } from '../models/teste-rapido';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class TesteRapidoService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8080/api/testeRapido";
+  // API = "http://localhost:8080/api/testeRapido";
+  API = environment.API="/api/testeRapido";
+
 
   constructor() { }
 

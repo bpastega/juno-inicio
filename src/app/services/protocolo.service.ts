@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Protocolo } from '../models/protocolo';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class ProtocoloService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8080/api/protocolo";
+  // API = "http://localhost:8080/api/protocolo";
+  API = environment.API="/api/protocolo";
+
 
   constructor() { }
 

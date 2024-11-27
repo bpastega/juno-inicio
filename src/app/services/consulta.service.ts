@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Consulta } from '../models/consulta';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { Consulta } from '../models/consulta';
 export class ConsultaService {
   http = inject(HttpClient);
 
-  API = "http://localhost:8080/api/consulta";
+  //API = "http://localhost:8080/api/consulta";
+  API = environment.API="/api/consulta";
 
   constructor() { }
 
