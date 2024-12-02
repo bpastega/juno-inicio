@@ -41,13 +41,15 @@ export class ConsultasListComponent {
 
   modalRef!: MdbModalRef<any>;
 
+  id: number = 0;
+
   @Input() modoLeitura: boolean = true;
   @Input() modoPacienteUnico: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
     if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
-      const id = this.rotaAtivada.snapshot.params['id'];
-      this.findAllPaciente(id);
+      this.id = this.rotaAtivada.snapshot.params['id'];
+      this.findAllPaciente(this.id);
     } else {
       this.findAll();
     }
@@ -157,6 +159,8 @@ export class ConsultasListComponent {
       title: mensagem,
       icon: 'success',
     });
+
+    this.findAllPaciente(this.id);
 
   }
 

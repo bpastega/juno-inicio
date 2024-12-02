@@ -253,6 +253,8 @@ export class PacienteInfoComponent {
         title: mensagem,
         icon: 'success',
       });
+
+      
   
     }
 

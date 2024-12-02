@@ -194,7 +194,7 @@ export class ProtocosListComponent {
       icon: 'success',
     });
 
-    this.findAll(); //atualiza e recarrega a lista
+     //atualiza e recarrega a lista
   }
 
 
