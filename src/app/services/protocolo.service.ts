@@ -12,7 +12,7 @@ export class ProtocoloService {
   http = inject(HttpClient);
 
   // API = "http://localhost:8080/api/protocolo";
-  API = environment.API="/api/protocolo";
+  API = environment.API+"/api/protocolo";
 
 
   constructor() { }

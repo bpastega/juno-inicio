@@ -12,7 +12,7 @@ export class TesteRapidoService {
   http = inject(HttpClient);
 
   // API = "http://localhost:8080/api/testeRapido";
-  API = environment.API="/api/testeRapido";
+  API = environment.API+"/api/testeRapido";
 
 
   constructor() { }
