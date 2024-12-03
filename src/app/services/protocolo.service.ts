@@ -54,6 +54,10 @@ export class ProtocoloService {
     return this.http.get<Protocolo>(this.API+"/findAtivoByIdPaciente/"+idPaciente);
   }
 
+  findAllByPacienteId(idPaciente: number): Observable<Protocolo[]>{
+    return this.http.get<Protocolo[]>(this.API + "/findAllByPacienteId/"+idPaciente);
+  }
+
   /*Dashboard*/
   countAllProtocolosAtivos(): Observable<number>{
     return this.http.get<number>(this.API+'/countAllProtocolosAtivos');

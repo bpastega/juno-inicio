@@ -35,6 +35,8 @@ export class ProtocosListComponent {
 
   router = inject(Router);
 
+  id: number = 0;
+
   @Input() modoPacienteUnico: boolean = false;
   @Input() paciente!: Paciente; //seleciona o paciente, caso modoPacienteUnico seja true
 
@@ -45,7 +47,7 @@ export class ProtocosListComponent {
 
     else{
       this.lista = this.paciente.protocolos; //TESTAR ESSE TRECHO!!!
-
+      this.id = this.paciente.id;
     }
     
   }
@@ -194,6 +196,7 @@ export class ProtocosListComponent {
       icon: 'success',
     });
 
+    this.protocoloService.findAllByPacienteId(this.id);
      //atualiza e recarrega a lista
   }
 
