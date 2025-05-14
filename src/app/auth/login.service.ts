@@ -1,4 +1,90 @@
-import { HttpClient } from '@angular/common/http';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { Login } from './login';
+import { Usuario } from './usuario';
+import { environment } from '../../environments/environment';
+import { KeycloakToken } from '../models/KeycloakToken';
+
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoginService {
+  http = inject(HttpClient);
+  usuario!: Usuario;
+  API = environment.API + '/api';
+
+
+  constructor() {}
+
+  
+
+  logar(login: Login): Observable<string> {
+    return this.http.post<string>(this.API + '/login', login, {
+      responseType: 'text' as 'json',
+    });
+  }
+  
+
+  addToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  removerToken() {
+    localStorage.removeItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  jwtDecode() {
+    let token = this.getToken();
+    if (token) {
+      return jwtDecode<KeycloakToken>(token);
+    }
+    return null;
+  }
+
+  // hasPermission(role: string) {
+  //   const user = this.getUsuarioLogado();
+  //   if (user.role == role) return true;
+  //   else return false;
+  // }
+
+  hasPermission(role: string): boolean {
+  const user = this.jwtDecode();
+  if (user && user.realm_access?.roles) {
+    return user.realm_access.roles.includes(role);
+  }
+  return false;
+}
+
+
+  
+  
+
+  getUsuarioLogado(): Usuario {
+    if (this.usuario) {
+      return this.usuario;
+    }
+  
+    const stored = localStorage.getItem('usuario');
+    if (stored) {
+      this.usuario = JSON.parse(stored);
+      return this.usuario;
+    }
+  
+    throw new Error('Usuário não encontrado. Faça login novamente.');
+  }
+  
+  
+}
+
+/*import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { jwtDecode, JwtPayload } from "jwt-decode";
@@ -12,7 +98,6 @@ import { environment } from '../../environments/environment';
 export class LoginService {
 
   http = inject(HttpClient);
-  // API = "http://localhost:8080/api/login";
   API = environment.API="/api/login";
 
 
@@ -62,3 +147,4 @@ export class LoginService {
 
 
 }
+*/

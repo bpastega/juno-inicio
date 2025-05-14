@@ -1,3 +1,3 @@
 export const environment = {
-    API: "http://18.206.58.25:8080"
+    API: "https://back.local.juno.com.br:8443/juno"
 };

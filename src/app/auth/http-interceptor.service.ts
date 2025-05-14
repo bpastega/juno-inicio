@@ -7,10 +7,10 @@ import Swal from 'sweetalert2';
 export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   const router = inject(Router);
 
-  // token existe no localStorage?
+
   const token = localStorage.getItem('token');
   if (token) {
-    //cabeçalho de autorização com o token
+
     request = request.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
     });
