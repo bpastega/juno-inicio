@@ -7,6 +7,7 @@ import { TesteRapidoService } from '../../services/teste-rapido.service';
 import { first, firstValueFrom, forkJoin, lastValueFrom } from 'rxjs';
 import { PacienteService } from '../../services/paciente.service';
 import { ProtocoloService } from '../../services/protocolo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,30 +35,60 @@ export class DashboardComponent implements AfterViewInit {
   testeRapidoService = inject(TesteRapidoService);
   pacienteService = inject(PacienteService);
   protocoloService = inject(ProtocoloService);
+  private router = inject(Router);
 
   constructor() {
     this.usuario = this.loginService.getUsuarioLogado();
     
   }
+  
 
   async ngAfterViewInit(): Promise<void> {
-    // Wait for the data to be loaded before proceeding
+    const token = this.loginService.getToken();
+    if (token) {
+      const decoded = this.loginService.jwtDecode() ?? { exp: 0 }; // Trate null/undefined
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (decoded.exp && decoded.exp < currentTime) {
+        console.error('Token expirado. Faça login novamente.');
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+        return;
+      }
+      console.log('Token válido:', decoded);
+    } else {
+      console.error('Nenhum token encontrado. Faça login.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.usuario = this.loginService.getUsuarioLogado();
+    await this.countAllTestesRapidos();
+    await this.countAllPacientes();
+    await this.countAllProtocolos();
+
+    this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Ativo', 'Inativo']);
+    this.renderChart('chart2', 'donut', 'Status de Protocolos', [this.protocolosAtivos, this.protocolosInativos], ['Ativo', 'Inativo']);
+    this.renderChart('chart3', 'donut', 'Tipos de Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
+  }
+
+  // async ngAfterViewInit(): Promise<void> {
+  //   // Wait for the data to be loaded before proceeding
+  //   this.usuario = this.loginService.getUsuarioLogado();
 
 
 
 
     
-    await this.countAllTestesRapidos();
-    await this.countAllPacientes();
-    await this.countAllProtocolos();
+  //   await this.countAllTestesRapidos();
+  //   await this.countAllPacientes();
+  //   await this.countAllProtocolos();
   
-    // Render the charts after the data has been loaded
-    this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Ativo', 'Inativo']);
-    this.renderChart('chart2', 'donut', 'Status de Protocolos', [this.protocolosAtivos, this.protocolosInativos], ['Ativo', 'Inativo']);
-    this.renderChart('chart3', 'donut', 'Tipos de Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
-    // this.renderChart('chartResumo', 'donut', 'Distribuição', [50, 30, 20], ['Ativo', 'Inativo', 'Pendente']);
-  }
+  //   // Render the charts after the data has been loaded
+  //   this.renderChart('chart1', 'donut', 'Status de Pacientes', [this.pacientesAtivos, this.pacientesInativos], ['Ativo', 'Inativo']);
+  //   this.renderChart('chart2', 'donut', 'Status de Protocolos', [this.protocolosAtivos, this.protocolosInativos], ['Ativo', 'Inativo']);
+  //   this.renderChart('chart3', 'donut', 'Tipos de Testes Rápidos', [this.testeRapidoSangue, this.testeRapidoUrina, this.testeRapidoCompleto, this.testeRapidoGenerico], ['Hemograma', 'Urina', 'Completo', 'Genérico']);
+  //   // this.renderChart('chartResumo', 'donut', 'Distribuição', [50, 30, 20], ['Ativo', 'Inativo', 'Pendente']);
+  // }
   
 
   /**
