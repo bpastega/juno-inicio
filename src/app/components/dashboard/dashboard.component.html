@@ -7,6 +7,7 @@
                     <p class="text-muted mb-0">Nível de Acesso:</p>
                   </div>
    -->
+
   <div class="row mt-4">
     <!-- Gráfico 1 -->
     <div class="col-md-4">
@@ -17,6 +18,7 @@
         </div>
       </div>
     </div>
+  
     <!-- Gráfico 2 -->
     <div class="col-md-4">
       <div class="card">
@@ -26,6 +28,8 @@
         </div>
       </div>
     </div>
+
+@if (loginService.hasPermission("COORD")) {
     <!-- Gráfico 3 -->
     <div class="col-md-4">
       <div class="card">
@@ -36,6 +40,7 @@
       </div>
     </div>
   </div>
+}
 
   <!-- Linha com a caixa maior -->
   <div class="row mt-4">
