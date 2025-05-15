@@ -16,7 +16,7 @@ export class LoginService {
   http = inject(HttpClient);
   usuario!: Usuario;
  // API = environment.API + '/api';
-API = environment.API+"/api/login";
+API = environment.API+"/api";
 
 
   
@@ -68,22 +68,19 @@ API = environment.API+"/api/login";
 }
 
 
-  
-  
+getUsuarioLogado(): Usuario {
+  const tokenData = this.jwtDecode();
+  if (!tokenData) throw new Error('Token inválido ou ausente');
 
-  getUsuarioLogado(): Usuario {
-    if (this.usuario) {
-      return this.usuario;
-    }
-  
-    const stored = localStorage.getItem('usuario');
-    if (stored) {
-      this.usuario = JSON.parse(stored);
-      return this.usuario;
-    }
-  
-    throw new Error('Usuário não encontrado. Faça login novamente.');
-  }
+  const token = new KeycloakToken(tokenData);
+  if (!token.email) throw new Error('Email não encontrado no token');
+
+  const user = new Usuario();
+  user.email = token.email;
+  user.role = token.getRole();
+  return user;
+}
+
   
   
 }

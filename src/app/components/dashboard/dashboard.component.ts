@@ -43,6 +43,11 @@ export class DashboardComponent implements AfterViewInit {
   async ngAfterViewInit(): Promise<void> {
     // Wait for the data to be loaded before proceeding
     this.usuario = this.loginService.getUsuarioLogado();
+
+
+
+
+    
     await this.countAllTestesRapidos();
     await this.countAllPacientes();
     await this.countAllProtocolos();
