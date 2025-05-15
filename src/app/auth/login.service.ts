@@ -15,7 +15,11 @@ import { KeycloakToken } from '../models/KeycloakToken';
 export class LoginService {
   http = inject(HttpClient);
   usuario!: Usuario;
-  API = environment.API + '/api';
+ // API = environment.API + '/api';
+API = environment.API+"/api/login";
+
+
+  
 
 
   constructor() {}
@@ -98,7 +102,8 @@ import { environment } from '../../environments/environment';
 export class LoginService {
 
   http = inject(HttpClient);
-  API = environment.API="/api/login";
+  // API = "http://localhost:8080/api/login";
+  API = environment.API+"/api/login";
 
 
 

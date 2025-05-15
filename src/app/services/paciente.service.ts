@@ -12,7 +12,7 @@ export class PacienteService {
   http = inject(HttpClient);
 
   // API = "http://localhost:8080/api/paciente";
-  API = environment.API="/api/paciente";
+  API = environment.API+"/api/paciente";
 
 
 

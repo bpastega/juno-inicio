@@ -12,7 +12,7 @@ export class ProtocoloService {
   http = inject(HttpClient);
 
   // API = "http://localhost:8080/api/protocolo";
-  API = environment.API="/api/protocolo";
+  API = environment.API+"/api/protocolo";
 
 
   constructor() { }
@@ -52,6 +52,10 @@ export class ProtocoloService {
 
   findAtivoByIdPaciente(idPaciente: number): Observable<Protocolo>{
     return this.http.get<Protocolo>(this.API+"/findAtivoByIdPaciente/"+idPaciente);
+  }
+
+  findAllByPacienteId(idPaciente: number): Observable<Protocolo[]>{
+    return this.http.get<Protocolo[]>(this.API + "/findAllByPacienteId/"+idPaciente);
   }
 
   /*Dashboard*/

@@ -36,13 +36,15 @@ export class ConsultasOdontologicasListComponent {
 
   modalRef!: MdbModalRef<any>;
 
+  id: number = 0;
+
   @Input() modoLeitura!: boolean;
   @Input() modoPacienteUnico: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
     if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
-      const id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(id);
+      this.id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(this.id);
     } else {
       this.listAll();
     }
@@ -168,6 +170,10 @@ export class ConsultasOdontologicasListComponent {
       icon: 'success',
     });
 
+    this.listAllPaciente(this.id);
+
   }
+
+  
 
 }

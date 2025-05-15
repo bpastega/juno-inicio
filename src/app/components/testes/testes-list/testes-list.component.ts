@@ -35,10 +35,12 @@ export class TestesListComponent {
   @Input() modoLeitura!: boolean;
   @Input() modoPacienteUnico: boolean = false;
 
+  id: number = 0;
+
   ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
     if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
-      const id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(id);
+      this.id = this.rotaAtivada.snapshot.params['id'];
+      this.listAllPaciente(this.id);
     } else {
       this.listAll();
     }
@@ -161,6 +163,8 @@ export class TestesListComponent {
       title: mensagem,
       icon: 'success',
     });
+
+    this.listAllPaciente(this.id);
 
   }
 

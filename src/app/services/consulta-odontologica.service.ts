@@ -12,7 +12,7 @@ export class ConsultaOdontologicaService {
   http = inject(HttpClient);
 
   //API = "http://localhost:8080/api/consultaOdontologica";
-  API = environment.API="/api/consultaOdontologica";
+  API = environment.API+"/api/consultaOdontologica";
 
   constructor() { }
 
