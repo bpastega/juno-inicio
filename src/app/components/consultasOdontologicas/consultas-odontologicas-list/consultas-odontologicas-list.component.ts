@@ -10,6 +10,7 @@ import { Consulta } from '../../../models/consulta';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ConsultasOdontologicasFormComponent } from "../consultas-odontologicas-form/consultas-odontologicas-form.component";
 import { NgClass } from '@angular/common';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-consultas-odontologicas-list',
@@ -30,6 +31,8 @@ export class ConsultasOdontologicasListComponent {
 
   consultaOdontologicaService = inject(ConsultaOdontologicaService);
   protocoloService = inject(ProtocoloService);
+  loginService = inject(LoginService);
+  
 
   modalService = inject(MdbModalService); // responsável por abrir as modais
   @ViewChild('modalConsultasOdontologicasForm') modalConsultasOdontologicasForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
@@ -42,25 +45,33 @@ export class ConsultasOdontologicasListComponent {
   @Input() modoPacienteUnico: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
-    if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
-      this.id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(this.id);
-    } else {
-      this.listAll();
+    if (this.loginService.hasPermission("COORD")) {
+
+      if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
+        this.id = this.rotaAtivada.snapshot.params['id'];
+        this.listAllPaciente(this.id);
+      } else {
+        this.listAll();
+      }
     }
+
+
   }
 
 
     constructor(){
-      if(this.modoPacienteUnico == false){
-        this.listAll();
+      if (this.loginService.hasPermission("COORD")) {
+        if(this.modoPacienteUnico == false){
+          this.listAll();
+        }
+    
+        else{
+          const id = this.rotaAtivada.snapshot.params['id'];
+          this.listAllPaciente(id);
+        }
+        
       }
-  
-      else{
-        const id = this.rotaAtivada.snapshot.params['id'];
-        this.listAllPaciente(id);
-      }
-      
+
     }
   
 

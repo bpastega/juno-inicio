@@ -9,13 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { TestesFormComponent } from "../testes-form/testes-form.component";
 import Swal from 'sweetalert2';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-testes-list',
   standalone: true,
   imports: [NgClass, TestesFormComponent],
   templateUrl: './testes-list.component.html',
-  styleUrl: './testes-list.component.scss'
+  styleUrl: './testes-list.component.scss',
 })
 export class TestesListComponent {
   lista: TesteRapido[] = [];
@@ -26,9 +27,12 @@ export class TestesListComponent {
 
   testeRapidoService = inject(TesteRapidoService);
   statusTesteService = inject(StatusTesteService);
+  loginService = inject(LoginService);
+  
 
   modalService = inject(MdbModalService); // responsável por abrir as modais
-  @ViewChild('modalTestesRapidosForm') modalTestesRapidosForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
+  @ViewChild('modalTestesRapidosForm')
+  modalTestesRapidosForm!: TemplateRef<any>; //enxergar o template da modal q tá no html
 
   modalRef!: MdbModalRef<any>;
 
@@ -37,79 +41,103 @@ export class TestesListComponent {
 
   id: number = 0;
 
-  ngOnChanges(changes: SimpleChanges) { //verifica mudanças no input modoPacienteUnico
-    if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
-      this.id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(this.id);
-    } else {
-      this.listAll();
-    }
-  }
-
-  constructor(){
-    if(this.modoPacienteUnico == false){
-      this.listAll();
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.loginService.hasPermission('COORD')) {
+        //verifica mudanças no input modoPacienteUnico
+        if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
+          this.id = this.rotaAtivada.snapshot.params['id'];
+          this.listAllPaciente(this.id);
+        } else {
+          this.listAll();
+        }
     }
 
     else{
-      const id = this.rotaAtivada.snapshot.params['id'];
-      this.listAllPaciente(id);
+      Swal.fire({
+                  icon: "error",
+                  title: "Acesso restrito a usuários coordenadores",
+                  text: "Acesso Negado!",
+                  });
     }
-    
   }
 
-  listAll(){ 
+  constructor() {
+    if (this.loginService.hasPermission('COORD')) {
+      if (this.modoPacienteUnico == false) {
+        this.listAll();
+      } else {
+        const id = this.rotaAtivada.snapshot.params['id'];
+        this.listAllPaciente(id);
+      }
+    }
 
-    this.testeRapidoService.findAll().subscribe({  
-      next: testes => { //quando o back retornar o que se espera
+    else{
+      Swal.fire({
+                  icon: "error",
+                  title: "Acesso restrito a usuários coordenadores",
+                  text: "Acesso Negado!",
+                  });
+    }
+  }
+
+  listAll() {
+    this.testeRapidoService.findAll().subscribe({
+      next: (testes) => {
+        //quando o back retornar o que se espera
         this.lista = testes;
       },
-      error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
-        let mensagemErro = "Erro desconhecido";
+      error: (erro) => {
+        //quando ocorrer qualquer erro (badrequest, exceptions..)
+        let mensagemErro = 'Erro desconhecido';
 
         if (erro.error) {
-            try {
-                // interpreto o erro como JSON se for string
-                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
-    
-                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
-                mensagemErro = Object.values(errorResponse).join(', ');
-            } catch (e) {
-                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
-            }
-        }
-    
-        
-        Swal.fire(mensagemErro);
-      }
-    });
+          try {
+            // interpreto o erro como JSON se for string
+            const errorResponse =
+              typeof erro.error === 'string'
+                ? JSON.parse(erro.error)
+                : erro.error;
 
+            // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+            mensagemErro = Object.values(errorResponse).join(', ');
+          } catch (e) {
+            mensagemErro =
+              erro.message || 'Erro desconhecido no formato da resposta.';
+          }
+        }
+
+        Swal.fire(mensagemErro);
+      },
+    });
   }
 
-  listAllPaciente(id: number){
+  listAllPaciente(id: number) {
     this.testeRapidoService.findAllByPacienteId(id).subscribe({
-      next: lista =>{
+      next: (lista) => {
         this.lista = lista;
       },
-      error: erro =>{
-        let mensagemErro = "Erro desconhecido";
+      error: (erro) => {
+        let mensagemErro = 'Erro desconhecido';
 
         if (erro.error) {
-            try {
-                // interpreto o erro como JSON se for string
-                const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
-    
-                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
-                mensagemErro = Object.values(errorResponse).join(', ');
-            } catch (e) {
-                mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
-            }
+          try {
+            // interpreto o erro como JSON se for string
+            const errorResponse =
+              typeof erro.error === 'string'
+                ? JSON.parse(erro.error)
+                : erro.error;
+
+            // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+            mensagemErro = Object.values(errorResponse).join(', ');
+          } catch (e) {
+            mensagemErro =
+              erro.message || 'Erro desconhecido no formato da resposta.';
+          }
         }
-    
-        
+
         Swal.fire(mensagemErro);
-      }
-    })
+      },
+    });
   }
 
   editarTesteRapido(testeRapido: TesteRapido) {
@@ -117,7 +145,7 @@ export class TestesListComponent {
     this.modalRef = this.modalService.open(this.modalTestesRapidosForm);
   }
 
-  deletarById(id: number){
+  deletarById(id: number) {
     Swal.fire({
       title: 'Confirme a deleção do Teste Rápido.',
       showCancelButton: true,
@@ -131,22 +159,24 @@ export class TestesListComponent {
             //adicionar um refresh
           },
           error: (erro) => {
-            
-            let mensagemErro = "Erro desconhecido";
+            let mensagemErro = 'Erro desconhecido';
 
             if (erro.error) {
-                try {
-                    // interpreto o erro como JSON se for string
-                    const errorResponse = typeof erro.error === 'string' ? JSON.parse(erro.error) : erro.error;
-        
-                    // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
-                    mensagemErro = Object.values(errorResponse).join(', ');
-                } catch (e) {
-                    mensagemErro = erro.message || "Erro desconhecido no formato da resposta.";
-                }
+              try {
+                // interpreto o erro como JSON se for string
+                const errorResponse =
+                  typeof erro.error === 'string'
+                    ? JSON.parse(erro.error)
+                    : erro.error;
+
+                // aqui estou concatendo todas as mensagens dos campos de erro separando por virgulas
+                mensagemErro = Object.values(errorResponse).join(', ');
+              } catch (e) {
+                mensagemErro =
+                  erro.message || 'Erro desconhecido no formato da resposta.';
+              }
             }
-        
-            
+
             Swal.fire(mensagemErro);
           },
         });
@@ -157,7 +187,7 @@ export class TestesListComponent {
   retornoForm(mensagem: string) {
     //acionado quando houver um evento salvar ou editar do FORM que está aberto na modal
 
-      this.modalRef.close(); //fecha a moodal
+    this.modalRef.close(); //fecha a moodal
 
     Swal.fire({
       title: mensagem,
@@ -165,8 +195,5 @@ export class TestesListComponent {
     });
 
     this.listAllPaciente(this.id);
-
   }
-
-
 }
