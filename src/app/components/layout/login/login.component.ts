@@ -25,9 +25,12 @@ export class LoginComponent {
 
   logar() {
     if (
-      (this.loginService.hasPermission('ADMIN') || this.loginService.hasPermission('USUARIO')) &&
-      (!this.loginService.hasPermission('COORD') || !this.loginService.hasPermission('RECEPCAO'))
-    ) {
+      (this.loginService.hasPermission('ADMIN')
+        || this.loginService.hasPermission('USUARIO'))
+      && !this.loginService.hasPermission('COORD')
+      && !this.loginService.hasPermission('RECEPCAO')
+    )
+{
       Swal.fire({
         icon: 'error',
         title: 'Acesso restrito a detentores de cadastro Juno',
