@@ -25,7 +25,7 @@ export class LoginComponent {
 
   logar() {
     if (
-      this.loginService.hasPermission('black-cat-role') &&
+      (this.loginService.hasPermission('ADMIN') || this.loginService.hasPermission('USUARIO')) &&
       (!this.loginService.hasPermission('COORD') || !this.loginService.hasPermission('RECEPCAO'))
     ) {
       Swal.fire({
