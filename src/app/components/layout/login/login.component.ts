@@ -24,15 +24,16 @@ export class LoginComponent {
   }
 
   logar() {
-    if (this.loginService.hasPermission('black-cat-role')) {
+    if (
+      this.loginService.hasPermission('black-cat-role') &&
+      (!this.loginService.hasPermission('COORD') || !this.loginService.hasPermission('RECEPCAO'))
+    ) {
       Swal.fire({
-                        icon: "error",
-                        title: "Acesso restrito a detentores de cadastro Juno",
-                        text: "Acesso Negado!",
-                });
-    }
-    
-    else {
+        icon: 'error',
+        title: 'Acesso restrito a detentores de cadastro Juno',
+        text: 'Acesso Negado!',
+      });
+    } else {
       this.loginService.logar(this.login).subscribe({
         next: (token) => {
           if (token) {
@@ -50,6 +51,6 @@ export class LoginComponent {
       });
     }
 
-    
+
   }
 }
