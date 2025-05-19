@@ -23,7 +23,44 @@ export class LoginComponent {
     this.loginService.removerToken();
   }
 
+
   logar() {
+  this.loginService.logar(this.login).subscribe({
+    next: (token) => {
+      if (token) {
+        this.loginService.addToken(token); // store JWT
+
+        // Check after storing token
+        const hasRequiredRole =
+          this.loginService.hasPermission('COORD') ||
+          this.loginService.hasPermission('RECEPCAO');
+
+        if (!hasRequiredRole) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Acesso restrito',
+            text: 'Usuário inserido não tem permissão para acessar o sistema',
+          });
+          this.loginService.removerToken();
+        } else {
+          this.router.navigate(['admin/dashboard']);
+        }
+      } else {
+        alert('Usuário ou senha incorretos');
+      }
+    },
+    error: (erro) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao autenticar',
+        text: 'Acesso Negado!',
+      });
+    },
+  });
+}
+
+
+  /*logar() {
     if (
       this.loginService.hasPermission('black-cat-role') &&
       (!this.loginService.hasPermission('COORD') || !this.loginService.hasPermission('RECEPCAO'))
@@ -46,11 +83,13 @@ export class LoginComponent {
           }
         },
         error: (erro) => {
-          alert('erro');
+          Swal.fire({
+            icon: 'error',
+            title: 'Usuário não tem permissão para acessar o sistema'+erro,
+            text: 'Acesso Negado!',
+          });
         },
       });
     }
-
-
-  }
+  }*/
 }
