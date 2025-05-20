@@ -33,7 +33,8 @@ export class LoginComponent {
         // Check after storing token
         const hasRequiredRole =
           this.loginService.hasPermission('COORD') ||
-          this.loginService.hasPermission('RECEPCAO');
+          this.loginService.hasPermission('RECEPCAO') ||
+          this.loginService.hasPermission('role-juno');
 
         if (!hasRequiredRole) {
           Swal.fire({
