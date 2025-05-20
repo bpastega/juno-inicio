@@ -29,7 +29,7 @@
       </div>
     </div>
 
-@if (loginService.hasPermission("COORD")) {
+@if (loginService.hasPermission("COORD") || (this.loginService.hasPermission("role-juno"))) {
     <!-- Gráfico 3 -->
     <div class="col-md-4">
       <div class="card">

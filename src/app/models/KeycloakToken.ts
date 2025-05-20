@@ -37,7 +37,7 @@ export class KeycloakToken {
   }
 
   getRole(){
-    if(this.hasRole("COORD")){
+    if(this.hasRole("COORD")|| this.hasRole('juno-role')){
       return "COORD"
     }else if(this.hasRole("RECEPCAO")){
       return "RECEPCAO"

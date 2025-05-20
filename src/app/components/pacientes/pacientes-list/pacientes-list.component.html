@@ -7,7 +7,7 @@
                   <h5 class="card-title">Listagem de Pacientes</h5>
 
                   <!-- Trecho correspondente aos botões e barra de pesquisa no topo da tabela-->
-                  @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")) {
+                  @if (loginService.hasPermission("COORD") || loginService.hasPermission("RECEPCAO")|| (this.loginService.hasPermission("role-juno"))) {
                   <div class="input-group">
                     <input (keyup.enter)="findByNome()" [(ngModel)]="pesquisa" type="text" class="form-control" placeholder="Parte do nome..."
                       aria-label="Recipient's username with two button addons" />

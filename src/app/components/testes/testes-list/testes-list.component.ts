@@ -42,7 +42,7 @@ export class TestesListComponent {
   id: number = 0;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.loginService.hasPermission('COORD')) {
+    if (this.loginService.hasPermission('COORD')|| (this.loginService.hasPermission("role-juno"))) {
         //verifica mudanças no input modoPacienteUnico
         if (changes['modoPacienteUnico'] && this.modoPacienteUnico) {
           this.id = this.rotaAtivada.snapshot.params['id'];
@@ -62,7 +62,7 @@ export class TestesListComponent {
   }
 
   constructor() {
-    if (this.loginService.hasPermission('COORD')) {
+    if (this.loginService.hasPermission('COORD')|| (this.loginService.hasPermission("role-juno"))) {
       if (this.modoPacienteUnico == false) {
         this.listAll();
       } else {
